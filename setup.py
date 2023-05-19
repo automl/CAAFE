@@ -22,7 +22,7 @@ setup(
     install_requires=[
         "openai",
         "kaggle",
-        "openml",
+        "openml==0.10.0",
         "tabpfn",
     ],
     extras_require={
