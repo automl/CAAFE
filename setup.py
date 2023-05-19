@@ -13,7 +13,7 @@ setup(
     license="LICENSE.txt",
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "License :: CC BY-NC-SA 4.0",
+        "License :: Free for non-commercial use",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
