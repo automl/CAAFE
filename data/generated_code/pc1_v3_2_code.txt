@@ -1,0 +1,12 @@
+
+# (Feature name and description)
+# Usefulness: This feature calculates the ratio of unique operands to unique operators
+# Input samples: 'uniq_Op': [14.0, 8.0, 20.0], 'uniq_Opnd': [12.0, 9.0, 136.0]
+df['uniq_Opnd/uniq_Op'] = df['uniq_Opnd'] / df['uniq_Op']
+# (Feature name and description)
+# Usefulness: This feature calculates the ratio of the number of operands to the number of operators
+# Input samples: 'total_Op': [28.0, 20.0, 367.0], 'total_Opnd': [24.0, 13.0, 304.0]
+df['total_Opnd/total_Op'] = df['total_Opnd'] / df['total_Op']# (Feature name and description)
+# Usefulness: This feature calculates the ratio of unique operands to the total number of operands
+# Input samples: 'uniq_Opnd': [12.0, 9.0, 136.0], 'total_Opnd': [24.0, 13.0, 304.0]
+df['uniq_Opnd/total_Opnd'] = df['uniq_Opnd'] / df['total_Opnd']

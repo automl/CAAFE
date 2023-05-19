@@ -1,0 +1,4 @@
+# ('head_and_neck_symptoms', 'Presence of head and neck symptoms')
+# Usefulness: Presence of head and neck symptoms may indicate the presence of GAS infection and help predict a positive RADT result.
+# Input samples: 'headache': [0.0, 0.0, 0.0], 'tonsillarswelling': [1.0, 0.0, 0.0], 'exudate': [1.0, 1.0, 0.0], 'erythema': [1.0, 0.0, 1.0], 'petechiae': [0.0, 0.0, 0.0], 'radt': [0.0, 1.0, 0.0]
+df['head_and_neck_symptoms'] = ((df['headache'] == 1) | (df['tonsillarswelling'] == 1) | (df['exudate'] == 1) | (df['erythema'] == 1) | (df['petechiae'] == 1)).astype(int)

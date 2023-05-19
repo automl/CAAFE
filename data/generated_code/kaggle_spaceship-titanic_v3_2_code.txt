@@ -1,0 +1,10 @@
+# ('CryoSleep_Age', 'Combination of CryoSleep and Age')
+# Usefulness: Passengers in cryosleep may be less likely to be transported to an alternate dimension. Combining CryoSleep status with age may provide additional information on this relationship.
+# Input samples: 'CryoSleep': [False, True, False], 'Age': [22.0, 57.0, 19.0]
+df['CryoSleep_Age'] = df['CryoSleep'].astype(int) * df['Age']# ('Total_Spending', 'Total amount spent on all luxury amenities')
+# Usefulness: The total amount spent on luxury amenities may provide information on the passenger's socioeconomic status and likelihood of being transported to an alternate dimension.
+# Input samples: 'RoomService': [0.0, 0.0, 0.0], 'FoodCourt': [0.0, 0.0, 47.0], 'ShoppingMall': [859.0, 0.0, 0.0], 'Spa': [62.0, 0.0, 263.0], 'VRDeck': [0.0, 0.0, 384.0]
+df['Total_Spending'] = df['RoomService'] + df['FoodCourt'] + df['ShoppingMall'] + df['Spa'] + df['VRDeck']# ('VIP_Deck_Spending', 'Combination of VIP, Cabin deck, and total spending')
+# Usefulness: VIP passengers may be more likely to be transported to an alternate dimension. Combining VIP status with the deck of the cabin and total spending may provide additional information on this relationship.
+# Input samples: 'VIP': [False, False, False], 'Cabin': ['F/1224/P', 'C/201/P', 'E/263/S'], 'RoomService': [0.0, 0.0, 263.0], 'FoodCourt': [0.0, 47.0, 0.0], 'ShoppingMall': [859.0, 0.0, 0.0], 'Spa': [62.0, 0.0, 263.0], 'VRDeck': [0.0, 384.0, 0.0]
+df['VIP_Deck_Spending'] = df['VIP'].astype(int) * df['Cabin'].str.split('/').str[0] + '_' + (df['RoomService'] + df['FoodCourt'] + df['ShoppingMall'] + df['Spa'] + df['VRDeck']).astype(str)

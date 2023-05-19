@@ -1,0 +1,55 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+"This dataset can be used to predict the presence of kidney stones based on urine analysis.
+
+The 79 urine specimens, were analyzed in an effort to
+determine if certain physical characteristics of the urine might be related to the
+formation of calcium oxalate crystals.
+The six physical characteristics of the urine are: (1) specific gravity, the density of the urine relative to water; (2) pH, the negative logarithm of the hydrogen ion; (3) osmolarity (mOsm), a unit used in biology and medicine but not in
+physical chemistry. Osmolarity is proportional to the concentration of
+molecules in solution; (4) conductivity (mMho milliMho). One Mho is one
+reciprocal Ohm. Conductivity is proportional to the concentration of charged
+ions in solution; (5) urea concentration in millimoles per litre; and (6) calcium
+concentration (CALC) in millimolesllitre.
+
+The data is obtained from 'Physical Characteristics of Urines With and Without Crystals',a chapter from Springer Series in Statistics."
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+id (float64): NaN-freq [0.0%], Samples [104.0, 281.0, 76.0, 48.0, 26.0, 352.0, 4.0, 134.0, 225.0, 224.0]
+gravity (float64): NaN-freq [0.0%], Samples [1.02, 1.02, 1.02, 1.03, 1.02, 1.03, 1.02, 1.01, 1.02, 1.01]
+ph (float64): NaN-freq [0.0%], Samples [7.61, 5.56, 5.47, 5.68, 5.53, 5.27, 5.53, 6.3, 5.53, 6.37]
+osmo (float64): NaN-freq [0.0%], Samples [527.0, 461.0, 874.0, 1236.0, 779.0, 1236.0, 874.0, 341.0, 874.0, 679.0]
+cond (float64): NaN-freq [0.0%], Samples [25.8, 17.8, 29.5, 27.3, 25.7, 32.6, 17.8, 14.6, 14.6, 31.2]
+urea (float64): NaN-freq [0.0%], Samples [75.0, 187.0, 380.0, 620.0, 382.0, 620.0, 385.0, 125.0, 385.0, 239.0]
+calc (float64): NaN-freq [0.0%], Samples [3.98, 6.99, 7.18, 12.68, 2.21, 5.38, 2.21, 1.06, 8.48, 1.52]
+target (category): NaN-freq [0.0%], Samples [0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 310
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "target".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "target" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'id': [104.0, 281.0, 76.0], 'gravity': [1.017, 1.017, 1.021], ...)
+(Some pandas code using id', 'gravity', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

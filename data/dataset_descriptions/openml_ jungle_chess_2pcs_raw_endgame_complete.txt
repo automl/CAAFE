@@ -1,0 +1,14 @@
+This dataset is part of a collection datasets based on the game "Jungle Chess" (a.k.a. Dou Shou Qi). For a description of the rules, please refer to the paper (link attached). The paper also contains a description of various constructed features. As the tablebases are a disjoint set of several tablebases based on which (two) pieces are on the board, we have uploaded all tablebases that have explicit different content:
+
+* Rat vs Rat
+* Rat vs Panther
+* Rat vs. Lion
+* Rat vs. Elephant
+* Panther vs. Lion
+* Panther vs. Elephant
+* Tiger vs. Lion
+* Lion vs. Lion
+* Lion vs. Elephant
+* Elephant vs. Elephant
+* Complete (Combination of the above)
+* RAW Complete (Combination of the above, containing for both pieces just the rank, file and strength information). This dataset contains a similar classification problem as, e.g., the King and Rook vs. King problem and is suitable for classification tasks. 

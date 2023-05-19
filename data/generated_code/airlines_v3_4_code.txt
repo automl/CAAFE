@@ -1,0 +1,6 @@
+# (Distance, numerical)
+# Usefulness: Longer flights may be more prone to delays due to various reasons such as weather or air traffic control
+# Input samples: 'AirportFrom': [63.0, 30.0, 80.0, 0.0, 38.0, 136.0, 22.0, 71.0, 197.0, 2.0], 'AirportTo': [6.0, 77.0, 0.0, 61.0, 1.0, 3.0, 59.0, 6.0, 61.0, 45.0]
+import numpy as np
+df['Distance'] = np.sqrt((df['AirportFrom'] - df['AirportTo'])**2)
+df.drop(columns=['AirportFrom', 'AirportTo'], inplace=True)# (AirlineDelayRate, numerical)

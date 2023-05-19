@@ -1,0 +1,5 @@
+
+# Feature: Adhesion_Mitoses_Ratio
+# Usefulness: This feature represents the ratio between Marginal_Adhesion and Mitoses, which can help in identifying the relationship between these two features and the prognosis.
+# Input samples: 'Marginal_Adhesion': [1.0, 10.0, 1.0], 'Mitoses': [1.0, 7.0, 1.0]
+df['Adhesion_Mitoses_Ratio'] = df['Marginal_Adhesion'] / df['Mitoses']

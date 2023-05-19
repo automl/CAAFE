@@ -1,0 +1,5 @@
+
+# Feature name: gravity_ph_ratio
+# Usefulness: This feature combines specific gravity and pH, which may provide additional information about the urine's ability to form calcium oxalate crystals.
+# Input samples: 'gravity': [1.02, 1.02, 1.02], 'ph': [5.53, 5.27, 5.36]
+df['gravity_ph_ratio'] = df['gravity'] / df['ph']

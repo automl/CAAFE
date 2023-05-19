@@ -1,0 +1,20 @@
+
+# Age_and_education
+# Usefulness: Combining wife's age and education can show the effect of education level on the contraceptive method used at different ages.
+# Input samples: 'Wifes_age': [46.0, 45.0, 39.0], 'Wifes_education': [3, 2, 2]
+df['Age_and_education'] = df['Wifes_age'] * df['Wifes_education']
+
+# Age_and_children
+# Usefulness: Combining wife's age and number of children ever born can show the relationship between age and fertility, which may influence contraceptive method choice.
+# Input samples: 'Wifes_age': [46.0, 45.0, 39.0], 'Number_of_children_ever_born': [5.0, 6.0, 6.0]
+df['Age_and_children'] = df['Wifes_age'] * df['Number_of_children_ever_born']
+
+# Education_gap
+# Usefulness: The difference in education levels between the wife and husband may affect the contraceptive method choice.
+# Input samples: 'Wifes_education': [3, 2, 2], 'Husbands_education': [2, 3, 3]
+df['Education_gap'] = df['Wifes_education'] - df['Husbands_education']
+
+# Religion_and_media
+# Usefulness: Combining wife's religion and media exposure can show the influence of religious beliefs and media exposure on contraceptive method choice.
+# Input samples: 'Wifes_religion': [1, 1, 1], 'Media_exposure': [0, 0, 0]
+df['Religion_and_media'] = df['Wifes_religion'] * df['Media_exposure']

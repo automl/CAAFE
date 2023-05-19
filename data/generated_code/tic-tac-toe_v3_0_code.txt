@@ -1,0 +1,12 @@
+
+# (Number of X's in the board)
+# Usefulness: The number of X's in the board can be a useful feature to predict the outcome of the game. If there are more X's than O's, it is more likely that X wins.
+# Input samples: 'top-left-square': [2, 2, 2], 'top-middle-square': [0, 0, 1], ...
+df['num_X'] = df.apply(lambda row: sum([1 for attr in row.index if row[attr] == 1]), axis=1)
+# (Number of O's in the board)
+# Usefulness: The number of O's in the board can be a useful feature to predict the outcome of the game. If there are more O's than X's, it is more likely that O wins.
+# Input samples: 'top-left-square': [2, 2, 2], 'top-middle-square': [0, 0, 1], ...
+df['num_O'] = df.apply(lambda row: sum([1 for attr in row.index if row[attr] == 2]), axis=1)# (Whether the center square is occupied)
+# Usefulness: The center square is an important square in tic-tac-toe. If it is occupied, it can be more difficult for the player who did not occupy it to win.
+# Input samples: 'top-left-square': [2, 2, 2], 'top-middle-square': [0, 0, 1], ...
+df['center_occupied'] = df['middle-middle-square'].apply(lambda x: 1 if x == 1 or x == 2 else 0)# (Whether the first player won)

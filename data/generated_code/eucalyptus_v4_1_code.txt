@@ -1,0 +1,15 @@
+
+# Altitude_Rain_ratio
+# Usefulness: This feature calculates the ratio of altitude to rainfall which can be useful in determining the utility of the trees for soil conservation, as it takes into account the environmental factors affecting tree growth.
+# Input samples: 'Altitude': [150.0, 200.0, 150.0], 'Rainfall': [1250.0, 1400.0, 900.0]
+df['Altitude_Rain_ratio'] = df['Altitude'] / df['Rainfall']
+
+# Survival_rate
+# Usefulness: This feature calculates the survival rate of trees by dividing the number of survived trees by the total number of trees planted. It can be useful in determining the utility of the trees for soil conservation, as it takes into account the survival of trees.
+# Input samples: 'Surv': [75.0, nan, nan], 'Year': [1983.0, 1980.0, 1986.0]
+df['Survival_rate'] = df['Surv'] / (2021 - df['Year'])
+
+# Avg_rating
+# Usefulness: This feature calculates the average rating of vigour, insect resistance, stem form, crown form, and branch form. It can be useful in determining the utility of the trees for soil conservation, as it takes into account the overall quality of trees.
+# Input samples: 'Vig': [4.5, 3.3, nan], 'Ins_res': [3.5, 4.0, nan], 'Stem_Fm': [3.3, 3.0, nan], 'Crown_Fm': [3.2, 3.5, nan], 'Brnch_Fm': [2.8, 3.0, nan]
+df['Avg_rating'] = df[['Vig', 'Ins_res', 'Stem_Fm', 'Crown_Fm', 'Brnch_Fm']].mean(axis=1)

@@ -1,0 +1,12 @@
+# ('Holding_Policy_Duration_Imputed', 'Use the median of Holding_Policy_Duration to impute missing values in this column. Replace "14+" with 15.', 
+#  {'Holding_Policy_Duration': ['3.0', '3.0', '6.0']})
+median_duration = df['Holding_Policy_Duration'].replace('14+', 15).astype(float).median()
+df['Holding_Policy_Duration_Imputed'] = df['Holding_Policy_Duration'].replace('14+', 15).astype(float).fillna(median_duration)# ('Age_Bin', 'Use the age of the person to create bins. Insurance needs may vary by age.', 
+#  {'Upper_Age': [48, 58, 65], 'Lower_Age': [48, 50, 60]})
+bins = [0, 30, 40, 50, 60, 70, 100]
+labels = ['0-30', '30-40', '40-50', '50-60', '60-70', '70+']
+df['Age_Bin'] = pd.cut(df['Upper_Age'], bins=bins, labels=labels)# ('Holding_Policy_Duration_Multiplied', 'Multiply Holding_Policy_Duration_Imputed and Holding_Policy_Type.', 
+#  {'Holding_Policy_Duration_Imputed': [3.0, 3.0, 6.0], 'Holding_Policy_Type': [3.0, 4.0, 3.0]})
+df['Holding_Policy_Duration_Multiplied'] = df['Holding_Policy_Duration_Imputed'] * df['Holding_Policy_Type']# ('Family_Size', 'Use the Is_Spouse and Upper_Age-Lower_Age to create a family size column. This may be useful for predicting insurance needs.', 
+#  {'Is_Spouse': ['No', 'Yes', 'Yes'], 'Upper_Age': [48, 58, 65], 'Lower_Age': [48, 50, 60]})
+df['Family_Size'] = df.apply(lambda row: 1 if row['Is_Spouse'] == 'No' else row['Upper_Age']-row['Lower_Age']+1, axis=1)

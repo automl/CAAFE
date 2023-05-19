@@ -1,0 +1,13 @@
+
+# ('age_y_2', 'Squared age_y', 'Usefulness: This feature allows the model to capture a potential quadratic relationship between age and the outcome.', 
+#  'age_y': [11.6, 8.2, 5.1], ...)
+df['age_y_2'] = df['age_y'] ** 2
+# ('swollen_tonsils', 'Swollen tonsils', 'Usefulness: This feature captures the presence of both swollen tonsils and tonsillar swelling.', 
+#  'swollenadp': [1.0, 0.0, 2.0], 'tonsillarswelling': [0.0, 1.0, 0.0], ...)
+df['swollen_tonsils'] = ((df['swollenadp'] > 0) & (df['tonsillarswelling'] > 0)).astype(int)# ('fever_cough', 'Fever and cough', 'Usefulness: This feature captures the presence of both fever and cough.', 
+#  'temperature': [38.8, 38.6, 39.5], 'cough': [1.0, 1.0, 0.0], ...)
+df['fever_cough'] = ((df['temperature'] > 38) & (df['cough'] > 0)).astype(int)# ('fever_rhinorrhea', 'Fever and rhinorrhea', 'Usefulness: This feature captures the presence of both fever and rhinorrhea.', 
+#  'temperature': [38.8, 38.6, 39.5], 'rhinorrhea': [1.0, 1.0, 0.0], ...)
+df['fever_rhinorrhea'] = ((df['temperature'] > 38) & (df['rhinorrhea'] > 0)).astype(int)# ('age_pain_interaction', 'Interaction between age and pain', 'Usefulness: This feature captures the interaction between age and pain.', 
+#  'age_y': [11.6, 8.2, 5.1], 'pain': [1.0, 1.0, 1.0], ...)
+df['age_pain_interaction'] = df['age_y'] * df['pain']

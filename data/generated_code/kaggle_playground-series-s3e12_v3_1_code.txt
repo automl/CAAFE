@@ -1,0 +1,12 @@
+
+# (Urea-to-calcium ratio)
+# Usefulness: Urine analysis can show elevated levels of urea and calcium in patients with kidney stones. This ratio can be an indicator of the likelihood of kidney stone formation.
+# Input samples: 'urea': [398.0, 178.0, 364.0], 'calc': [3.16, 3.04, 7.31]
+df['urea_calc_ratio'] = df['urea'] / df['calc']
+# (Osmolarity divided by conductivity)
+# Usefulness: Osmolarity and conductivity are both measures of the concentration of particles in urine. This feature captures their relationship.
+# Input samples: 'osmo': [442.0, 803.0, 853.0], 'cond': [25.7, 26.0, 24.5]
+df['osmo_div_cond'] = df['osmo'] / df['cond']# (Calcium concentration times pH)
+# Usefulness: Calcium concentration and pH are both important factors in the formation of kidney stones. This feature captures their interaction.
+# Input samples: 'calc': [3.16, 3.04, 7.31], 'ph': [5.53, 5.27, 5.36]
+df['calc_times_ph'] = df['calc'] * df['ph']

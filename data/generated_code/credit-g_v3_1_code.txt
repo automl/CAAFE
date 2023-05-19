@@ -1,0 +1,8 @@
+# Explanation why the column 'own_telephone' is dropped
+# This column is dropped as it is not expected to have a significant impact on the classification of "class" according to dataset description and attributes.
+df.drop(columns=['own_telephone'], inplace=True)
+
+# (Feature name and description)
+# Usefulness: This feature creates a binary indicator variable for customers who have a credit amount greater than the median credit amount.
+# Input samples: 'credit_amount': [1549.0, 7476.0, 2442.0]
+df['above_median_credit'] = df['credit_amount'] > df['credit_amount'].median()

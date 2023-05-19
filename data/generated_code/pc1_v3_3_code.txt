@@ -1,0 +1,18 @@
+
+# (Feature name and description)
+# Usefulness: This feature calculates the ratio of unique operands to unique operators in the code. This ratio can be used to assess the complexity of the code and can be a useful feature for predicting defects.
+# Input samples: 'uniq_Op': [14.0, 8.0, 16.0, 4.0, 15.0], 'uniq_Opnd': [12.0, 12.0, 17.0, 6.0, 23.0]
+df['uniq_Opnd/uniq_Op'] = df['uniq_Opnd'] / df['uniq_Op']
+# (Feature name and description)
+# Usefulness: This feature calculates the ratio of the total number of operands to the total number of operators in the code. This ratio can be used to assess the complexity of the code and can be a useful feature for predicting defects.
+# Input samples: 'total_Op': [35.0, 19.0, 32.0, 13.0, 72.0], 'total_Opnd': [22.0, 14.0, 22.0, 12.0, 58.0]
+df['total_Opnd/total_Op'] = df['total_Opnd'] / df['total_Op']# (Feature name and description)
+# Usefulness: This feature calculates the ratio of the Halstead program length to McCabe's line count of code. This ratio can be used to assess the readability of the code and can be a useful feature for predicting defects.
+# Input samples: 'L': [0.08, 0.21, 0.1, 0.25, 0.05], 'loc': [12.0, 8.0, 13.0, 6.0, 19.0]
+df['L/loc'] = df['L'] / df['loc']# (Feature name and description)
+# Usefulness: This feature calculates the ratio of the Halstead effort to McCabe's line count of code. This ratio can be used to assess the maintainability of the code and can be a useful feature for predicting defects.
+# Input samples: 'E': [3438.37, 665.58, 2820.11, 332.19, 12903.06], 'loc': [12.0, 8.0, 13.0, 6.0, 19.0]
+df['E/loc'] = df['E'] / df['loc']# (Feature name and description)
+# Usefulness: This feature calculates the ratio of the Halstead volume to McCabe's cyclomatic complexity. This ratio can be used to assess the maintainability of the code and can be a useful feature for predicting defects.
+# Input samples: 'V': [267.93, 142.62, 272.4, 83.05, 682.23], 'v(g)': [1.0, 1.0, 2.0, 1.0, 7.0]
+df['V/v(g)'] = df['V'] / df['v(g)']

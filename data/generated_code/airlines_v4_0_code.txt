@@ -1,0 +1,6 @@
+
+# FlightLengthCategory (Categorical representation of flight length)
+# Usefulness: The length of the flight might have an impact on the delay, as longer flights might have more chances of facing issues that cause delays.
+# Input samples: 'Length': [30.0, 130.0, 166.0]
+import numpy as np
+df['FlightLengthCategory'] = pd.cut(df['Length'], bins=[0, 100, 200, np.inf], labels=[1, 2, 3])

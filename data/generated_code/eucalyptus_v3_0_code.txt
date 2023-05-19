@@ -1,0 +1,4 @@
+# ('Rainfall+Altitude', 'Adding Rainfall and Altitude')
+# Usefulness: This column captures the sum of Rainfall and Altitude which may be important in predicting the utility of a species as the location of the site (Rainfall and Altitude) could affect the growth of the species differently.
+# Input samples: 'Rainfall': [1300.0, 850.0, 1080.0], 'Altitude': [150.0, 100.0, 180.0]
+df['Rainfall+Altitude'] = df['Rainfall'] + df['Altitude']

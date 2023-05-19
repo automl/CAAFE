@@ -1,0 +1,38 @@
+
+# Top row win
+# Usefulness: Indicates if the top row has a winning combination for "x"
+# Input samples: 'top-left-square': [0, 2, 0], 'top-middle-square': [1, 0, 0], 'top-right-square': [1, 0, 1]
+df['top_row_win'] = (df['top-left-square'] == df['top-middle-square']) & (df['top-middle-square'] == df['top-right-square']) & (df['top-left-square'] == 1)
+
+# Middle row win
+# Usefulness: Indicates if the middle row has a winning combination for "x"
+# Input samples: 'middle-left-square': [2, 2, 0], 'middle-middle-square': [2, 1, 1], 'middle-right-square': [2, 0, 0]
+df['middle_row_win'] = (df['middle-left-square'] == df['middle-middle-square']) & (df['middle-middle-square'] == df['middle-right-square']) & (df['middle-left-square'] == 1)
+
+# Bottom row win
+# Usefulness: Indicates if the bottom row has a winning combination for "x"
+# Input samples: 'bottom-left-square': [1, 2, 2], 'bottom-middle-square': [0, 1, 2], 'bottom-right-square': [2, 0, 2]
+df['bottom_row_win'] = (df['bottom-left-square'] == df['bottom-middle-square']) & (df['bottom-middle-square'] == df['bottom-right-square']) & (df['bottom-left-square'] == 1)
+
+# Left column win
+# Usefulness: Indicates if the left column has a winning combination for "x"
+# Input samples: 'top-left-square': [0, 2, 0], 'middle-left-square': [2, 2, 0], 'bottom-left-square': [1, 2, 2]
+df['left_column_win'] = (df['top-left-square'] == df['middle-left-square']) & (df['middle-left-square'] == df['bottom-left-square']) & (df['top-left-square'] == 1)
+
+# Right column win
+# Usefulness: Indicates if the right column has a winning combination for "x"
+# Input samples: 'top-right-square': [1, 0, 1], 'middle-right-square': [2, 0, 0], 'bottom-right-square': [2, 0, 2]
+df['right_column_win'] = (df['top-right-square'] == df['middle-right-square']) & (df['middle-right-square'] == df['bottom-right-square']) & (df['top-right-square'] == 1)
+
+# Diagonal win (top-left to bottom-right)
+# Usefulness: Indicates if the diagonal from top-left to bottom-right has a winning combination for "x"
+# Input samples: 'top-left-square': [0, 2, 0], 'middle-middle-square': [2, 1, 1], 'bottom-right-square': [2, 0, 2]
+df['diag_tl_br_win'] = (df['top-left-square'] == df['middle-middle-square']) & (df['middle-middle-square'] == df['bottom-right-square']) & (df['top-left-square'] == 1)
+
+# Diagonal win (top-right to bottom-left)
+# Usefulness: Indicates if the diagonal from top-right to bottom-left has a winning combination for "x"
+# Input samples: 'top-right-square': [1, 0, 1], 'middle-middle-square': [2, 1, 1], 'bottom-left-square': [1, 2, 2]
+df['diag_tr_bl_win'] = (df['top-right-square'] == df['middle-middle-square']) & (df['middle-middle-square'] == df['bottom-left-square']) & (df['top-right-square'] == 1)
+
+# Dropping original columns as they are now represented by the added features
+df.drop(columns=['top-left-square', 'top-middle-square', 'top-right-square', 'middle-left-square', 'middle-middle-square', 'middle-right-square', 'bottom-left-square', 'bottom-middle-square', 'bottom-right-square'], inplace=True)

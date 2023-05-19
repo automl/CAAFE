@@ -1,0 +1,16 @@
+
+# ('calc_to_urea_ratio', 'Ratio of calcium concentration to urea concentration')
+# Usefulness: Calcium oxalate stones are the most common type of kidney stone. The ratio of calcium to urea concentration in urine has been shown to be a useful predictor of calcium oxalate stone formation.
+# Input samples: 'calc': [7.68, 2.17, 12.68], 'urea': [396.0, 159.0, 364.0]
+df['calc_to_urea_ratio'] = df['calc'] / df['urea']
+# ('is_acidic', 'Whether the urine is acidic (pH < 7)')
+# Usefulness: The pH of urine can affect the formation of kidney stones. Urine that is too acidic or too alkaline can promote the formation of certain types of kidney stones. 
+# Input samples: 'ph': [5.58, 5.09, 5.24]
+df['is_acidic'] = (df['ph'] < 7).astype(int)
+# ('calc_to_ph_product', 'Product of calcium concentration and pH')
+# Usefulness: The product of calcium concentration and pH in urine has been shown to be a useful predictor of calcium oxalate stone formation.
+# Input samples: 'calc': [7.68, 2.17, 12.68], 'ph': [5.58, 5.09, 5.24]
+df['calc_to_ph_product'] = df['calc'] * df['ph']# ('osmo_to_urea_ratio', 'Ratio of osmolarity to urea concentration')
+# Usefulness: The ratio of osmolarity to urea concentration in urine has been shown to be a useful predictor of kidney stone formation.
+# Input samples: 'osmo': [945.0, 371.0, 703.0], 'urea': [396.0, 159.0, 364.0]
+df['osmo_to_urea_ratio'] = df['osmo'] / df['urea']

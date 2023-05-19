@@ -1,0 +1,12 @@
+
+# ('FamilySize', 'The total number of family members aboard the Spaceship Titanic')
+# Usefulness: Family size may have an impact on whether a passenger was transported, as larger families may have been more likely to stick together and be transported as a group.
+# Input samples: 'PassengerId': ['8878_01', '7749_02', '3955_01'], 'HomePlanet': ['Earth', 'Mars', 'Earth'], 'Cabin': ['E/568/P', 'D/244/P', 'G/648/S']
+df['FamilySize'] = df.groupby(df['PassengerId'].str.split('_').str[0])['PassengerId'].transform('count')
+# ('IsAdult', 'Whether the passenger is an adult or not')
+# Usefulness: Age may have an impact on whether a passenger was transported, but instead of using age directly, we can create a binary feature based on whether the passenger is an adult or not.
+# Input samples: 'Age': [22.0, 37.0, 45.0]
+df['IsAdult'] = (df['Age'] >= 18).astype(int)# ('IsVIPandCryo', 'Whether the passenger is both a VIP and in cryosleep')
+# Usefulness: Passengers who are both VIP and in cryosleep may be less likely to be transported, as they may have paid more for the voyage and been more invested in its success.
+# Input samples: 'VIP': [False, False, False], 'CryoSleep': [False, False, True]
+df['IsVIPandCryo'] = (df['VIP'] & df['CryoSleep']).astype(int)

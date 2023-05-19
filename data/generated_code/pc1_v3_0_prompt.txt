@@ -1,0 +1,100 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+"  
+
+**PC1 Software defect prediction**  
+One of the NASA Metrics Data Program defect data sets. Data from flight software for earth orbiting satellite. Data comes from McCabe and Halstead features extractors of source code.  These features were defined in the 70s in an attempt to objectively characterize code features that are associated with software quality.
+
+
+
+ Attribute Information  
+
+1. loc             : numeric % McCabe's line count of code
+2. v(g)            : numeric % McCabe "cyclomatic complexity"
+3. ev(g)           : numeric % McCabe "essential complexity"
+4. iv(g)           : numeric % McCabe "design complexity"
+5. n               : numeric % Halstead total operators + operands
+6. v               : numeric % Halstead "volume"
+7. l               : numeric % Halstead "program length"
+8. d               : numeric % Halstead "difficulty"
+9. i               : numeric % Halstead "intelligence"
+10. e               : numeric % Halstead "effort"
+11. b               : numeric % Halstead 
+12. t               : numeric % Halstead's time estimator
+13. lOCode          : numeric % Halstead's line count
+14. lOComment       : numeric % Halstead's count of lines of comments
+15. lOBlank         : numeric % Halstead's count of blank lines
+16. lOCodeAndComment: numeric
+17. uniq_Op         : numeric % unique operators
+18. uniq_Opnd       : numeric % unique operands
+19. total_Op        : numeric % total operators
+20. total_Opnd      : numeric % total operands
+21. branchCount     : numeric % of the flow graph
+22. branchCount     : numeric % of the flow graph
+23. defects         : {false,true} % module has/has not one or more reported defects
+
+
+
+ Relevant papers  
+
+- Shepperd, M. and Qinbao Song and Zhongbin Sun and Mair, C. (2013)
+Data Quality: Some Comments on the NASA Software Defect Datasets, IEEE Transactions on Software Engineering, 39.
+
+- Tim Menzies and Justin S. Di Stefano (2004) How Good is Your Blind Spot Sampling Policy? 2004 IEEE Conference on High Assurance
+Software Engineering.
+
+- T. Menzies and J. DiStefano and A. Orrego and R. Chapman (2004) Assessing Predictors of Software Defects", Workshop on Predictive Software Models, Chicago"
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+loc (float64): NaN-freq [0.0%], Samples [3.0, 21.0, 37.0, 17.0, 13.0, 4.0, 6.0, 23.0, 6.0, 3.0]
+v(g) (float64): NaN-freq [0.0%], Samples [1.0, 4.0, 6.0, 1.0, 1.0, 2.0, 3.0, 7.0, 4.0, 1.0]
+ev(g) (float64): NaN-freq [0.0%], Samples [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 7.0, 4.0, 1.0]
+iv(G) (float64): NaN-freq [0.0%], Samples [1.0, 2.0, 2.0, 1.0, 1.0, 2.0, 3.0, 4.0, 1.0, 1.0]
+N (float64): NaN-freq [0.0%], Samples [7.0, 57.0, 97.0, 102.0, 49.0, 13.0, 28.0, 104.0, 32.0, 7.0]
+V (float64): NaN-freq [0.0%], Samples [19.65, 276.9, 541.74, 550.02, 218.51, 43.19, 109.39, 524.62, 135.93, 18.09]
+L (float64): NaN-freq [0.0%], Samples [0.5, 0.09, 0.07, 0.07, 0.23, 0.14, 0.13, 0.06, 0.1, 0.67]
+D (float64): NaN-freq [0.0%], Samples [2.0, 10.71, 13.93, 13.54, 4.31, 7.0, 8.0, 15.84, 9.63, 1.5]
+I (float64): NaN-freq [0.0%], Samples [9.83, 25.84, 38.89, 40.63, 50.67, 6.17, 13.67, 33.12, 14.12, 12.06]
+E (float64): NaN-freq [0.0%], Samples [39.3, 2966.84, 7545.68, 7446.38, 942.33, 302.3, 875.14, 8311.04, 1308.36, 27.14]
+B (float64): NaN-freq [0.0%], Samples [0.01, 0.09, 0.18, 0.18, 0.07, 0.01, 0.04, 0.17, 0.05, 0.01]
+T (float64): NaN-freq [0.0%], Samples [2.18, 164.82, 419.2, 413.69, 52.35, 16.79, 48.62, 461.72, 72.69, 1.51]
+lOCode (float64): NaN-freq [0.0%], Samples [3.0, 21.0, 37.0, 16.0, 11.0, 4.0, 6.0, 23.0, 6.0, 3.0]
+lOComment (float64): NaN-freq [0.0%], Samples [0.0, 0.0, 0.0, 9.0, 15.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+locCodeAndComment (float64): NaN-freq [0.0%], Samples [0.0, 0.0, 0.0, 1.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+lOBlank (float64): NaN-freq [0.0%], Samples [1.0, 4.0, 4.0, 12.0, 9.0, 0.0, 0.0, 11.0, 0.0, 0.0]
+uniq_Op (float64): NaN-freq [0.0%], Samples [4.0, 15.0, 20.0, 16.0, 6.0, 7.0, 10.0, 14.0, 11.0, 3.0]
+uniq_Opnd (float64): NaN-freq [0.0%], Samples [3.0, 14.0, 28.0, 26.0, 16.0, 3.0, 5.0, 19.0, 8.0, 3.0]
+total_Op (float64): NaN-freq [0.0%], Samples [4.0, 37.0, 58.0, 58.0, 26.0, 7.0, 20.0, 61.0, 18.0, 4.0]
+total_Opnd (float64): NaN-freq [0.0%], Samples [3.0, 20.0, 39.0, 44.0, 23.0, 6.0, 8.0, 43.0, 14.0, 3.0]
+branchCount (float64): NaN-freq [0.0%], Samples [1.0, 7.0, 11.0, 1.0, 1.0, 3.0, 5.0, 13.0, 7.0, 1.0]
+defects (category): NaN-freq [0.0%], Samples [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 831
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "defects".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "defects" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'loc': [3.0, 21.0, 37.0], 'v(g)': [1.0, 4.0, 6.0], ...)
+(Some pandas code using loc', 'v(g)', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

@@ -1,0 +1,13 @@
+# (Insulin resistance)
+# Usefulness: Insulin resistance is a well-known risk factor for diabetes. This feature calculates insulin resistance using the HOMA-IR formula.
+# Input samples: 'plas': [87.0, 137.0, 134.0], 'insu': [0.0, 0.0, 291.0]
+df['homa_ir'] = (df['plas'] * df['insu']) / 405
+df.drop(columns=['insu'], inplace=True)# (Age group)
+# Usefulness: Age is a well-known risk factor for diabetes. This feature categorizes age into age groups.
+# Input samples: 'age': [25.0, 39.0, 21.0]
+df['age_group'] = pd.cut(df['age'], bins=[20, 30, 40, 50, 60, 70, 81], labels=['20-29', '30-39', '40-49', '50-59', '60-69', '70+'])
+df.drop(columns=['age'], inplace=True)# (Triceps skin fold thickness group)
+# Usefulness: Triceps skin fold thickness is a well-known risk factor for diabetes. This feature categorizes triceps skin fold thickness into groups.
+# Input samples: 'skin': [23.0, 41.0, 20.0]
+df['skin_group'] = pd.cut(df['skin'], bins=[-1, 0, 10, 20, 30, 100], labels=['0', '1-10', '11-20', '21-30', '31+'])
+df.drop(columns=['skin'], inplace=True)

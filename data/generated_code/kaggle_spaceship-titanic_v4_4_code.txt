@@ -1,0 +1,5 @@
+
+# CryoSleep and VIP interaction
+# Usefulness: Passengers who are both in CryoSleep and VIP might have a different probability of being transported.
+# Input samples: 'CryoSleep': [False, False, False], 'VIP': [False, False, False]
+df['CryoSleep_VIP'] = df['CryoSleep'].astype(int) & df['VIP'].astype(int)

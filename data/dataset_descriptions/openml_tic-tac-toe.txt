@@ -1,0 +1,2 @@
+**Tic-Tac-Toe Endgame database**  
+This database encodes the complete set of possible board configurations at the end of tic-tac-toe games, where "x" is assumed to have played first.  The target concept is "win for x" (i.e., true when "x" has one of 8 possible ways to create a "three-in-a-row").  

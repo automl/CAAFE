@@ -1,0 +1,5 @@
+
+# Pedigree_Age Interaction
+# Usefulness: This interaction feature can help capture the combined effect of diabetes pedigree function and age on diabetes risk, as both factors can influence the likelihood of diabetes.
+# Input samples: 'pedi': [0.8, 0.29, 0.32], 'age': [21.0, 42.0, 55.0]
+df['pedigree_age_interaction'] = df['pedi'] * df['age']

@@ -1,0 +1,65 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+"
+
+ Description 
+
+
+
+This dataset is part of a collection datasets based on the game "Jungle Chess" (a.k.a. Dou Shou Qi). For a description of the rules, please refer to the paper (link attached). The paper also contains a description of various constructed features. As the tablebases are a disjoint set of several tablebases based on which (two) pieces are on the board, we have uploaded all tablebases that have explicit different content:
+
+* Rat vs Rat
+* Rat vs Panther
+* Rat vs. Lion
+* Rat vs. Elephant
+* Panther vs. Lion
+* Panther vs. Elephant
+* Tiger vs. Lion
+* Lion vs. Lion
+* Lion vs. Elephant
+* Elephant vs. Elephant
+* Complete (Combination of the above)
+* RAW Complete (Combination of the above, containing for both pieces just the rank, file and strength information). This dataset contains a similar classification problem as, e.g., the King and Rook vs. King problem and is suitable for classification tasks. 
+
+(Note that this dataset is one of the above mentioned datasets). Additionally, note that several subproblems are very similar. Having seen a given positions from one of the tablebases arguably gives a lot of information about the outcome of the same position in the other tablebases. 
+
+J. N. van Rijn and J. K. Vis, Endgame Analysis of Dou Shou Qi. ICGA Journal 37:2, 120--124, 2014. ArXiv link: https://arxiv.org/abs/1604.07312"
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+white_piece0_strength (float64): NaN-freq [0.0%], Samples [7.0, 0.0, 4.0, 0.0, 7.0, 0.0, 7.0, 4.0, 6.0, 0.0]
+white_piece0_file (float64): NaN-freq [0.0%], Samples [6.0, 3.0, 1.0, 4.0, 6.0, 3.0, 0.0, 1.0, 0.0, 5.0]
+white_piece0_rank (float64): NaN-freq [0.0%], Samples [7.0, 2.0, 6.0, 4.0, 2.0, 5.0, 4.0, 7.0, 8.0, 3.0]
+black_piece0_strength (float64): NaN-freq [0.0%], Samples [0.0, 4.0, 0.0, 4.0, 6.0, 0.0, 6.0, 0.0, 4.0, 0.0]
+black_piece0_file (float64): NaN-freq [0.0%], Samples [5.0, 0.0, 2.0, 6.0, 0.0, 1.0, 4.0, 0.0, 6.0, 1.0]
+black_piece0_rank (float64): NaN-freq [0.0%], Samples [6.0, 5.0, 7.0, 7.0, 8.0, 8.0, 0.0, 4.0, 5.0, 3.0]
+class (category): NaN-freq [0.0%], Samples [1.0, 2.0, 0.0, 2.0, 2.0, 0.0, 1.0, 0.0, 0.0, 1.0]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 1500
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "class".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "class" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'white_piece0_strength': [7.0, 0.0, 4.0], 'white_piece0_file': [6.0, 3.0, 1.0], ...)
+(Some pandas code using white_piece0_strength', 'white_piece0_file', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

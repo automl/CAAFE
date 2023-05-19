@@ -1,0 +1,15 @@
+
+# Feature: Cell_Size_and_Shape_Uniformity
+# Usefulness: Combining Cell_Size_Uniformity and Cell_Shape_Uniformity might capture the overall uniformity of the cells, which could help in classifying the prognosis.
+# Input samples: 'Cell_Size_Uniformity': [1.0, 2.0, 6.0], 'Cell_Shape_Uniformity': [1.0, 2.0, 5.0]
+df['Cell_Size_and_Shape_Uniformity'] = df['Cell_Size_Uniformity'] * df['Cell_Shape_Uniformity']
+
+# Feature: Adhesion_and_Mitoses
+# Usefulness: Combining Marginal_Adhesion and Mitoses might capture the relationship between cell adhesion and cell division, which could help in classifying the prognosis.
+# Input samples: 'Marginal_Adhesion': [1.0, 1.0, 6.0], 'Mitoses': [1.0, 2.0, 1.0]
+df['Adhesion_and_Mitoses'] = df['Marginal_Adhesion'] * df['Mitoses']
+
+# Feature: Adhesion_and_Epi_Cell_Size
+# Usefulness: Combining Marginal_Adhesion and Single_Epi_Cell_Size might capture the relationship between cell adhesion and cell size, which could help in classifying the prognosis.
+# Input samples: 'Marginal_Adhesion': [1.0, 1.0, 6.0], 'Single_Epi_Cell_Size': [2.0, 2.0, 10.0]
+df['Adhesion_and_Epi_Cell_Size'] = df['Marginal_Adhesion'] * df['Single_Epi_Cell_Size']

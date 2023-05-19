@@ -1,0 +1,17 @@
+
+# Feature: Reco_Policy_Premium_Ratio
+# Usefulness: The ratio between Reco_Policy_Premium and the age difference can provide information on the premium cost per age difference, which might be related to the likelihood of a positive response.
+# Input samples: 'Reco_Policy_Premium': [16968.0, 11322.0, 17430.0], 'Upper_Age': [54, 42, 69], 'Lower_Age': [20, 42, 69]
+df['Reco_Policy_Premium_Ratio'] = df['Reco_Policy_Premium'] / (df['Upper_Age'] - df['Lower_Age'] + 1)
+# Feature: Is_Spouse_Encoded
+# Usefulness: Encoding the Is_Spouse feature can help the classifier better understand the relationship status information and its relation to the target variable.
+# Input samples: 'Is_Spouse': ['Yes', 'No', 'No']
+df['Is_Spouse_Encoded'] = df['Is_Spouse'].map({'Yes': 1, 'No': 0})
+
+# Feature: Reco_Insurance_Type_Encoded
+# Usefulness: Encoding the Reco_Insurance_Type feature can help the classifier better understand the type of insurance recommendation and its relation to the target variable.
+# Input samples: 'Reco_Insurance_Type': ['Joint', 'Individual', 'Individual']
+df['Reco_Insurance_Type_Encoded'] = df['Reco_Insurance_Type'].map({'Joint': 1, 'Individual': 0})
+
+# Dropping original Reco_Insurance_Type column as it is now encoded
+df.drop(columns=['Reco_Insurance_Type'], inplace=True)

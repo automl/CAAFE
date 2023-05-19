@@ -1,0 +1,5 @@
+
+# (Feature name and description)
+# Usefulness: This feature calculates the difference between the strength of the white piece and the strength of the black piece, giving an idea of which color has an advantage in the game.
+# Input samples: 'white_piece0_strength': [7.0, 0.0, 4.0], 'black_piece0_strength': [0.0, 4.0, 0.0]
+df['strength_diff'] = df['white_piece0_strength'] - df['black_piece0_strength']

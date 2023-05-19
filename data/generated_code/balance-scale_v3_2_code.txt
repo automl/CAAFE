@@ -1,0 +1,13 @@
+# ('right-weight' * 'right-distance')
+# Usefulness: This feature captures the interaction between the weight and distance on the right side of the balance scale, which is a key factor in determining the class of the balance scale.
+# Input samples: 'right-weight': [5.0, 3.0, 1.0], 'right-distance': [2.0, 4.0, 4.0]
+df['right-interaction'] = df['right-weight'] * df['right-distance']# ('left-weight' / 'left-distance')
+# Usefulness: This feature captures the ratio between the weight and distance on the left side of the balance scale, which is a key factor in determining the class of the balance scale.
+# Input samples: 'left-weight': [2.0, 4.0, 1.0], 'left-distance': [2.0, 5.0, 4.0]
+df['left-ratio'] = df['left-weight'] / df['left-distance']# ('left-weight' * 'left-distance') / ('right-weight' * 'right-distance')
+# Usefulness: This feature captures the ratio between the left and right interactions, which is a key factor in determining the class of the balance scale.
+# Input samples: 'left-weight': [2.0, 4.0, 1.0], 'left-distance': [2.0, 5.0, 4.0], 'right-weight': [5.0, 3.0, 1.0], 'right-distance': [2.0, 4.0, 4.0]
+df['interaction-ratio'] = (df['left-weight'] * df['left-distance']) / (df['right-weight'] * df['right-distance'])# ('left-weight' - 'right-weight') / ('left-distance' - 'right-distance')
+# Usefulness: This feature captures the difference in weight per unit distance between the left and right sides of the balance scale, which is a key factor in determining the class of the balance scale.
+# Input samples: 'left-weight': [2.0, 4.0, 1.0], 'left-distance': [2.0, 5.0, 4.0], 'right-weight': [5.0, 3.0, 1.0], 'right-distance': [2.0, 4.0, 4.0]
+df['weight-distance-diff'] = (df['left-weight'] - df['right-weight']) / (df['left-distance'] - df['right-distance'])

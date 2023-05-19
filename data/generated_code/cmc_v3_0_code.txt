@@ -1,0 +1,9 @@
+
+# (Wife_and_husband_education)
+# Usefulness: Education level of both wife and husband may be important in determining contraceptive method used. High education level of both may indicate more planning and use of long-term methods.
+# Input samples: 'Wifes_education': [3, 3, 2], 'Husbands_education': [3, 3, 3]
+df['Wife_and_husband_education'] = df['Wifes_education'] + df['Husbands_education']
+# (Wife_age_squared)
+# Usefulness: This feature may capture the non-linear relationship between wife's age and contraceptive method used. A squared term may be useful in capturing this relationship.
+# Input samples: 'Wifes_age': [48.0, 32.0, 28.0]
+df['Wife_age_squared'] = df['Wifes_age'] ** 2

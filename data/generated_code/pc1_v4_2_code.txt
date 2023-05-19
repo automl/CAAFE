@@ -1,0 +1,19 @@
+# Feature: Code Complexity
+# Usefulness: Combining McCabe's cyclomatic complexity (v(g)) and Halstead's difficulty (D) to create a single metric for overall code complexity. Higher complexity may be associated with higher chances of defects.
+# Input samples: 'v(g)': [4.0, 1.0, 26.0], 'D': [14.0, 5.78, 22.35]
+df['code_complexity'] = df['v(g)'] * df['D']
+
+# Feature: Comment Ratio
+# Usefulness: The ratio of lines of comments (lOComment) to lines of code (lOCode) can be an indicator of code quality. A higher ratio may indicate better documentation and lower chances of defects.
+# Input samples: 'lOCode': [9.0, 13.0, 166.0], 'lOComment': [0.0, 0.0, 49.0]
+df['comment_ratio'] = df['lOComment'] / (df['lOCode'] + 1e-6)  # Adding a small constant to avoid division by zero
+
+# Feature: Blank Line Ratio
+# Usefulness: The ratio of blank lines (lOBlank) to lines of code (loc) can indicate the readability of the code. Higher ratios may suggest better readability and lower chances of defects.
+# Input samples: 'lOBlank': [5.0, 0.0, 39.0], 'loc': [11.0, 13.0, 167.0]
+df['blank_line_ratio'] = df['lOBlank'] / (df['loc'] + 1e-6)  # Adding a small constant to avoid division by zero
+
+# Feature: Intelligence per Line of Code
+# Usefulness: The ratio of Halstead's intelligence (I) to lines of code (loc) can indicate the complexity of the code. Higher intelligence per line may be associated with higher chances of defects.
+# Input samples: 'I': [17.46, 23.35, 218.7], 'loc': [11.0, 13.0, 167.0]
+df['intelligence_per_loc'] = df['I'] / (df['loc'] + 1e-6)  # Adding a small constant to avoid division by zero

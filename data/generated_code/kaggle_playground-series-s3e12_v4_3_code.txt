@@ -1,0 +1,13 @@
+
+# (Urea to Creatinine Ratio)
+# Usefulness: Urea and creatinine are both markers of kidney function. The ratio of the two can be used to estimate the cause of acute kidney injury.
+# Input samples: 'urea': [125.0, 164.0, 418.0], 'calc': [1.05, 1.16, 2.36], 'id': [265.0, 157.0, 385.0]
+df['urea_creatinine_ratio'] = df['urea'] / df['calc']
+# (Calcium to Creatinine Ratio)
+# Usefulness: Calcium and creatinine are both markers of kidney function. The ratio of the two can be used to estimate the cause of acute kidney injury.
+# Input samples: 'calc': [1.05, 1.16, 2.36], 'urea': [125.0, 164.0, 418.0], 'id': [265.0, 157.0, 385.0]
+df['calcium_creatinine_ratio'] = df['calc'] / df['urea']
+# (Urea to Calcium Ratio)
+# Usefulness: Urea and calcium are both important factors in the formation of kidney stones. The ratio of the two can help predict the presence of kidney stones.
+# Input samples: 'urea': [125.0, 164.0, 418.0], 'calc': [1.05, 1.16, 2.36], 'target': [0.0, 1.0, 1.0]
+df['urea_calcium_ratio'] = df['urea'] / df['calc']

@@ -1,0 +1,32 @@
+
+# ('DBH_Ht', 'Feature that combines DBH and Ht', 'This feature combines the height and diameter of the tree, which is important for determining the overall size and maturity of the tree.')
+df['DBH_Ht'] = df['DBH'] * df['Ht']
+
+# ('Surv_Vig', 'Feature that combines Surv and Vig', 'This feature combines the survival and vigor of the tree, which is important for determining the health and growth potential of the tree.')
+df['Surv_Vig'] = df['Surv'] * df['Vig']
+
+# ('InsRes_StemFm', 'Feature that combines Ins_res and Stem_Fm', 'This feature combines the insect resistance and stem form of the tree, which is important for determining the overall health and resistance to pests and diseases.')
+df['InsRes_StemFm'] = df['Ins_res'] * df['Stem_Fm']
+
+# ('CrownFm_BrnchFm', 'Feature that combines Crown_Fm and Brnch_Fm', 'This feature combines the crown form and branch form of the tree, which is important for determining the overall shape and structure of the tree.')
+df['CrownFm_BrnchFm'] = df['Crown_Fm'] * df['Brnch_Fm']
+
+# ('Altitude_Rainfall', 'Feature that combines Altitude and Rainfall', 'This feature combines the altitude and rainfall of the site, which is important for determining the environmental conditions that the tree is growing in.')
+df['Altitude_Rainfall'] = df['Altitude'] * df['Rainfall']
+
+# Drop PMCno column due to high amount of missing data
+df.drop(columns=['PMCno'], inplace=True)
+# ('Altitude_Sp', 'Feature that combines Altitude and Sp', 'This feature combines the altitude and species of the tree, which is important for determining the environmental conditions and type of the tree.')
+df['Altitude_Sp'] = df['Altitude'] * df['Sp']
+
+# ('Rainfall_Year', 'Feature that combines Rainfall and Year', 'This feature combines the rainfall and year of planting of the tree, which is important for determining the climate conditions and planting time of the tree.')
+df['Rainfall_Year'] = df['Rainfall'] * df['Year']
+
+# ('DBH_Ht_Sp', 'Feature that combines DBH, Ht, and Sp', 'This feature combines the diameter, height, and species of the tree, which is important for determining the size and type of the tree.')
+df['DBH_Ht_Sp'] = df['DBH'] * df['Ht'] * df['Sp']
+
+# ('Rainfall_Frosts_Locality', 'Feature that combines Rainfall, Frosts, and Locality', 'This feature combines the rainfall, frosts, and locality of the site, which is important for determining the environmental conditions that the tree is growing in.')
+df['Rainfall_Frosts_Locality'] = df['Rainfall'] * df['Frosts'] * df['Locality']
+
+# Drop Stem_Fm, Crown_Fm, Brnch_Fm columns due to high amount of missing data
+df.drop(columns=['Stem_Fm', 'Crown_Fm', 'Brnch_Fm'], inplace=True)

@@ -1,0 +1,19 @@
+
+# ('FamilySize', 'Number of family members travelling with the passenger')
+# Usefulness: The number of family members travelling with the passenger can be important for predicting whether the passenger was transported, as families may be more likely to be transported together.
+# Input samples: 'PassengerId': ['4841_02', '1040_01', '5788_01'], 'HomePlanet': ['Europa', 'Earth', 'Mars'], 'Cabin': ['B/192/S', 'G/164/S', 'F/1105/S']
+df['FamilySize'] = df.groupby(df['PassengerId'].str.split('_').str[0])['PassengerId'].transform('count')
+
+# ('CabinDeck', 'The deck level of the passenger cabin')
+# Usefulness: The deck level of the passenger cabin may be important for predicting whether the passenger was transported, as passengers on certain decks may be more likely to be affected by the spacetime anomaly.
+# Input samples: 'Cabin': ['B/192/S', 'G/164/S', 'F/1105/S'], 'Destination': ['TRAPPIST-1e', 'PSO J318.5-22', 'TRAPPIST-1e']
+df['CabinDeck'] = df['Cabin'].str.split('/').str[0]
+
+# ('IsAdult', 'Whether the passenger is an adult (age >= 18)')
+# Usefulness: Age may be an important factor in predicting whether the passenger was transported, and it is common to consider age groups such as adults vs. children. This column simplifies the age variable by categorizing passengers as adults or children.
+# Input samples: 'Age': [21.0, 15.0, 27.0], 'VIP': [False, False, False]
+df['IsAdult'] = (df['Age'] >= 18).astype(int)
+
+# ('TotalSpending', 'The total amount spent by the passenger on luxury amenities')
+# Usefulness: The amount spent by the passenger on luxury amenities may be indicative of their socioeconomic status or level of attachment to the current dimension, and thus may be important for predicting whether they were transported.
+# Input samples: 'RoomService': [12.0, 521.0, 850.0], 'FoodCourt': [1855.0, 162.0, 0.0

@@ -1,0 +1,14 @@
+
+# Left Moment
+# Usefulness: This feature represents the product of left weight and left distance, which is useful to determine the balance scale tip.
+# Input samples: 'left-weight': [4.0, 5.0, 1.0], 'left-distance': [2.0, 4.0, 4.0]
+df['left_moment'] = df['left-weight'] * df['left-distance']
+
+# Balance Difference
+# Usefulness: This feature represents the difference between left moment and right moment, which can help to classify the balance scale tip more accurately.
+# Input samples: 'left-weight': [4.0, 5.0, 1.0], 'left-distance': [2.0, 4.0, 4.0], 'right-weight': [4.0, 4.0, 5.0], 'right-distance': [2.0, 4.0, 5.0]
+df['balance_diff'] = (df['left-weight'] * df['left-distance']) - (df['right-weight'] * df['right-distance'])
+
+# Drop redundant columns
+# Explanation: The original columns are now represented by the balance_diff feature, which captures the relationship between left and right moments.
+df.drop(columns=['left-weight', 'left-distance', 'right-weight', 'right-distance'], inplace=True)

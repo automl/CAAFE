@@ -1,0 +1,10 @@
+
+# Insulin Glucose Interaction
+# Usefulness: Insulin and glucose levels are directly related to diabetes risk. Their interaction term can help capture this relationship.
+# Input samples: 'insu': [155.0, 65.0, 0.0], 'plas': [129.0, 86.0, 151.0]
+df['insulin_glucose_interaction'] = df['insu'] * df['plas']
+
+# Skin Thickness Insulin Interaction
+# Usefulness: Skin thickness and insulin levels can both be related to diabetes risk. Their interaction term can help capture this relationship.
+# Input samples: 'skin': [49.0, 52.0, 46.0], 'insu': [155.0, 65.0, 0.0]
+df['skin_insulin_interaction'] = df['skin'] * df['insu']

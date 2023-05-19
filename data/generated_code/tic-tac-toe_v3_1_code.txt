@@ -1,0 +1,12 @@
+
+# (Number of squares occupied)
+# Usefulness: Knowing the number of squares occupied can give insight into the progress of the game and help classify "Class" 
+# Input samples: 'top-left-square': [0, 1, 2], 'top-middle-square': [0, 0, 0], 'top-right-square': [2, 2, 1], 'middle-left-square': [1, 2, 0], 'middle-middle-square': [0, 1, 2], 'middle-right-square': [2, 0, 1], 'bottom-left-square': [0, 2, 0], 'bottom-middle-square': [1, 0, 2], 'bottom-right-square': [2, 1, 1]
+df['num_squares_occupied'] = df.apply(lambda row: len([x for x in row if x != 0]), axis=1)
+# (Count of X's on the board)
+# Usefulness: Knowing the number of X's on the board can give insight into the progress of the game and help classify "Class" 
+# Input samples: 'top-left-square': [0, 1, 2], 'top-middle-square': [0, 0, 0], 'top-right-square': [2, 2, 1], 'middle-left-square': [1, 2, 0], 'middle-middle-square': [0, 1, 2], 'middle-right-square': [2, 0, 1], 'bottom-left-square': [0, 2, 0], 'bottom-middle-square': [1, 0, 2], 'bottom-right-square': [2, 1, 1]
+df['num_X'] = df.apply(lambda row: row.tolist().count(1), axis=1)# (Count of O's on the board)
+# Usefulness: Knowing the number of O's on the board can give insight into the progress of the game and help classify "Class" 
+# Input samples: 'top-left-square': [0, 1, 2], 'top-middle-square': [0, 0, 0], 'top-right-square': [2, 2, 1], 'middle-left-square': [1, 2, 0], 'middle-middle-square': [0, 1, 2], 'middle-right-square': [2, 0, 1], 'bottom-left-square': [0, 2, 0], 'bottom-middle-square': [1, 0, 2], 'bottom-right-square': [2, 1, 1]
+df['num_O'] = df.apply(lambda row: row.tolist().count(2), axis=1)

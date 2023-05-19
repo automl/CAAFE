@@ -1,0 +1,50 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+"For the data and objective, it is evident that this is a Binary Classification Problem data in the Tabular Data format.
+A policy is recommended to a person when they land on an insurance website, and if the person chooses to fill up a form to apply, it is considered a Positive outcome (Classified as lead). All other conditions are considered Zero outcomes."
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+ID (int64): NaN-freq [0.0%], Samples [44723, 1807, 21468, 21335, 2850, 31337, 49649, 12803, 39654, 40718]
+City_Code (object): NaN-freq [0.0%], Samples ['C4', 'C9', 'C20', 'C7', 'C9', 'C11', 'C12', 'C1', 'C18', 'C17']
+Region_Code (int64): NaN-freq [0.0%], Samples [1794, 623, 3380, 2723, 995, 2773, 330, 142, 513, 621]
+Accomodation_Type (object): NaN-freq [0.0%], Samples ['Owned', 'Rented', 'Rented', 'Owned', 'Owned', 'Rented', 'Rented', 'Owned', 'Owned', 'Rented']
+Reco_Insurance_Type (object): NaN-freq [0.0%], Samples ['Individual', 'Individual', 'Individual', 'Joint', 'Individual', 'Individual', 'Individual', 'Individual', 'Individual', 'Joint']
+Upper_Age (int64): NaN-freq [0.0%], Samples [52, 22, 63, 73, 62, 22, 23, 74, 35, 34]
+Lower_Age (int64): NaN-freq [0.0%], Samples [52, 22, 63, 71, 62, 22, 23, 74, 35, 30]
+Is_Spouse (object): NaN-freq [0.0%], Samples ['No', 'No', 'No', 'Yes', 'No', 'No', 'No', 'No', 'No', 'Yes']
+Health Indicator (object): NaN-freq [0.0%], Samples ['X1', 'X2', 'X3', 'X9', 'X1', 'X1', 'X2', 'X6', 'X1', 'X4']
+Holding_Policy_Duration (object): NaN-freq [0.0%], Samples ['7.0', '2.0', '1.0', '4.0', '4.0', '1.0', '1.0', '11.0', '1.0', '5.0']
+Holding_Policy_Type (float64): NaN-freq [0.0%], Samples [2.0, 3.0, 1.0, 3.0, 2.0, 2.0, 1.0, 1.0, 2.0, 1.0]
+Reco_Policy_Cat (int64): NaN-freq [0.0%], Samples [21, 16, 17, 21, 21, 20, 16, 19, 22, 12]
+Reco_Policy_Premium (float64): NaN-freq [0.0%], Samples [13112.0, 9800.0, 17280.0, 24822.0, 14664.0, 6300.0, 8592.0, 17310.0, 13860.0, 12012.0]
+Response (category): NaN-freq [0.0%], Samples [1, 0, 0, 0, 0, 1, 0, 0, 1, 0]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 1500
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "Response".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "Response" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'ID': [44723, 1807, 21468], 'City_Code': ['C4', 'C9', 'C20'], ...)
+(Some pandas code using ID', 'City_Code', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

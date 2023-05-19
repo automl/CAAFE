@@ -1,0 +1,15 @@
+
+# Surv_to_Rainfall_ratio (Surv divided by Rainfall)
+# Usefulness: The survival rate of trees in relation to the amount of rainfall can provide insights into the species' adaptability and suitability for soil conservation in different rainfall conditions.
+# Input samples: 'Surv': [40.0, 70.0, 45.0], 'Rainfall': [1300.0, 850.0, 1080.0]
+df['Surv_to_Rainfall_ratio'] = df['Surv'] / df['Rainfall']
+
+# DBH_to_Surv_ratio (DBH divided by Surv)
+# Usefulness: The ratio of diameter base height to survival rate can provide insights into the tree's overall form and ability to withstand external factors, which may affect its utility for soil conservation.
+# Input samples: 'DBH': [26.59, 17.01, 7.89], 'Surv': [40.0, 70.0, 45.0]
+df['DBH_to_Surv_ratio'] = df['DBH'] / df['Surv']
+
+# Ht_to_Surv_ratio (Ht divided by Surv)
+# Usefulness: The ratio of height to survival rate can provide insights into the tree's overall form and ability to withstand external factors, which may affect its utility for soil conservation.
+# Input samples: 'Ht': [10.8, 12.28, 5.65], 'Surv': [40.0, 70.0, 45.0]
+df['Ht_to_Surv_ratio'] = df['Ht'] / df['Surv']

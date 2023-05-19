@@ -1,0 +1,11 @@
+
+# (Number of "x" in the top row)
+# Usefulness: The number of "x" in the top row can help predict if "x" is closer to winning by having a higher chance of completing a three-in-a-row.
+# Input samples: 'top-left-square': [2, 0, 1], 'top-middle-square': [1, 1, 2], 'top-right-square': [0, 1, 2]
+df['num_x_top_row'] = df[['top-left-square', 'top-middle-square', 'top-right-square']].apply(lambda x: sum(i == 1 for i in x), axis=1)
+# (Number of "o" in the diagonal from top-left to bottom-right)
+# Usefulness: The number of "o" in the diagonal from top-left to bottom-right can help predict if "o" is closer to winning by having a higher chance of completing a three-in-a-row.
+# Input samples: 'top-left-square': [2, 0, 1], 'middle-middle-square': [1, 2, 2], 'bottom-right-square': [2, 0, 1]
+df['num_o_topleft_bottomright_diag'] = [1 if df.iloc[i]['top-left-square'] == 2 else 0 for i in range(len(df))]
+df['num_o_topleft_bottomright_diag'] += [1 if df.iloc[i]['middle-middle-square'] == 2 else 0 for i in range(len(df))]
+df['num_o_topleft_bottomright_diag'] += [1 if df.iloc[i]['bottom-right-square'] == 2 else 0 for i in range(len(df))]

@@ -1,0 +1,7 @@
+# ('white_piece0_strength' / 'black_piece0_strength')
+# Usefulness: The ratio of the strengths of the white and black pieces provides a measure of how strong the white piece is relative to the black piece. This can be useful in predicting the outcome of the game.
+# Input samples: 'white_piece0_strength': [7.0, 6.0, 7.0], 'black_piece0_strength': [0.0, 0.0, 6.0]
+df['strength_ratio'] = df['white_piece0_strength'] / df['black_piece0_strength']# ('white_piece0_strength' + 'black_piece0_strength')
+# Usefulness: The sum of the strengths of the white and black pieces provides a measure of how strong the pieces are. This can be useful in predicting the outcome of the game.
+# Input samples: 'white_piece0_strength': [7.0, 6.0, 7.0], 'black_piece0_strength': [0.0, 0.0, 6.0]
+df['total_strength'] = df['white_piece0_strength'] + df['black_piece0_strength']

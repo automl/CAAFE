@@ -1,0 +1,26 @@
+
+# Age category
+# Usefulness: Categorizing age values into groups can help the classifier identify patterns related to diabetes risk.
+# Input samples: 'age': [25.0, 39.0, 21.0]
+def age_category(age):
+    if age < 30:
+        return 0  # Young
+    elif 30 <= age < 50:
+        return 1  # Middle-aged
+    else:
+        return 2  # Old
+
+df['age_cat'] = df['age'].apply(age_category)
+
+# Glucose tolerance test result category
+# Usefulness: Categorizing glucose tolerance test results can help the classifier identify patterns related to diabetes risk.
+# Input samples: 'plas': [87.0, 137.0, 134.0]
+def glucose_category(glucose):
+    if glucose < 140:
+        return 0  # Normal
+    elif 140 <= glucose < 200:
+        return 1  # Prediabetes
+    else:
+        return 2  # Diabetes
+
+df['glucose_cat'] = df['plas'].apply(glucose_category)

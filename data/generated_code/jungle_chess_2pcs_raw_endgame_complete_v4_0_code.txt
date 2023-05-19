@@ -1,0 +1,20 @@
+
+# Feature name: strength_difference
+# Usefulness: This feature calculates the difference in strength between the white and black pieces, which can help the classifier understand the power dynamics between the two pieces.
+# Input samples: 'white_piece0_strength': [7.0, 6.0, 7.0], 'black_piece0_strength': [0.0, 0.0, 6.0]
+df['strength_difference'] = df['white_piece0_strength'] - df['black_piece0_strength']
+
+# Feature name: is_adjacent
+# Usefulness: This feature indicates if the white and black pieces are adjacent to each other, which can help the classifier understand if the pieces are close enough to interact.
+# Input samples: 'white_piece0_file': [6.0, 2.0, 1.0], 'white_piece0_rank': [4.0, 7.0, 1.0], 'black_piece0_file': [5.0, 3.0, 4.0], 'black_piece0_rank': [8.0, 5.0, 2.0]
+df['is_adjacent'] = (((df['white_piece0_file'] - df['black_piece0_file']).abs() <= 1) & ((df['white_piece0_rank'] - df['black_piece0_rank']).abs() <= 1)).astype(int)
+
+# Feature name: stronger_piece
+# Usefulness: This feature indicates if the white piece is stronger than the black piece, which can help the classifier understand the power dynamics between the two pieces.
+# Input samples: 'white_piece0_strength': [7.0, 6.0, 7.0], 'black_piece0_strength': [0.0, 0.0, 6.0]
+df['stronger_piece'] = (df['white_piece0_strength'] > df['black_piece0_strength']).astype(int)
+
+# Feature name: weaker_piece
+# Usefulness: This feature indicates if the black piece is stronger than the white piece, which can help the classifier understand the power dynamics between the two pieces.
+# Input samples: 'white_piece0_strength': [7.0, 6.0, 7.0], 'black_piece0_strength': [0.0, 0.0, 6.0]
+df['weaker_piece'] = (df['white_piece0_strength'] < df['black_piece0_strength']).astype(int)

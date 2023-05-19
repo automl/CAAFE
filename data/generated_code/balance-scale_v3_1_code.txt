@@ -1,0 +1,4 @@
+# ('right-weight-times-distance', 'Product of right weight and right distance')
+# Usefulness: The product of right weight and right distance can be an important factor in determining the balance of the scale. 
+# Input samples: 'right-weight': [5.0, 1.0, 5.0], 'right-distance': [3.0, 1.0, 5.0], ...
+df['right-weight-times-distance'] = df['right-weight'] * df['right-distance']

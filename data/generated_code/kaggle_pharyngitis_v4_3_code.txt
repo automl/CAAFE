@@ -1,0 +1,16 @@
+
+# ('age_y_above_10', 'Whether the patient age is above 10 years old')
+# Usefulness: Older children may exhibit different symptoms and signs than younger children, so this feature can help capture that difference.
+# Input samples: 'age_y': [4.4, 11.3, 5.8]
+df['age_y_above_10'] = (df['age_y'] > 10).astype(int)
+# ('pain_swollenadp', 'Whether the patient has both pain and swollen adenoids')
+# Usefulness: Pain and swollen adenoids are both common symptoms of GAS pharyngitis, and the presence of both may indicate a higher likelihood of a positive RADT result.
+# Input samples: 'pain': [1.0, 1.0, 1.0], 'swollenadp': [0.0, 2.0, 0.0]
+df['pain_swollenadp'] = ((df['pain'] == 1) & (df['swollenadp'] > 0)).astype(int)# Explanation: 'age_y_above_10' is a feature that has already been added, but it may be useful to also include the opposite feature.
+df['age_y_below_10'] = (df['age_y'] <= 10).astype(int)
+
+# Explanation: 'pain' and 'tender' are both symptoms that may indicate GAS pharyngitis. This feature captures the presence of either symptom.
+df['pain_or_tender'] = ((df['pain'] == 1) | (df['tender'] == 1)).astype(int)
+
+# Explanation: 'swollenadp' and 'tender' are both symptoms that may indicate GAS pharyngitis. This feature captures the presence of either symptom.
+df['swollenadp_or_tender'] = ((df['swollenadp'] > 0) | (df['tender'] == 1)).astype(int)

@@ -1,0 +1,15 @@
+
+# Feature: Respiratory_symptoms
+# Usefulness: This feature combines the information from 'cough' and 'rhinorrhea' to create a single feature representing respiratory symptoms, which can potentially improve the prediction of "radt".
+# Input samples: 'cough': [1.0, 0.0, 0.0], 'rhinorrhea': [1.0, 0.0, 0.0]
+df['Respiratory_symptoms'] = df[['cough', 'rhinorrhea']].sum(axis=1)
+
+# Drop 'cough' and 'rhinorrhea' as 'Respiratory_symptoms' combines their information
+df.drop(columns=['cough', 'rhinorrhea'], inplace=True)
+# Feature: Sudden_and_conjunctivitis
+# Usefulness: This feature combines the information from 'sudden' and 'conjunctivitis' to create a single feature representing sudden onset and conjunctivitis symptoms, which can potentially improve the prediction of "radt".
+# Input samples: 'sudden': [0.0, 1.0, 0.0], 'conjunctivitis': [0.0, 0.0, 0.0]
+df['Sudden_and_conjunctivitis'] = df[['sudden', 'conjunctivitis']].sum(axis=1)
+
+# Drop 'sudden' and 'conjunctivitis' as 'Sudden_and_conjunctivitis' combines their information
+df.drop(columns=['sudden', 'conjunctivitis'], inplace=True)

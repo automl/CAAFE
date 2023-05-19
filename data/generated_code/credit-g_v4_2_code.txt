@@ -1,0 +1,19 @@
+
+# Credit amount to duration ratio
+# Usefulness: This feature represents the amount of credit per month, which can help identify the risk level of the customer.
+# Input samples: 'credit_amount': [3609.0, 3331.0, 1311.0], 'duration': [48.0, 12.0, 24.0]
+df['credit_amount_duration_ratio'] = df['credit_amount'] / df['duration']
+
+# Credit amount to age ratio
+# Usefulness: This feature represents the amount of credit relative to the age of the customer, which can help assess the risk level and financial stability of the customer.
+# Input samples: 'credit_amount': [3609.0, 3331.0, 1311.0], 'age': [27.0, 42.0, 26.0]
+df['credit_amount_age_ratio'] = df['credit_amount'] / df['age']
+
+# Duration to residence since ratio
+# Usefulness: This feature represents the proportion of the credit duration with respect to the time the customer has been residing at their current residence, which can help assess the risk level and stability of the customer.
+# Input samples: 'duration': [48.0, 12.0, 24.0], 'residence_since': [1.0, 4.0, 3.0]
+df['duration_residence_since_ratio'] = df['duration'] / df['residence_since']
+
+# Drop num_dependents column as it may be redundant and hurt predictive performance
+# Explanation: The number of people being liable to provide maintenance for may not provide significant information about the credit risk of a customer, especially when other features like credit amount and duration are considered.
+df.drop(columns=['num_dependents'], inplace=True)

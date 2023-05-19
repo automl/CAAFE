@@ -1,0 +1,33 @@
+
+# Feature: GroupSize (Number of passengers in the same group)
+# Usefulness: This feature can help to identify if passengers traveling in larger groups have a higher or lower chance of being transported.
+# Input samples: 'PassengerId': ['5909_03', '4256_08', '2000_01']
+df['GroupSize'] = df['PassengerId'].apply(lambda x: int(x.split('_')[1]))
+
+# Feature: TotalExpenses (Total amount spent on amenities)
+# Usefulness: Passengers who spend more on amenities might have a different likelihood of being transported.
+# Input samples: 'RoomService': [0.0, 0.0, 5.0], 'FoodCourt': [0.0, 0.0, 2676.0], 'ShoppingMall': [0.0, 608.0, 13.0], 'Spa': [0.0, 0.0, 0.0], 'VRDeck': [0.0, 91.0, 157.0]
+df['TotalExpenses'] = df['RoomService'] + df['FoodCourt'] + df['ShoppingMall'] + df['Spa'] + df['VRDeck']
+
+# Feature: AgeGroup (Categorical age group)
+# Usefulness: Different age groups may have different likelihoods of being transported.
+# Input samples: 'Age': [2.0, 44.0, 28.0]
+import numpy as np
+bins = [0, 12, 18, 35, 60, np.inf]
+labels = ['Child', 'Teen', 'YoungAdult', 'Adult', 'Senior']
+df['AgeGroup'] = pd.cut(df['Age'], bins=bins, labels=labels)
+
+# Dropping Age as AgeGroup contains the relevant information
+df.drop(columns=['Age'], inplace=True)
+# Feature: SameHomeAndDestination (Boolean indicating if HomePlanet and Destination are the same)
+# Usefulness: Passengers with the same HomePlanet and Destination might have a different likelihood of being transported.
+# Input samples: 'HomePlanet': ['Earth', 'Earth', 'Europa'], 'Destination': ['55 Cancri e', '55 Cancri e', '55 Cancri e']
+df['SameHomeAndDestination'] = df['HomePlanet'] == df['Destination']
+# Feature: ExpensesPerDeck (Average expenses of passengers in the same deck)
+# Usefulness: Passengers in the same deck with different spending patterns might have a different likelihood of being transported.
+# Input samples: 'Cabin': ['G/961/S', 'F/880/P', 'C/76/S'], 'TotalExpenses': [0.0, 608.0, 2851.0]
+df['Deck'] = df['Cabin'].apply(lambda x: x[0])
+df = df.merge(df.groupby('Deck')['TotalExpenses'].mean().reset_index().rename(columns={'TotalExpenses': 'ExpensesPerDeck'}), on='Deck', how='left')
+
+# Dropping Cabin again as the Deck and GroupSize features contain relevant information from it
+df.drop(columns=['Cabin'], inplace=True)

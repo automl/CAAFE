@@ -1,0 +1,20 @@
+
+# Diagonal top-left to bottom-right
+# Usefulness: This feature checks if there is a winning diagonal from top-left to bottom-right for player "x".
+# Input samples: 'top-left-square': [2, 1, 1], 'middle-middle-square': [1, 2, 2], 'bottom-right-square': [2, 2, 2]
+df['diagonal_tl_br'] = ((df['top-left-square'] == 1) & (df['middle-middle-square'] == 1) & (df['bottom-right-square'] == 1)).astype(int)
+
+# Diagonal top-right to bottom-left
+# Usefulness: This feature checks if there is a winning diagonal from top-right to bottom-left for player "x".
+# Input samples: 'top-right-square': [0, 2, 1], 'middle-middle-square': [1, 2, 2], 'bottom-left-square': [2, 0, 2]
+df['diagonal_tr_bl'] = ((df['top-right-square'] == 1) & (df['middle-middle-square'] == 1) & (df['bottom-left-square'] == 1)).astype(int)
+
+# Horizontal middle row
+# Usefulness: This feature checks if there is a winning horizontal row in the middle for player "x".
+# Input samples: 'middle-left-square': [1, 1, 1], 'middle-middle-square': [1, 2, 2], 'middle-right-square': [2, 2, 2]
+df['horizontal_middle_row'] = ((df['middle-left-square'] == 1) & (df['middle-middle-square'] == 1) & (df['middle-right-square'] == 1)).astype(int)
+
+# Count x's in a row
+# Usefulness: This feature counts the number of "x" in each row, which can help identify if there are enough "x" to form a winning condition.
+# Input samples: 'top-left-square': [2, 1, 1], 'top-middle-square': [1, 1, 1], 'top-right-square': [0, 2, 1], 'middle-left-square': [1, 1, 1], 'middle-middle-square': [1, 2, 2], 'middle-right-square': [2, 2, 2], 'bottom-left-square': [2, 0, 2], 'bottom-middle-square': [1, 0, 0], 'bottom-right-square': [2, 2, 2]
+df['x_count'] = (df == 1).sum(axis=1)

@@ -1,0 +1,5 @@
+
+# Feature: TotalExpense (sum of expenses in RoomService, FoodCourt, ShoppingMall, Spa, and VRDeck)
+# Usefulness: Passengers with higher expenses may have different probabilities of being transported due to their activity patterns and locations on the ship.
+# Input samples: 'RoomService': [0.0, 0.0, 672.0], 'FoodCourt': [0.0, 0.0, 0.0], 'ShoppingMall': [0.0, 0.0, 0.0], 'Spa': [0.0, 0.0, 0.0], 'VRDeck': [0.0, 0.0, 20.0]
+df['TotalExpense'] = df['RoomService'] + df['FoodCourt'] + df['ShoppingMall'] + df['Spa'] + df['VRDeck']

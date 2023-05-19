@@ -1,0 +1,27 @@
+
+# Feature: Policy_duration_years
+# Usefulness: Converting the Holding_Policy_Duration to numeric values in years may provide a better understanding of the duration of the policy, which could be relevant in predicting the response.
+# Input samples: 'Holding_Policy_Duration': ['7.0', '2.0', '1.0']
+df['Policy_duration_years'] = df['Holding_Policy_Duration'].replace('14+', '15').astype(float)
+
+# Feature: Health_Indicator_numeric
+# Usefulness: Converting the Health Indicator to numeric values may provide a better understanding of the health condition of the policy holder, which could be relevant in predicting the response.
+# Input samples: 'Health Indicator': ['X1', 'X2', 'X3']
+df['Health_Indicator_numeric'] = df['Health Indicator'].str.extract('(\d+)').astype(float)
+
+# Drop the original Health Indicator column as it is now redundant
+df.drop(columns=['Health Indicator'], inplace=True)
+
+# Feature: Is_Spouse_binary
+# Usefulness: Converting the Is_Spouse column to binary values may provide a better understanding of whether the policy holder has a spouse or not, which could be relevant in predicting the response.
+# Input samples: 'Is_Spouse': ['No', 'No', 'No']
+df['Is_Spouse_binary'] = (df['Is_Spouse'] == 'Yes').astype(int)
+
+# Drop the original Is_Spouse column as it is now redundant
+df.drop(columns=['Is_Spouse'], inplace=True)
+
+# Feature: Reco_Policy_Premium_log
+# Usefulness: Taking the logarithm of the Reco_Policy_Premium may help normalize the distribution of the values, which could improve the performance of the classifier.
+# Input samples: 'Reco_Policy_Premium': [13112.0, 9800.0, 17280.0]
+import numpy as np
+df['Reco_Policy_Premium_log'] = np.log(df['Reco_Policy_Premium'])

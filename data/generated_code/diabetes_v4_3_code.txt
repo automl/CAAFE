@@ -1,0 +1,10 @@
+
+# BMI age interaction
+# Usefulness: As age increases, the impact of BMI on diabetes risk may also increase.
+# Input samples: 'mass': [34.5, 26.4, 37.2], 'age': [40.0, 21.0, 45.0]
+df['bmi_age_interaction'] = df['mass'] * df['age']
+
+# Glucose and blood pressure interaction
+# Usefulness: Higher glucose and blood pressure levels may indicate a higher risk of diabetes.
+# Input samples: 'plas': [117.0, 134.0, 102.0], 'pres': [88.0, 58.0, 74.0]
+df['glucose_pressure_interaction'] = df['plas'] * df['pres']

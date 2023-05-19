@@ -1,0 +1,23 @@
+
+# Feature: Unique Operand Ratio
+# Usefulness: The ratio of unique operands (uniq_Opnd) to total operands (total_Opnd) can provide insights into the diversity of data used in the code, which can be an indicator of code complexity and potential defects.
+# Input samples: 'uniq_Opnd': [18.0, 13.0, 18.0], 'total_Opnd': [23.0, 38.0, 26.0]
+df['unique_operand_ratio'] = df['uniq_Opnd'] / df['total_Opnd']
+# Dropping correlated features
+# Explanation: Dropping features that are highly correlated with other features can help reduce multicollinearity and improve the performance of the downstream classifier.
+
+# 'N' is correlated with 'total_Op' and 'total_Opnd' as they all represent the total number of operators and operands.
+df.drop(columns=['N'], inplace=True)
+
+# 'lOCode' and 'loc' are correlated as they both represent the line count of code.
+df.drop(columns=['lOCode'], inplace=True)
+
+# 'V' is correlated with 'total_Op' and 'total_Opnd' as it represents the Halstead volume.
+df.drop(columns=['V'], inplace=True)
+
+# 'L' is correlated with 'uniq_Op' and 'uniq_Opnd' as it represents the Halstead program length.
+df.drop(columns=['L'], inplace=True)
+# Feature: Code to Comment Ratio
+# Usefulness: The ratio of lines of code (loc) to lines of comments (lOComment) can provide insights into the balance between code and documentation, which can be related to code maintainability and potential defects.
+# Input samples: 'loc': [15.0, 13.0, 14.0], 'lOComment': [8.0, 0.0, 1.0]
+df['code_to_comment_ratio'] = df['loc'] / (df['lOComment'] + 1)  # Adding 1 to avoid division by zero

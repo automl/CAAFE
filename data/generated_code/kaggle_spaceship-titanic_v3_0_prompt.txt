@@ -1,0 +1,63 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+"Dataset Description
+In this competition your task is to predict whether a passenger was transported to an alternate dimension during the Spaceship Titanic's collision with the spacetime anomaly. To help you make these predictions, you're given a set of personal records recovered from the ship's damaged computer system.
+
+File and Data Field Descriptions
+train.csv - Personal records for about two-thirds (~8700) of the passengers, to be used as training data.
+PassengerId - A unique Id for each passenger. Each Id takes the form gggg_pp where gggg indicates a group the passenger is travelling with and pp is their number within the group. People in a group are often family members, but not always.
+HomePlanet - The planet the passenger departed from, typically their planet of permanent residence.
+CryoSleep - Indicates whether the passenger elected to be put into suspended animation for the duration of the voyage. Passengers in cryosleep are confined to their cabins.
+Cabin - The cabin number where the passenger is staying. Takes the form deck/num/side, where side can be either P for Port or S for Starboard.
+Destination - The planet the passenger will be debarking to.
+Age - The age of the passenger.
+VIP - Whether the passenger has paid for special VIP service during the voyage.
+RoomService, FoodCourt, ShoppingMall, Spa, VRDeck - Amount the passenger has billed at each of the Spaceship Titanic's many luxury amenities.
+Name - The first and last names of the passenger.
+Transported - Whether the passenger was transported to another dimension. This is the target, the column you are trying to predict."
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+PassengerId (object): NaN-freq [0.0%], Samples ['8878_01', '7749_02', '3955_01', '4258_01', '8123_01', '7696_01', '8744_01', '2257_02', '8260_03', '6899_01']
+HomePlanet (object): NaN-freq [0.0%], Samples ['Earth', 'Mars', 'Earth', 'Europa', 'Earth', 'Mars', 'Earth', 'Europa', 'Earth', 'Europa']
+CryoSleep (bool): NaN-freq [0.0%], Samples [False, False, True, False, True, False, False, True, True, False]
+Cabin (object): NaN-freq [0.0%], Samples ['E/568/P', 'D/244/P', 'G/648/S', 'A/37/P', 'G/1312/P', 'E/499/P', 'E/570/S', 'B/66/P', 'G/1334/S', 'A/73/P']
+Destination (object): NaN-freq [0.0%], Samples ['TRAPPIST-1e', 'TRAPPIST-1e', 'TRAPPIST-1e', 'TRAPPIST-1e', 'TRAPPIST-1e', 'TRAPPIST-1e', 'TRAPPIST-1e', '55 Cancri e', '55 Cancri e', 'TRAPPIST-1e']
+Age (float64): NaN-freq [0.0%], Samples [22.0, 37.0, 45.0, 39.0, 45.0, 34.0, 53.0, 22.0, 4.0, 59.0]
+VIP (bool): NaN-freq [0.0%], Samples [False, False, False, False, False, False, False, False, False, False]
+RoomService (float64): NaN-freq [0.0%], Samples [0.0, 416.0, 0.0, 0.0, 0.0, 751.0, 1613.0, 0.0, 0.0, 0.0]
+FoodCourt (float64): NaN-freq [0.0%], Samples [0.0, 56.0, 0.0, 266.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+ShoppingMall (float64): NaN-freq [0.0%], Samples [0.0, 1912.0, 0.0, 0.0, 0.0, 185.0, 0.0, 0.0, 0.0, 0.0]
+Spa (float64): NaN-freq [0.0%], Samples [0.0, 0.0, 0.0, 1254.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+VRDeck (float64): NaN-freq [0.0%], Samples [906.0, 0.0, 0.0, 197.0, 0.0, 77.0, 7.0, 0.0, 0.0, 0.0]
+Name (object): NaN-freq [0.0%], Samples ['Tracek Rames', 'Dynx Pie', 'Morrie Gamberson', 'Misa Perneernal', 'Violan Newtontoss', 'Sceres Hooff', 'Jilly Holton', 'Nasliak Diateous', 'Melara Daviddley', 'Anyonon Coweboded']
+Transported (category): NaN-freq [0.0%], Samples [False, False, True, False, False, False, False, True, True, True]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 1500
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "Transported".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "Transported" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'PassengerId': ['8878_01', '7749_02', '3955_01'], 'HomePlanet': ['Earth', 'Mars', 'Earth'], ...)
+(Some pandas code using PassengerId', 'HomePlanet', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

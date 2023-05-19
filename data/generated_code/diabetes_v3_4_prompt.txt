@@ -1,0 +1,64 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+" 4. Relevant Information:
+       Several constraints were placed on the selection of these instances from
+       a larger database.  In particular, all patients here are females at
+       least 21 years old of Pima Indian heritage.  ADAP is an adaptive learning
+       routine that generates and executes digital analogs of perceptron-like
+       devices.  It is a unique algorithm; see the paper for details.
+ 
+ 7. For Each Attribute: (all numeric-valued)
+    1. Number of times pregnant
+    2. Plasma glucose concentration a 2 hours in an oral glucose tolerance test
+    3. Diastolic blood pressure (mm Hg)
+    4. Triceps skin fold thickness (mm)
+    5. 2-Hour serum insulin (mu U/ml)
+    6. Body mass index (weight in kg/(height in m)^2)
+    7. Diabetes pedigree function
+    8. Age (years)
+    9. Class variable (0 or 1)
+
+ Relabeled values in attribute 'class'
+    From: 0                       To: tested_negative     
+    From: 1                       To: tested_positive"
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+preg (float64): NaN-freq [0.0%], Samples [3.0, 1.0, 0.0, 8.0, 2.0, 4.0, 2.0, 10.0, 1.0, 4.0]
+plas (float64): NaN-freq [0.0%], Samples [129.0, 86.0, 151.0, 120.0, 94.0, 146.0, 71.0, 90.0, 121.0, 146.0]
+pres (float64): NaN-freq [0.0%], Samples [92.0, 66.0, 90.0, 86.0, 68.0, 78.0, 70.0, 85.0, 78.0, 92.0]
+skin (float64): NaN-freq [0.0%], Samples [49.0, 52.0, 46.0, 0.0, 18.0, 0.0, 27.0, 32.0, 39.0, 0.0]
+insu (float64): NaN-freq [0.0%], Samples [155.0, 65.0, 0.0, 0.0, 76.0, 0.0, 0.0, 0.0, 74.0, 0.0]
+mass (float64): NaN-freq [0.0%], Samples [36.4, 41.3, 42.1, 28.4, 26.0, 38.5, 28.0, 34.9, 39.0, 31.2]
+pedi (float64): NaN-freq [0.0%], Samples [0.97, 0.92, 0.37, 0.26, 0.56, 0.52, 0.59, 0.82, 0.26, 0.54]
+age (float64): NaN-freq [0.0%], Samples [32.0, 29.0, 21.0, 22.0, 21.0, 67.0, 22.0, 56.0, 28.0, 61.0]
+class (category): NaN-freq [0.0%], Samples [1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 576
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "class".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "class" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'preg': [3.0, 1.0, 0.0], 'plas': [129.0, 86.0, 151.0], ...)
+(Some pandas code using preg', 'plas', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

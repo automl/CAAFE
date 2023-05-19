@@ -1,0 +1,5 @@
+
+# (Feature name and description)
+# Usefulness: This feature calculates the difference between the left and right distances and adds the information to the dataset. This can be useful because it can help the classifier understand the distribution of weight on each side of the scale.
+# Input samples: 'left-distance': [1.0, 3.0, 3.0], 'right-distance': [5.0, 4.0, 4.0]
+df['distance_diff'] = df['left-distance'] - df['right-distance']

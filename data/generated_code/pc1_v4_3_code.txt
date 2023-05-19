@@ -1,0 +1,28 @@
+
+# Feature: Complexity Ratio
+# Usefulness: This feature represents the ratio between McCabe's "cyclomatic complexity" and "design complexity". A high ratio indicates that the code is more complex and may be more prone to defects.
+# Input samples: 'v(g)': [1.0, 1.0, 2.0], 'iv(G)': [1.0, 1.0, 2.0]
+df['complexity_ratio'] = df['v(g)'] / df['iv(G)']
+
+# Feature: Comment Ratio
+# Usefulness: This feature represents the ratio between the number of comment lines and the total number of lines of code. A higher ratio indicates better documentation, which may lead to fewer defects.
+# Input samples: 'lOComment': [0.0, 12.0, 0.0], 'lOCode': [12.0, 8.0, 13.0]
+df['comment_ratio'] = df['lOComment'] / df['lOCode']
+
+# Feature: Operand Ratio
+# Usefulness: This feature represents the ratio between unique operands and total operands. A higher ratio indicates a more diverse set of operands, which may affect the complexity and defect probability of the code.
+# Input samples: 'uniq_Opnd': [12.0, 12.0, 17.0], 'total_Opnd': [22.0, 14.0, 22.0]
+df['operand_ratio'] = df['uniq_Opnd'] / df['total_Opnd']
+
+# Dropping columns that may be redundant or less informative
+# Explanation: Columns 'lOCode', 'lOComment', 'uniq_Opnd', and 'total_Opnd' are used to create the new features 'comment_ratio' and 'operand_ratio', so they may be less informative for the classifier.
+df.drop(columns=['lOCode', 'lOComment', 'uniq_Opnd', 'total_Opnd'], inplace=True)
+
+# Feature: Operator Ratio
+# Usefulness: This feature represents the ratio between unique operators and total operators. A higher ratio indicates a more diverse set of operators, which may affect the complexity and defect probability of the code.
+# Input samples: 'uniq_Op': [14.0, 8.0, 16.0], 'total_Op': [35.0, 19.0, 32.0]
+df['operator_ratio'] = df['uniq_Op'] / df['total_Op']
+
+# Dropping columns that may be redundant or less informative
+# Explanation: Columns 'uniq_Op' and 'total_Op' are used to create the new feature 'operator_ratio', so they may be less informative for the classifier.
+df.drop(columns=['uniq_Op', 'total_Op'], inplace=True)

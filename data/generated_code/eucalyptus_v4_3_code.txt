@@ -1,0 +1,5 @@
+
+# Survival_rate
+# Usefulness: Survival rate can be an important factor in determining the utility of a tree for soil conservation, as trees with higher survival rates may provide better long-term coverage and erosion control.
+# Input samples: 'Surv': [nan, 75.0, 75.0], 'Rep': [2.0, 2.0, 3.0]
+df['Survival_rate'] = df['Surv'] / df['Rep']

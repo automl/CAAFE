@@ -1,0 +1,15 @@
+
+# Feature: Strength difference between white and black pieces
+# Usefulness: This feature calculates the difference in strength between the white and black pieces, which can be useful in determining the likelihood of a piece capturing another piece or being in a winning position.
+# Input samples: 'white_piece0_strength': [7.0, 6.0, 4.0], 'black_piece0_strength': [4.0, 6.0, 7.0]
+df['strength_difference'] = df['white_piece0_strength'] - df['black_piece0_strength']
+
+# Feature: File difference between white and black pieces
+# Usefulness: This feature calculates the difference in file between the white and black pieces, which can be useful in determining the likelihood of a piece capturing another piece or being in a winning position.
+# Input samples: 'white_piece0_file': [0.0, 0.0, 6.0], 'black_piece0_file': [5.0, 0.0, 3.0]
+df['file_difference'] = df['white_piece0_file'] - df['black_piece0_file']
+
+# Feature: Product of strengths between white and black pieces
+# Usefulness: This feature calculates the product of strengths between the white and black pieces, which can be useful in determining the overall strength of the pieces on the board and their likelihood of capturing other pieces.
+# Input samples: 'white_piece0_strength': [7.0, 6.0, 4.0], 'black_piece0_strength': [4.0, 6.0, 7.0]
+df['strength_product'] = df['white_piece0_strength'] * df['black_piece0_strength']

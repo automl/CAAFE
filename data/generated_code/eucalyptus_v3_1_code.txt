@@ -1,0 +1,6 @@
+# (Feature name and description)
+# Usefulness: This feature captures the ratio of the altitude to the rainfall, which can help to identify if certain areas with specific rainfall and altitude combinations are more suitable for soil conservation.
+# Input samples: 'Altitude': [150.0, 200.0, 150.0], 'Rainfall': [1250.0, 1400.0, 900.0]
+df['Altitude_Rainfall_ratio'] = df['Altitude'] / df['Rainfall']# Explanation why the column 'Year' is dropped
+# The year of planting is unlikely to have a direct impact on the classification of "Utility", as the species and seedlot are already included in the dataset, and the effect of the year on the growth and health of the trees is likely to be indirect and complex.
+df.drop(columns=['Year'], inplace=True)

@@ -1,0 +1,46 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+"**Tic-Tac-Toe Endgame database**  
+This database encodes the complete set of possible board configurations at the end of tic-tac-toe games, where "x" is assumed to have played first.  The target concept is "win for x" (i.e., true when "x" has one of 8 possible ways to create a "three-in-a-row").  "
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+top-left-square (int32): NaN-freq [0.0%], Samples [0, 1, 2, 2, 2, 1, 0, 1, 1, 1]
+top-middle-square (int32): NaN-freq [0.0%], Samples [0, 0, 0, 0, 0, 2, 2, 2, 0, 1]
+top-right-square (int32): NaN-freq [0.0%], Samples [2, 2, 1, 0, 0, 2, 1, 0, 2, 2]
+middle-left-square (int32): NaN-freq [0.0%], Samples [1, 2, 0, 0, 2, 1, 2, 2, 0, 2]
+middle-middle-square (int32): NaN-freq [0.0%], Samples [0, 1, 2, 2, 0, 2, 2, 1, 0, 2]
+middle-right-square (int32): NaN-freq [0.0%], Samples [2, 0, 1, 1, 1, 0, 2, 2, 2, 1]
+bottom-left-square (int32): NaN-freq [0.0%], Samples [0, 2, 0, 1, 2, 1, 1, 2, 0, 2]
+bottom-middle-square (int32): NaN-freq [0.0%], Samples [1, 0, 2, 0, 0, 1, 1, 1, 1, 1]
+bottom-right-square (int32): NaN-freq [0.0%], Samples [2, 1, 1, 2, 1, 2, 0, 1, 2, 2]
+Class (category): NaN-freq [0.0%], Samples [1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 71
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "Class".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "Class" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'top-left-square': [0, 1, 2], 'top-middle-square': [0, 0, 0], ...)
+(Some pandas code using top-left-square', 'top-middle-square', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

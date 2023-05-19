@@ -1,0 +1,7 @@
+
+# ('credit_per_duration', 'Useful to know how much credit is granted per month, as this can indicate if the customer is overextending themselves or not.')
+# Input samples: {'duration': [48.0, 12.0, 24.0], 'credit_amount': [3609.0, 3331.0, 1311.0]}
+df['credit_per_duration'] = df['credit_amount'] / df['duration']
+# ('credit_per_person', 'Useful to know how much credit is granted per person, as this can indicate if the customer is overextending themselves or not.')
+# Input samples: {'credit_amount': [3609.0, 3331.0, 1311.0], 'num_dependents': [1.0, 1.0, 1.0]}
+df['credit_per_person'] = df['credit_amount'] / (df['num_dependents'] + 1)

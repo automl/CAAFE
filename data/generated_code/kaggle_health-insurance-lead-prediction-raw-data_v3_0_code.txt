@@ -1,0 +1,8 @@
+# ('Holding_Policy_Duration_Imputed', 'Useful to capture if the duration of a holding policy was imputed due to missing data.',)
+# Input samples: ('Holding_Policy_Duration': ['6.0', '14+', '8.0'], ...)
+df['Holding_Policy_Duration_Imputed'] = df['Holding_Policy_Duration'].isna().astype(int)# ('Previously_Insured_Lower_Age', 'Useful to capture if the policy holder was previously insured and their lower age.',)
+# Input samples: ('Lower_Age': [20, 42, 69], 'Reco_Insurance_Type': ['Joint', 'Individual', 'Individual'], ...)
+df['Previously_Insured_Lower_Age'] = (df['Reco_Insurance_Type'] == 'Individual').astype(int) * df['Lower_Age']# Explanation: 'ID' is dropped as it does not provide any useful information for the downstream classifier.
+df.drop(columns=['ID'], inplace=True)# ('Holding_Policy_Duration_Imputed_Holding_Policy_Type', 'Useful to capture if the duration of a holding policy was imputed and the type of the holding policy.',)
+# Input samples: ('Holding_Policy_Duration': ['6.0', '14+', '8.0'], 'Holding_Policy_Type': [2.0, 2.0, 1.0], ...)
+df['Holding_Policy_Duration_Imputed_Holding_Policy_Type'] = df['Holding_Policy_Duration_Imputed'] * df['Holding_Policy_Type']

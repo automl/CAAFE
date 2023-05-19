@@ -1,0 +1,5 @@
+
+# (Distance)
+# Usefulness: Distance between airports can be a useful feature for predicting flight delays. Longer distances may have more potential for delays due to weather, air traffic control, etc.
+# Input samples: 'AirportFrom': [225.0, 39.0, 5.0], 'AirportTo': [11.0, 7.0, 60.0]
+df['Distance'] = ((df['AirportFrom'] - df['AirportTo'])**2)**0.5

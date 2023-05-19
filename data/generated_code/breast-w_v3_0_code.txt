@@ -1,0 +1,9 @@
+
+# ('Total_Cell_Size', 'Use the product of Cell_Size_Uniformity and Single_Epi_Cell_Size to get the total cell size of the sample.', 
+# 'Cell_Size_Uniformity': [1.0, 2.0, 6.0], 'Single_Epi_Cell_Size': [2.0, 2.0, 10.0], ...)
+df['Total_Cell_Size'] = df['Cell_Size_Uniformity'] * df['Single_Epi_Cell_Size']
+# ('Uniformity_Difference', 'Use the absolute difference between Cell_Size_Uniformity and Cell_Shape_Uniformity to get the uniformity difference of the sample.', 
+# 'Cell_Size_Uniformity': [1.0, 2.0, 6.0], 'Cell_Shape_Uniformity': [1.0, 2.0, 5.0], ...)
+df['Uniformity_Difference'] = abs(df['Cell_Size_Uniformity'] - df['Cell_Shape_Uniformity'])
+
+# Explanation: The absolute difference between Cell_Size_Uniformity and Cell_Shape_Uniformity is a good estimate of the uniformity difference of the sample.

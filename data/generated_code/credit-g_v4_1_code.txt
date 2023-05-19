@@ -1,0 +1,10 @@
+
+# Feature: Installment to credit amount ratio
+# Usefulness: This feature calculates the ratio of installment commitment to credit amount, which can help to identify patterns in credit risk based on how much of the credit amount is being committed to installments.
+# Input samples: 'installment_commitment': [4.0, 4.0, 4.0], 'credit_amount': [1549.0, 7476.0, 2442.0]
+df['installment_to_credit_amount_ratio'] = df['installment_commitment'] / df['credit_amount']
+
+# Feature: Income stability
+# Usefulness: This feature calculates the ratio of duration to present employment, which can help to identify patterns in credit risk based on the stability of a person's income.
+# Input samples: 'duration': [9.0, 48.0, 27.0], 'employment': [1, 3, 4]
+df['income_stability'] = df['duration'] / df['employment']

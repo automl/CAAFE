@@ -1,0 +1,92 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+"
+**German Credit dataset**  
+This dataset classifies people described by a set of attributes as good or bad credit risks.
+
+This dataset comes with a cost matrix: 
+``` 
+Good  Bad (predicted)  
+Good   0    1 (actual)  
+Bad    5    0  
+```
+
+It is worse to class a customer as good when they are bad (5), than it is to class a customer as bad when they are good (1).  
+
+
+
+ Attribute description  
+
+1. Status of existing checking account, in Deutsche Mark.  
+2. Duration in months  
+3. Credit history (credits taken, paid back duly, delays, critical accounts)  
+4. Purpose of the credit (car, television,...)  
+5. Credit amount  
+6. Status of savings account/bonds, in Deutsche Mark.  
+7. Present employment, in number of years.  
+8. Installment rate in percentage of disposable income  
+9. Personal status (married, single,...) and sex  
+10. Other debtors / guarantors  
+11. Present residence since X years  
+12. Property (e.g. real estate)  
+13. Age in years  
+14. Other installment plans (banks, stores)  
+15. Housing (rent, own,...)  
+16. Number of existing credits at this bank  
+17. Job  
+18. Number of people being liable to provide maintenance for  
+19. Telephone (yes,no)  
+20. Foreign worker (yes,no)"
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+checking_status (int32): NaN-freq [0.0%], Samples [3, 3, 3, 0, 1, 1, 3, 1, 3, 3]
+duration (float64): NaN-freq [0.0%], Samples [48.0, 12.0, 24.0, 12.0, 15.0, 36.0, 10.0, 12.0, 36.0, 24.0]
+credit_history (int32): NaN-freq [0.0%], Samples [1, 4, 2, 2, 4, 4, 2, 2, 2, 2]
+purpose (int32): NaN-freq [0.0%], Samples [9, 2, 3, 0, 3, 1, 0, 0, 2, 3]
+credit_amount (float64): NaN-freq [0.0%], Samples [3609.0, 3331.0, 1311.0, 1893.0, 1537.0, 5800.0, 1287.0, 1318.0, 10974.0, 2284.0]
+savings_status (int32): NaN-freq [0.0%], Samples [0, 0, 1, 0, 4, 0, 4, 3, 0, 0]
+employment (int32): NaN-freq [0.0%], Samples [2, 4, 3, 2, 4, 2, 4, 4, 0, 3]
+installment_commitment (float64): NaN-freq [0.0%], Samples [1.0, 2.0, 4.0, 4.0, 4.0, 3.0, 4.0, 4.0, 4.0, 4.0]
+personal_status (int32): NaN-freq [0.0%], Samples [1, 2, 3, 1, 2, 2, 2, 2, 1, 2]
+other_parties (int32): NaN-freq [0.0%], Samples [0, 0, 0, 2, 2, 0, 1, 0, 0, 0]
+residence_since (float64): NaN-freq [0.0%], Samples [1.0, 4.0, 3.0, 4.0, 4.0, 4.0, 2.0, 4.0, 2.0, 2.0]
+property_magnitude (int32): NaN-freq [0.0%], Samples [0, 1, 1, 1, 0, 2, 1, 0, 2, 2]
+age (float64): NaN-freq [0.0%], Samples [27.0, 42.0, 26.0, 29.0, 50.0, 34.0, 45.0, 54.0, 26.0, 28.0]
+other_payment_plans (int32): NaN-freq [0.0%], Samples [1, 1, 2, 2, 2, 2, 2, 2, 2, 2]
+housing (int32): NaN-freq [0.0%], Samples [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+existing_credits (float64): NaN-freq [0.0%], Samples [1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 1.0, 1.0, 2.0, 1.0]
+job (int32): NaN-freq [0.0%], Samples [2, 2, 2, 2, 2, 2, 1, 2, 3, 2]
+num_dependents (float64): NaN-freq [0.0%], Samples [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+own_telephone (int32): NaN-freq [0.0%], Samples [0, 0, 1, 1, 1, 1, 0, 1, 1, 1]
+foreign_worker (int32): NaN-freq [0.0%], Samples [0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+class (category): NaN-freq [0.0%], Samples [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 750
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "class".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "class" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'checking_status': [3, 3, 3], 'duration': [48.0, 12.0, 24.0], ...)
+(Some pandas code using checking_status', 'duration', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

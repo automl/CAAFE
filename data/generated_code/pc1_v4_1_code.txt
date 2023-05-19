@@ -1,0 +1,15 @@
+
+# Feature name: complexity_ratio
+# Usefulness: This feature captures the relationship between "cyclomatic complexity" and "design complexity", which might help in identifying modules with high complexity ratios that are more prone to defects.
+# Input samples: 'v(g)': [1.0, 3.0, 6.0], 'iv(G)': [1.0, 2.0, 5.0]
+df['complexity_ratio'] = df['v(g)'] / df['iv(G)']
+
+# Feature name: code_density
+# Usefulness: This feature captures the relationship between the total number of operators and operands and the line count of code. It can help in identifying modules with high code density that might be more prone to defects.
+# Input samples: 'total_Op': [62.0, 20.0, 160.0], 'total_Opnd': [61.0, 17.0, 145.0], 'loc': [18.0, 9.0, 35.0]
+df['code_density'] = (df['total_Op'] + df['total_Opnd']) / df['loc']
+
+# Feature name: unique_operator_ratio
+# Usefulness: This feature captures the relationship between the unique operators and the total operators. It might help in identifying modules with high unique operator ratios that are more prone to defects due to higher complexity.
+# Input samples: 'uniq_Op': [4.0, 12.0, 21.0], 'total_Op': [62.0, 20.0, 160.0]
+df['unique_operator_ratio'] = df['uniq_Op'] / df['total_Op']

@@ -1,0 +1,12 @@
+# ('City_Code_Count', 'Usefulness: The count of individuals in a city may be indicative of the likelihood of a response.', 
+#  'Input samples: City_Code': ['C1', 'C5', 'C1'], 'Region_Code': [2037, 3535, 1159])
+df['City_Code_Count'] = df.groupby('City_Code')['Region_Code'].transform('count')# ('Family_Size', 'Usefulness: The family size may be indicative of the likelihood of a response.', 
+#  'Input samples: Upper_Age': [28, 52, 52], 'Lower_Age': [28, 52, 52], 'Is_Spouse': ['No', 'No', 'No]')
+df['Family_Size'] = df['Is_Spouse'].apply(lambda x: 2 if x == 'Yes' else 1) + (df['Upper_Age'] + df['Lower_Age'])//30# ('Premium_By_Age', 'Usefulness: The ratio of premium to age may be indicative of the likelihood of a response.', 
+#  'Input samples: Upper_Age': [28, 52, 52], 'Lower_Age': [28, 52, 52], 'Reco_Policy_Premium': [10544.0, 11484.0, 19240.0])
+df['Premium_By_Age'] = df['Reco_Policy_Premium'] / ((df['Upper_Age'] + df['Lower_Age'])/2)# ('Holding_Policy_Duration_Imputed_Ordinal', 'Usefulness: The duration of holding policy may be important in predicting response. This column imputes a value of 0 for NaNs and maps the duration to an ordinal scale.', 
+#  'Input samples: Holding_Policy_Duration': ['3.0', '4.0', '2.0'], 'Holding_Policy_Type': [3.0, 2.0, 3.0])
+df['Holding_Policy_Duration_Imputed'] = df['Holding_Policy_Duration'].fillna(0)
+df['Holding_Policy_Duration_Imputed_Ordinal'] = df['Holding_Policy_Duration_Imputed'].replace(['14+'], 15).astype(float)# ('Premium_Per_Region', 'Usefulness: The average premium per region may be indicative of the likelihood of a response.', 
+#  'Input samples: Region_Code': [2037, 3535, 1159], 'Reco_Policy_Premium': [10544.0, 11484.0, 19240.0])
+df['Premium_Per_Region'] = df.groupby('Region_Code')['Reco_Policy_Premium'].transform('mean')

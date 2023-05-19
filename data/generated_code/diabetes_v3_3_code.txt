@@ -1,0 +1,15 @@
+# (Plasma glucose concentration a 2 hours in an oral glucose tolerance test) - (2-Hour serum insulin (mu U/ml))
+# Usefulness: This feature measures the difference between glucose and insulin levels in the blood, which is an important factor in detecting insulin resistance and diabetes.
+# Input samples: 'plas': [117.0, 134.0, 102.0], 'insu': [145.0, 291.0, 105.0]
+df['glu_ins_diff'] = df['plas'] - df['insu']# (Body mass index) * (Diabetes pedigree function)
+# Usefulness: This feature is a combination of BMI and diabetes pedigree function, which measures the likelihood of having diabetes based on family history. High values of this feature indicate a higher risk of diabetes.
+# Input samples: 'mass': [34.5, 26.4, 37.2], 'pedi': [0.4, 0.35, 0.2]
+df['bmi_pedi_product'] = df['mass'] * df['pedi']# (Age) * (Diabetes pedigree function)
+# Usefulness: This feature is a combination of age and diabetes pedigree function, which measures the likelihood of having diabetes based on family history. High values of this feature indicate a higher risk of diabetes.
+# Input samples: 'age': [40.0, 21.0, 45.0], 'pedi': [0.4, 0.35, 0.2]
+df['age_pedi_product'] = df['age'] * df['pedi']# Drop 'skin' column
+# Explanation: The 'skin' column may not be useful for predicting diabetes as it measures the thickness of a fold of skin on the triceps, which may not be directly related to diabetes risk.
+df.drop(columns=['skin'], inplace=True)# (Body mass index)^2
+# Usefulness: This feature is a transformation of the 'mass' column, which may help capture non-linear relationships between BMI and diabetes risk.
+# Input samples: 'mass': [34.5, 26.4, 37.2]
+df['bmi_squared'] = df['mass'] ** 2

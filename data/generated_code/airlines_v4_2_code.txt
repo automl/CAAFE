@@ -1,0 +1,13 @@
+
+# FlightLengthCategory
+# Usefulness: This feature categorizes the flight length into short, medium, and long-haul flights, which might be useful in predicting delays as different flight lengths might have different patterns of delays.
+# Input samples: 'Length': [134.0, 244.0, 380.0]
+def categorize_flight_length(length):
+    if length < 200:
+        return 0  # Short-haul
+    elif 200 <= length < 500:
+        return 1  # Medium-haul
+    else:
+        return 2  # Long-haul
+
+df['FlightLengthCategory'] = df['Length'].apply(categorize_flight_length)

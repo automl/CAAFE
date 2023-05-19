@@ -1,0 +1,17 @@
+
+# Feature name: GroupSize
+# Usefulness: Indicates the number of passengers traveling in the same group. Larger groups might have a higher chance of being transported together.
+# Input samples: 'PassengerId': ['8878_01', '7749_02', '3955_01']
+group_sizes = df['PassengerId'].str.split('_', expand=True)[0].value_counts()
+df['GroupSize'] = df['PassengerId'].str.split('_', expand=True)[0].map(group_sizes)
+# Feature name: Deck
+# Usefulness: Extracts the deck information from the Cabin column. Passengers on different decks might have different chances of being transported.
+# Input samples: 'Cabin': ['E/568/P', 'D/244/P', 'G/648/S']
+df['Deck'] = df['Cabin'].str[0]
+df['Deck'] = df['Deck'].astype('category')
+
+# Feature name: Side
+# Usefulness: Extracts the side information from the Cabin column. Passengers on different sides (Port or Starboard) might have different chances of being transported.
+# Input samples: 'Cabin': ['E/568/P', 'D/244/P', 'G/648/S']
+df['Side'] = df['Cabin'].str[-1]
+df['Side'] = df['Side'].astype('category')

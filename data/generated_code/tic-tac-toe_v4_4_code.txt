@@ -1,0 +1,15 @@
+
+# Horizontal win for x
+# Usefulness: This feature indicates if there is a horizontal win for x in any of the three rows.
+# Input samples: 'top-left-square': [2, 0, 1], 'top-middle-square': [1, 1, 2], 'top-right-square': [0, 1, 2], 'middle-left-square': [1, 0, 1], 'middle-middle-square': [1, 2, 2], 'middle-right-square': [2, 1, 2], 'bottom-left-square': [2, 2, 2], 'bottom-middle-square': [1, 2, 1], 'bottom-right-square': [2, 2, 1]
+df['horizontal_win_x'] = ((df['top-left-square'] == 1) & (df['top-middle-square'] == 1) & (df['top-right-square'] == 1)) | ((df['middle-left-square'] == 1) & (df['middle-middle-square'] == 1) & (df['middle-right-square'] == 1)) | ((df['bottom-left-square'] == 1) & (df['bottom-middle-square'] == 1) & (df['bottom-right-square'] == 1))
+
+# Vertical win for x
+# Usefulness: This feature indicates if there is a vertical win for x in any of the three columns.
+# Input samples: 'top-left-square': [2, 0, 1], 'top-middle-square': [1, 1, 2], 'top-right-square': [0, 1, 2], 'middle-left-square': [1, 0, 1], 'middle-middle-square': [1, 2, 2], 'middle-right-square': [2, 1, 2], 'bottom-left-square': [2, 2, 2], 'bottom-middle-square': [1, 2, 1], 'bottom-right-square': [2, 2, 1]
+df['vertical_win_x'] = ((df['top-left-square'] == 1) & (df['middle-left-square'] == 1) & (df['bottom-left-square'] == 1)) | ((df['top-middle-square'] == 1) & (df['middle-middle-square'] == 1) & (df['bottom-middle-square'] == 1)) | ((df['top-right-square'] == 1) & (df['middle-right-square'] == 1) & (df['bottom-right-square'] == 1))
+
+# Diagonal win for x
+# Usefulness: This feature indicates if there is a diagonal win for x in any of the two diagonals.
+# Input samples: 'top-left-square': [2, 0, 1], 'top-middle-square': [1, 1, 2], 'top-right-square': [0, 1, 2], 'middle-left-square': [1, 0, 1], 'middle-middle-square': [1, 2, 2], 'middle-right-square': [2, 1, 2], 'bottom-left-square': [2, 2, 2], 'bottom-middle-square': [1, 2, 1], 'bottom-right-square': [2, 2, 1]
+df['diagonal_win_x'] = ((df['top-left-square'] == 1) & (df['middle-middle-square'] == 1) & (df['bottom-right-square'] == 1)) | ((df['top-right-square'] == 1) & (df['middle-middle-square'] == 1) & (df['bottom-left-square'] == 1))

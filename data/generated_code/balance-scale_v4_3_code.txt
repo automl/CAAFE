@@ -1,0 +1,12 @@
+
+# Right Moment
+# Usefulness: This feature calculates the moment on the right side, which is the product of right-weight and right-distance. This is useful because the balance scale depends on the moments on both sides.
+# Input samples: 'right-weight': [3.0, 4.0, 5.0], 'right-distance': [2.0, 2.0, 5.0]
+df['right_moment'] = df['right-weight'] * df['right-distance']
+# Moment Difference
+# Usefulness: This feature calculates the difference between the left moment and the right moment. A positive value indicates the balance scale tips to the left, a negative value indicates it tips to the right, and a value close to zero indicates it is balanced.
+# Input samples: 'left-weight': [2.0, 3.0, 1.0], 'left-distance': [4.0, 5.0, 4.0], 'right-weight': [3.0, 4.0, 5.0], 'right-distance': [2.0, 2.0, 5.0]
+df['moment_diff'] = (df['left-weight'] * df['left-distance']) - (df['right-weight'] * df['right-distance'])
+# Drop redundant columns
+# The original columns 'left-weight', 'left-distance', 'right-weight', and 'right-distance' can be dropped as they are now represented by the new features 'left_moment', 'right_moment', and 'moment_diff'.
+df.drop(columns=['left-weight', 'left-distance', 'right-weight', 'right-distance'], inplace=True)

@@ -1,0 +1,8 @@
+
+# Feature: Employment stability
+# Usefulness: This feature checks if the individual has a stable employment, which can help in understanding their ability to repay the credit.
+# Input samples: 'employment': [4, 0, 2]
+df['employment_stability'] = df['employment'].apply(lambda x: 1 if x >= 3 else 0)
+
+# Dropping 'employment' column as 'employment_stability' provides a more generalized representation of employment status
+df.drop(columns=['employment'], inplace=True)

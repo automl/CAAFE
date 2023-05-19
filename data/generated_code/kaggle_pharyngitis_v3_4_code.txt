@@ -1,0 +1,10 @@
+# ('fever_and_cough', 'Whether the patient has both fever and cough')
+# Usefulness: Fever and cough are two of the most common symptoms of respiratory infections, including GAS pharyngitis. This feature captures their co-occurrence.
+# Input samples: 'temperature': [38.0, 39.0, 39.5], 'cough': [0.0, 1.0, 0.0]
+df['fever_and_cough'] = ((df['temperature'] >= 38.0) & (df['cough'] > 0)).astype(int)# ('fever_and_petechiae', 'Whether the patient has both fever and petechiae')
+# Usefulness: Fever and petechiae are two of the most common symptoms of GAS infection. This feature captures their co-occurrence.
+# Input samples: 'temperature': [38.0, 39.0, 39.5], 'petechiae': [0.0, 0.0, 0.0]
+df['fever_and_petechiae'] = ((df['temperature'] >= 38.0) & (df['petechiae'] > 0)).astype(int)# ('fever_and_rhinorrhea', 'Whether the patient has both fever and rhinorrhea')
+# Usefulness: Fever and rhinorrhea are two of the most common symptoms of respiratory infections, including GAS pharyngitis. This feature captures their co-occurrence.
+# Input samples: 'temperature': [38.0, 39.0, 39.5], 'rhinorrhea': [0.0, 0.0, 0.0]
+df['fever_and_rhinorrhea'] = ((df['temperature'] >= 38.0) & (df['rhinorrhea'] > 0)).astype(int)

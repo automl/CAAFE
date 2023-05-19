@@ -1,0 +1,19 @@
+
+# Diagonal 2
+# Usefulness: This adds useful real world knowledge to classify "Class" as it checks for a win condition in the second diagonal (top-right to bottom-left).
+# Input samples: 'top-right-square': [1, 0, 1], 'middle-middle-square': [0, 2, 2], 'bottom-left-square': [2, 1, 1]
+df['diag2'] = df.apply(lambda row: 1 if row['top-right-square'] == row['middle-middle-square'] == row['bottom-left-square'] and row['top-right-square'] != 0 else 0, axis=1)
+
+# Vertical wins
+# Usefulness: This adds useful real world knowledge to classify "Class" as it checks for a win condition in each of the three vertical columns.
+# Input samples: 'top-left-square': [2, 2, 2], 'top-middle-square': [0, 0, 1], 'top-right-square': [1, 0, 1], 'middle-left-square': [1, 0, 2], 'middle-middle-square': [0, 2, 2], 'middle-right-square': [1, 1, 2], 'bottom-left-square': [2, 1, 1], 'bottom-middle-square': [2, 0, 0], 'bottom-right-square': [2, 2, 0]
+df['vertical_wins'] = df.apply(lambda row: 1 if (row['top-left-square'] == row['middle-left-square'] == row['bottom-left-square'] and row['top-left-square'] != 0) or (row['top-middle-square'] == row['middle-middle-square'] == row['bottom-middle-square'] and row['top-middle-square'] != 0) or (row['top-right-square'] == row['middle-right-square'] == row['bottom-right-square'] and row['top-right-square'] != 0) else 0, axis=1)
+
+# Empty squares count
+# Usefulness: This adds useful real world knowledge to classify "Class" as it counts the number of empty squares in the board, which can help to identify if the game ended in a draw.
+# Input samples: 'top-left-square': [2, 2, 2], 'top-middle-square': [0, 0, 1], 'top-right-square': [1, 0, 1], 'middle-left-square': [1, 0, 2], 'middle-middle-square': [0, 2, 2], 'middle-right-square': [1, 1, 2], 'bottom-left-square': [2, 1, 1], 'bottom-middle-square': [2, 0, 0], 'bottom-right-square': [2, 2, 0]
+df['empty_squares'] = df.apply(lambda row: sum([1 for col in ['top-left-square', 'top-middle-square', 'top-right-square', 'middle-left-square', 'middle-middle-square', 'middle-right-square', 'bottom-left-square', 'bottom-middle-square', 'bottom-right-square'] if row[col] == 0]), axis=1)
+
+# Dropping less relevant columns
+# Explanation: Dropping the original square columns as the newly created features (diagonal, horizontal, vertical wins, and empty squares count) capture the relevant information for predicting "Class".
+df.drop(columns=['top-left-square', 'top-middle-square', 'top-right-square', 'middle-left-square', 'middle-middle-square', 'middle-right-square', 'bottom-left-square', 'bottom-middle-square', 'bottom-right-square'], inplace=True)

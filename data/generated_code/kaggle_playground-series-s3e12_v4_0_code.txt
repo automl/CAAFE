@@ -1,0 +1,5 @@
+
+# Feature name: "gravity_ph_product"
+# Usefulness: Combining gravity and pH values can provide useful information about the urine environment, which might be related to the formation of calcium oxalate crystals.
+# Input samples: 'gravity': [1.02, 1.02, 1.02], 'ph': [7.61, 5.56, 5.47]
+df['gravity_ph_product'] = df['gravity'] * df['ph']

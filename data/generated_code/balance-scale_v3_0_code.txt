@@ -1,0 +1,12 @@
+
+# ('balance', 'Balance between left and right weights')
+# Usefulness: This column calculates the difference between the left weight and right weight, giving an indication of the balance between the two.
+# Input samples: 'left-weight': [4.0, 5.0, 1.0], 'right-weight': [4.0, 5.0, 2.0], ...
+df['balance'] = df['left-weight'] - df['right-weight']
+# ('distance_diff', 'Difference between left and right distance')
+# Usefulness: This column calculates the difference between the left distance and right distance, giving an indication of the balance between the two.
+# Input samples: 'left-distance': [2.0, 4.0, 4.0], 'right-distance': [2.0, 4.0, 5.0], ...
+df['distance_diff'] = df['left-distance'] - df['right-distance']# ('weight_product', 'Product of left and right weights')
+# Usefulness: This column calculates the product of the left and right weights, giving an indication of the total weight involved in the balance and how the weight is distributed between the two sides.
+# Input samples: 'left-weight': [4.0, 5.0, 1.0], 'right-weight': [4.0, 5.0, 2.0], ...
+df['weight_product'] = df['left-weight'] * df['right-weight']

@@ -1,0 +1,18 @@
+
+# Feature: Chromatin_and_Nucleoli
+# Usefulness: Combining bland chromatin and normal nucleoli can capture the relationship between chromatin and nucleoli, which could be related to the malignancy of the tumor.
+# Input samples: 'Bland_Chromatin': [2.0, 2.0, 1.0], 'Normal_Nucleoli': [1.0, 1.0, 1.0]
+df['Chromatin_and_Nucleoli'] = df['Bland_Chromatin'] * df['Normal_Nucleoli']
+
+# Drop columns that might be redundant after creating the new feature
+# Explanation: Columns 'Bland_Chromatin' and 'Normal_Nucleoli' are combined into the new feature 'Chromatin_and_Nucleoli', which might capture their relationship better.
+df.drop(columns=['Bland_Chromatin', 'Normal_Nucleoli'], inplace=True)
+
+# Feature: Clump_Thickness_and_Mitoses
+# Usefulness: Combining clump thickness and mitoses can capture the relationship between the thickness of the clump and the number of mitoses, which could be related to the malignancy of the tumor.
+# Input samples: 'Clump_Thickness': [1.0, 5.0, 4.0], 'Mitoses': [1.0, 1.0, 1.0]
+df['Clump_Thickness_and_Mitoses'] = df['Clump_Thickness'] * df['Mitoses']
+
+# Drop columns that might be redundant after creating the new feature
+# Explanation: Columns 'Clump_Thickness' and 'Mitoses' are combined into the new feature 'Clump_Thickness_and_Mitoses', which might capture their relationship better.
+df.drop(columns=['Clump_Thickness', 'Mitoses'], inplace=True)

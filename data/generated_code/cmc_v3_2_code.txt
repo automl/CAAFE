@@ -1,0 +1,13 @@
+
+# (Wife_and_husband_education)
+# Usefulness: A woman's contraceptive method choice may be influenced by the education level of both herself and her husband. This new column combines the wife's and husband's education levels to capture this relationship.
+# Input samples: 'Wifes_education': [3, 2, 2], 'Husbands_education': [2, 3, 3]
+df['Wife_and_husband_education'] = df['Wifes_education'] + df['Husbands_education']
+# (Number_of_children_and_age)
+# Usefulness: A woman's age and the number of children she has ever born may be correlated with her contraceptive method choice. This new column combines these two features to capture this relationship.
+# Input samples: 'Wifes_age': [46.0, 45.0, 39.0], 'Number_of_children_ever_born': [5.0, 6.0, 6.0]
+df['Number_of_children_and_age'] = df['Wifes_age'] * df['Number_of_children_ever_born']# Explanation: Wife's religion is dropped because it is a binary feature with low variance, which may not be useful for the downstream classifier.
+df.drop(columns=['Wifes_religion'], inplace=True)# (Age_diff)
+# Usefulness: The difference in age between a woman and her husband may be correlated with her contraceptive method choice. This new column captures this relationship.
+# Input samples: 'Wifes_age': [46.0, 45.0, 39.0], 'Husbands_education': [45.0, 46.0, 44.0]
+df['Age_diff'] = abs(df['Wifes_age'] - df['Husbands_education'])

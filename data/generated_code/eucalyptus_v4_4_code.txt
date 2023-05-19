@@ -1,0 +1,10 @@
+
+# (Seedlot_Density)
+# Usefulness: Some seedlots may be more dense than others, which could affect the growth of the trees. This feature gives an indication of the density of each seedlot.
+# Input samples: 'PMCno': [1521.0, 1524.0, 1786.0], 'Ht': [13.32, 5.5, 5.39], 'DBH': [31.38, 7.6, 6.05]
+df['Seedlot_Density'] = (df['Ht'] * df['DBH']) / df['PMCno']
+# (Species_Survival_Rate)
+# Usefulness: This feature gives an indication of the average survival rate for each species.
+# Input samples: 'Sp': [6, 8, 1], 'Surv': [nan, 20.0, 88.0]
+species_mean_survival = df.groupby('Sp')['Surv'].mean()
+df['Species_Survival_Rate'] = df['Sp'].map(species_mean_survival)

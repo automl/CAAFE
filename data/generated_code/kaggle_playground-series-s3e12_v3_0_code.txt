@@ -1,0 +1,9 @@
+
+# (Urea_to_calcium_ratio)
+# Usefulness: High levels of urea and calcium in urine have been associated with kidney stones. This column adds information on the ratio of urea to calcium, which is a useful predictor for the formation of calcium oxalate crystals.
+# Input samples: 'urea': [75.0, 187.0, 380.0], 'calc': [3.98, 6.99, 7.18]
+df['urea_to_calcium_ratio'] = df['urea'] / df['calc']
+# (Osmo_cond_ratio)
+# Usefulness: High levels of osmolarity and conductivity in urine have been associated with kidney stones. This column adds information on the ratio of osmolarity to conductivity, which is a useful predictor for the formation of calcium oxalate crystals.
+# Input samples: 'osmo': [527.0, 461.0, 874.0], 'cond': [25.8, 17.8, 29.5]
+df['osmo_cond_ratio'] = df['osmo'] / df['cond']# (Urea_minus_calcium)

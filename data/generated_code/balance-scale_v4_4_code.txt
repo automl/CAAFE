@@ -1,0 +1,13 @@
+
+# Right Moment
+# Usefulness: Calculates the moment on the right side of the balance scale, which is essential to determine the class.
+# Input samples: 'right-weight': [1.0, 3.0, 5.0], 'right-distance': [5.0, 2.0, 4.0]
+df['right_moment'] = df['right-weight'] * df['right-distance']
+# Moment Difference
+# Usefulness: Calculates the difference between the left and right moments, which helps in determining the class.
+# Input samples: 'left_moment': [2.0, 8.0, 6.0], 'right_moment': [5.0, 6.0, 20.0]
+df['moment_difference'] = df['left-weight'] * df['left-distance'] - df['right-weight'] * df['right-distance']
+
+# Dropping left-weight, left-distance, right-weight, right-distance as they are not needed anymore
+# We have created new features (left_moment, right_moment, moment_difference) that capture the information of these columns
+df.drop(columns=['left-weight', 'left-distance', 'right-weight', 'right-distance'], inplace=True)

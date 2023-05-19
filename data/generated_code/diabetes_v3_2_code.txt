@@ -1,0 +1,17 @@
+# (GlucoseInsulinRatio)
+# Usefulness: The ratio of glucose levels to insulin levels can be a better indicator of diabetes risk than glucose levels alone.
+# Input samples: 'plas': [119.0, 107.0, 115.0], 'insu': [220.0, 0.0, 96.0]
+df['GlucoseInsulinRatio'] = df['plas'] / df['insu']
+
+# (AgeBMI)
+# Usefulness: BMI and age can interact in complex ways to increase the risk of diabetes. This feature can capture this relationship.
+# Input samples: 'age': [29.0, 23.0, 32.0], 'mass': [45.6, 26.4, 34.6]
+df['AgeBMI'] = df['age'] * df['mass']
+
+# (BloodPressurePedigree)
+# Usefulness: The pedigree function can be an indicator of genetic predisposition to diabetes. This feature can capture this relationship with blood pressure.
+# Input samples: 'pres': [86.0, 60.0, 70.0], 'pedi': [0.81, 0.13, 0.53]
+df['BloodPressurePedigree'] = df['pres'] * df['pedi']
+
+# Dropping columns that might be redundant and hurt the predictive performance of the downstream classifier (Feature selection)
+df.drop(columns=['preg', 'skin'], inplace=True)

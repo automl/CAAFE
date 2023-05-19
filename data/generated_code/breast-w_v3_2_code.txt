@@ -1,0 +1,5 @@
+# Explanation: 'Marginal_Adhesion' is dropped as it has low importance in the feature importance analysis and may hurt predictive performance.
+df.drop(columns=['Marginal_Adhesion'], inplace=True)# ('High_Clump_Size', 'Create a binary feature indicating high values for Clump_Thickness and Cell_Size_Uniformity')
+# Usefulness: High values for Clump_Thickness and Cell_Size_Uniformity are known to be associated with malignancy. This new feature captures this information in a binary form.
+# Input samples: 'Clump_Thickness': [1.0, 5.0, 4.0], 'Cell_Size_Uniformity': [1.0, 2.0, 1.0], ...
+df['High_Clump_Size'] = ((df['Clump_Thickness'] >= 6) & (df['Cell_Size_Uniformity'] >= 6)).astype(int)

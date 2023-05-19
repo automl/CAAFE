@@ -1,0 +1,15 @@
+
+# Feature: Strength difference between white and black pieces
+# Usefulness: The difference in strength between the white and black pieces can indicate which player has a better chance of winning.
+# Input samples: 'white_piece0_strength': [7.0, 0.0, 4.0], 'black_piece0_strength': [0.0, 4.0, 0.0]
+df['strength_diff'] = df['white_piece0_strength'] - df['black_piece0_strength']
+# Feature: Sum of ranks of white and black pieces
+# Usefulness: The sum of ranks of the white and black pieces can provide information about their overall position on the board, which can impact the game's outcome.
+# Input samples: 'white_piece0_rank': [7.0, 2.0, 6.0], 'black_piece0_rank': [6.0, 5.0, 7.0]
+df['sum_of_ranks'] = df['white_piece0_rank'] + df['black_piece0_rank']# Feature: Product of strengths of white and black pieces
+# Usefulness: The product of strengths of the white and black pieces can provide information about the overall power balance in the game, which can impact the game's outcome.
+# Input samples: 'white_piece0_strength': [7.0, 0.0, 4.0], 'black_piece0_strength': [0.0, 4.0, 0.0]
+df['strength_product'] = df['white_piece0_strength'] * df['black_piece0_strength']# Feature: Difference in files of white and black pieces
+# Usefulness: The difference in files of the white and black pieces can provide information about their horizontal position on the board, which can impact the game's outcome.
+# Input samples: 'white_piece0_file': [6.0, 3.0, 1.0], 'black_piece0_file': [5.0, 0.0, 2.0]
+df['file_diff'] = df['white_piece0_file'] - df['black_piece0_file']

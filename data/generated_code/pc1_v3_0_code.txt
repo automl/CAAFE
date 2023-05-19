@@ -1,0 +1,15 @@
+
+# (Feature name and description)
+# Usefulness: This feature is the ratio of unique operands to total operands
+# Input samples: 'uniq_Opnd': [3.0, 14.0, 28.0], 'total_Opnd': [3.0, 20.0, 39.0]
+df['uniq_Opnd_ratio'] = df['uniq_Opnd'] / df['total_Opnd']
+# (Feature name and description)
+# Usefulness: This feature is the ratio of McCabe's cyclomatic complexity to Halstead's volume
+# Input samples: 'v(g)': [1.0, 4.0, 6.0], 'V': [19.65, 276.9, 541.74]
+df['complexity_volume_ratio'] = df['v(g)'] / df['V']# (Feature name and description)
+# Usefulness: This feature is the ratio of McCabe's line count of code to Halstead's total operators + operands
+# Input samples: 'loc': [3.0, 21.0, 37.0], 'N': [7.0, 57.0, 97.0]
+df['code_to_operands_ratio'] = df['loc'] / df['N']# (Feature name and description)
+# Usefulness: This feature is the ratio of McCabe's cyclomatic complexity to McCabe's essential complexity
+# Input samples: 'v(g)': [1.0, 4.0, 6.0], 'ev(g)': [1.0, 1.0, 1.0]
+df['complexity_essential_ratio'] = df['v(g)'] / df['ev(g)']

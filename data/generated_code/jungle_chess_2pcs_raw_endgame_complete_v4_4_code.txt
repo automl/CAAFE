@@ -1,0 +1,20 @@
+
+# Strength difference between white and black pieces
+# Usefulness: The difference in strength between the two pieces can be an important factor in determining the outcome of the game.
+# Input samples: 'white_piece0_strength': [0.0, 4.0, 4.0], 'black_piece0_strength': [7.0, 0.0, 0.0]
+df['strength_difference'] = df['white_piece0_strength'] - df['black_piece0_strength']
+
+# Is white piece stronger than black piece
+# Usefulness: This binary feature indicates whether the white piece is stronger than the black piece, which can be useful for predicting the outcome of the game.
+# Input samples: 'white_piece0_strength': [0.0, 4.0, 4.0], 'black_piece0_strength': [7.0, 0.0, 0.0]
+df['white_piece_stronger'] = (df['white_piece0_strength'] > df['black_piece0_strength']).astype(int)
+
+# Is white piece weaker than black piece
+# Usefulness: This binary feature indicates whether the white piece is weaker than the black piece, which can be useful for predicting the outcome of the game.
+# Input samples: 'white_piece0_strength': [0.0, 4.0, 4.0], 'black_piece0_strength': [7.0, 0.0, 0.0]
+df['white_piece_weaker'] = (df['white_piece0_strength'] < df['black_piece0_strength']).astype(int)
+
+# Is white piece on a diagonal with black piece
+# Usefulness: This binary feature indicates whether the white piece and the black piece are on a diagonal, which can be useful for predicting the outcome of the game.
+# Input samples: 'white_piece0_file': [4.0, 0.0, 3.0], 'white_piece0_rank': [2.0, 5.0, 6.0], 'black_piece0_file': [5.0, 1.0, 1.0], 'black_piece0_rank': [8.0, 3.0, 8.0]
+df['diagonal'] = (abs(df['white_piece0_file'] - df['black_piece0_file']) == abs(df['white_piece0_rank'] - df['black_piece0_rank'])).astype(int)

@@ -1,0 +1,7 @@
+# ('right-weight' * 'right-distance')
+# Usefulness: This column calculates the right moment of the scale, which is an important factor in determining the balance of the scale.
+# Input samples: 'right-weight': [3.0, 4.0, 5.0], 'right-distance': [2.0, 2.0, 5.0]
+df['right-moment'] = df['right-weight'] * df['right-distance']# ('left-distance' - 'right-distance')
+# Usefulness: This column calculates the difference between the left and right distances of the scale, which can help to determine the direction in which the scale will tip.
+# Input samples: 'left-distance': [4.0, 5.0, 4.0], 'right-distance': [2.0, 2.0, 5.0]
+df['distance-difference'] = df['left-distance'] - df['right-distance']

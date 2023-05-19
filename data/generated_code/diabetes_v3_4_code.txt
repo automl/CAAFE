@@ -1,0 +1,17 @@
+# (Age multiplied by diabetes pedigree function)
+# Usefulness: Older women with a family history of diabetes are at a higher risk of developing diabetes.
+# Input samples: 'age': [32.0, 29.0, 21.0], 'pedi': [0.97, 0.92, 0.37]
+df['age_pedi'] = df['age'] * df['pedi']# (Plasma glucose concentration multiplied by BMI)
+# Usefulness: Women with higher BMI and higher glucose concentrations have a higher risk of developing diabetes.
+# Input samples: 'plas': [129.0, 86.0, 151.0], 'mass': [36.4, 41.3, 42.1]
+df['plas_bmi'] = df['plas'] * df['mass']# (Body mass index divided by age)
+# Usefulness: Age and BMI are important risk factors for diabetes. This feature combines them to capture the interaction between them.
+# Input samples: 'mass': [36.4, 41.3, 42.1], 'age': [32.0, 29.0, 21.0]
+df['mass_age'] = df['mass'] / df['age']# Explanation why the column 'insu' is dropped: The 'insu' column has a high percentage of missing values (48.7%) and it is unlikely that this column will add useful information to the classifier.
+df.drop(columns=['insu'], inplace=True)# (Plasma glucose concentration divided by age)
+# Usefulness: Age and plasma glucose concentration are important risk factors for diabetes. This feature combines them to capture the interaction between them.
+# Input samples: 'plas': [129.0, 86.0, 151.0], 'age': [32.0, 29.0, 21.0]
+df['plas_age'] = df['plas'] / df['age']# (Body mass index multiplied by diabetes pedigree function)
+# Usefulness: Women with higher BMI and a family history of diabetes are at a higher risk of developing diabetes.
+# Input samples: 'mass': [36.4, 41.3, 42.1], 'pedi': [0.97, 0.92, 0.37]
+df['mass_pedi'] = df['mass'] * df['pedi']

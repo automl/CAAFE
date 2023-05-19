@@ -1,0 +1,12 @@
+# ('Region_Code_Count', 'Use the count of Region_Code to capture the frequency of a region.')
+# Usefulness: The frequency of a region may be an important predictor for the insurance purchase decision.
+# Input samples: 'Region_Code': [598, 4855, 529], 'ID': [46203, 7682, 43204]
+df['Region_Code_Count'] = df.groupby('Region_Code')['ID'].transform('count')# ('Spouse_Age_Difference', 'Use the difference between Upper_Age and Lower_Age for spouses to capture the age difference within a household.')
+# Usefulness: The age difference within a household may be an important predictor for the insurance purchase decision, especially for married couples.
+# Input samples: 'Upper_Age': [56, 43, 33], 'Lower_Age': [56, 42, 20], 'Is_Spouse': ['No', 'Yes', 'No']
+import numpy as np
+df['Spouse_Age_Difference'] = df.loc[df['Is_Spouse']=='Yes', 'Upper_Age'] - df.loc[df['Is_Spouse']=='Yes', 'Lower_Age']
+df.loc[df['Is_Spouse']=='No', 'Spouse_Age_Difference'] = np.nan# ('Premium_to_Age_Ratio_Bucket', 'Use the Premium_to_Age_Ratio to create buckets.')
+# Usefulness: Buckets for Premium_to_Age_Ratio may be a better predictor for the insurance purchase decision than the continuous variable.
+# Input samples: 'Reco_Policy_Premium': [16172.0, 19272.0, 13661.2], 'Upper_Age': [56, 43, 33]
+df['Premium_to_Age_Ratio_Bucket'] = pd.cut(x=df['Reco_Policy_Premium']/df['Upper_Age'], bins=[0, 200, 400, 600, 1000], labels=['0-200', '200-400', '400-600', '600+'])

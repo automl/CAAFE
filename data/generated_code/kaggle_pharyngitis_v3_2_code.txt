@@ -1,0 +1,4 @@
+# ('age_group', 'The patient age group.')
+# Usefulness: Younger children are more likely to have GAS infection. This feature can help in predicting the outcome of the RADT test.
+# Input samples: 'age_y': [4.2, 4.5, 8.5, 5.7, 6.3, 6.8, 9.0, 6.1, 7.5, 10.7]
+df['age_group'] = pd.cut(df['age_y'], bins=[0, 5, 10, 100], labels=['0-5', '5-10', '10+']).astype(str)

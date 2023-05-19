@@ -1,0 +1,4 @@
+# ('Family_Size', 'Useful to capture the total number of individuals insured under the same policy', 'Is_Spouse': ['No', 'No', 'Yes'], 'Upper_Age': [52, 22, 63], ...)
+df['Family_Size'] = df['Is_Spouse'].replace({'Yes':2, 'No':1}) + (df['Upper_Age'] > 30).astype(int)# ('Holding_Policy_Duration_Imputed_Holding_Policy_Type_Imputed', 'Useful to capture if both holding policy duration and type were imputed', 'Holding_Policy_Duration_Imputed': [0, 0, 1], 'Holding_Policy_Type_Imputed': [0, 1, 0], ...)
+df['Holding_Policy_Duration_Imputed_Holding_Policy_Type_Imputed'] = (df['Holding_Policy_Duration'].isna().astype(int)) * (df['Holding_Policy_Type'].isna().astype(int))# ('Premium_Per_Age', 'Useful to capture premium paid per year of life insured', 'Reco_Policy_Premium': [13112.0, 9800.0, 17280.0], 'Age': [52, 22, 63], ...)
+df['Premium_Per_Age'] = df['Reco_Policy_Premium'] / (df['Upper_Age'] + df['Lower_Age'])

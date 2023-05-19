@@ -1,0 +1,9 @@
+
+# Feature: Nuclei_Features_Avg
+# Usefulness: Combining Bare_Nuclei, Bland_Chromatin, and Normal_Nucleoli into a single feature as they all represent characteristics of cell nuclei.
+# Input samples: 'Bare_Nuclei': [2.0, 10.0, 3.0], 'Bland_Chromatin': [2.0, 4.0, 4.0], 'Normal_Nucleoli': [1.0, 8.0, 10.0]
+df['Nuclei_Features_Avg'] = (df['Bare_Nuclei'] + df['Bland_Chromatin'] + df['Normal_Nucleoli']) / 3
+
+# Dropping redundant columns
+# Explanation: Dropping Bare_Nuclei, Bland_Chromatin, and Normal_Nucleoli as they are combined into Nuclei_Features_Avg
+df.drop(columns=['Bare_Nuclei', 'Bland_Chromatin', 'Normal_Nucleoli'], inplace=True)

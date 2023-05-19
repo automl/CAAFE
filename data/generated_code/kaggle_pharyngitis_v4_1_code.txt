@@ -1,0 +1,10 @@
+
+# Feature: Age and Exudate Interaction
+# Usefulness: Younger children may be more likely to have exudate present in their throat, which could be indicative of a more severe infection and thus more likely to be RADT positive.
+# Input samples: 'age_y': [11.6, 8.2, 5.1], 'exudate': [0.0, 0.0, 0.0]
+df['age_exudate_interaction'] = df['age_y'] * df['exudate']
+
+# Feature: Age and Tonsillar Swelling Interaction
+# Usefulness: Younger children may be more likely to have tonsillar swelling, which could be indicative of a more severe infection and thus more likely to be RADT positive.
+# Input samples: 'age_y': [11.6, 8.2, 5.1], 'tonsillarswelling': [0.0, 1.0, 0.0]
+df['age_tonsillar_swelling_interaction'] = df['age_y'] * df['tonsillarswelling']

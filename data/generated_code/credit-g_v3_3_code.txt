@@ -1,0 +1,16 @@
+
+# (Credit amount to duration ratio)
+# Usefulness: This column captures the ratio of credit amount to duration, which gives an idea of how much the borrower will have to pay back per unit time. This is a useful metric for predicting credit risk.
+# Input samples: 'credit_amount': [2473.0, 522.0, 719.0], 'duration': [18.0, 12.0, 12.0]
+df['credit_duration_ratio'] = df['credit_amount'] / df['duration']
+# (Age bin)
+# Usefulness: This column bins the age of the borrower into different groups. This can help capture non-linear relationships between age and credit risk.
+# Input samples: 'age': [25.0, 42.0, 41.0], 
+df['age_bin'] = pd.cut(df['age'], bins=[0, 25, 40, 60, 100], labels=['young', 'middle-aged', 'senior', 'old'])# (Credit amount to installment commitment ratio)
+# Usefulness: This column captures the ratio of credit amount to installment commitment, which gives an idea of how much the borrower will have to pay back per installment. This is a useful metric for predicting credit risk.
+# Input samples: 'credit_amount': [2473.0, 522.0, 719.0], 'installment_commitment': [4.0, 4.0, 4.0]
+df['credit_installment_ratio'] = df['credit_amount'] / df['installment_commitment']# (Credit history and purpose combination)
+# Usefulness: This column combines credit history and purpose columns to capture the relationship between the two. This can help capture the borrower's credit history and their reason for taking the loan.
+# Input samples: 'credit_history': [2, 4, 2], 'purpose': [2, 3, 6]
+df['credit_history_purpose'] = df['credit_history'].astype(str) + '_' + df['purpose'].astype(str)# Explanation: The column 'foreign_worker' has low variance and is unlikely to be useful for predicting credit risk. Therefore, it is dropped.
+df.drop(columns=['foreign_worker'], inplace=True)

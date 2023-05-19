@@ -1,0 +1,11 @@
+
+# Feature: code_density
+# Usefulness: This feature represents the proportion of code lines (lOCode) to the total lines of code, comments, and blank lines. 
+# A higher code density may indicate better code organization and lower chances of defects.
+# Input samples: 'lOCode': [3.0, 21.0, 37.0], 'lOComment': [0.0, 0.0, 0.0], 'lOBlank': [1.0, 4.0, 4.0]
+df['code_density'] = df['lOCode'] / (df['lOCode'] + df['lOComment'] + df['lOBlank'])
+
+# Feature: effort_per_line
+# Usefulness: This feature represents the average effort (Halstead effort) per line of code. Higher effort per line may indicate more complex code and a higher likelihood of defects.
+# Input samples: 'E': [39.3, 2966.84, 7545.68], 'loc': [3.0, 21.0, 37.0]
+df['effort_per_line'] = df['E'] / df['loc']

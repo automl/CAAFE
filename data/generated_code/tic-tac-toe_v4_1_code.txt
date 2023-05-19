@@ -1,0 +1,29 @@
+
+# Feature: Row Wins for X
+# Usefulness: This feature counts the number of rows where X has a win (three-in-a-row). It helps the classifier to identify if X has won or not.
+# Input samples: 'top-left-square': [0, 1, 2], 'top-middle-square': [0, 0, 0], 'top-right-square': [2, 2, 1], ...
+df['row_wins_x'] = ((df['top-left-square'] == 1) & (df['top-middle-square'] == 1) & (df['top-right-square'] == 1) |
+                    (df['middle-left-square'] == 1) & (df['middle-middle-square'] == 1) & (df['middle-right-square'] == 1) |
+                    (df['bottom-left-square'] == 1) & (df['bottom-middle-square'] == 1) & (df['bottom-right-square'] == 1)).astype(int)
+
+# Feature: Column Wins for X
+# Usefulness: This feature counts the number of columns where X has a win (three-in-a-row). It helps the classifier to identify if X has won or not.
+# Input samples: 'top-left-square': [0, 1, 2], 'middle-left-square': [1, 2, 0], 'bottom-left-square': [0, 2, 0], ...
+df['col_wins_x'] = ((df['top-left-square'] == 1) & (df['middle-left-square'] == 1) & (df['bottom-left-square'] == 1) |
+                    (df['top-middle-square'] == 1) & (df['middle-middle-square'] == 1) & (df['bottom-middle-square'] == 1) |
+                    (df['top-right-square'] == 1) & (df['middle-right-square'] == 1) & (df['bottom-right-square'] == 1)).astype(int)
+
+# Feature: Diagonal Wins for X
+# Usefulness: This feature counts the number of diagonals where X has a win (three-in-a-row). It helps the classifier to identify if X has won or not.
+# Input samples: 'top-left-square': [0, 1, 2], 'middle-middle-square': [0, 1, 2], 'bottom-right-square': [2, 1, 1], ...
+df['diag_wins_x'] = ((df['top-left-square'] == 1) & (df['middle-middle-square'] == 1) & (df['bottom-right-square'] == 1) |
+                     (df['top-right-square'] == 1) & (df['middle-middle-square'] == 1) & (df['bottom-left-square'] == 1)).astype(int)
+
+# Feature: Total Wins for X
+# Usefulness: This feature combines the row, column, and diagonal wins for X into a single feature, which should simplify the model and improve its performance.
+# Input samples: 'row_wins_x': [0, 1, 0], 'col_wins_x': [0, 0, 1], 'diag_wins_x': [1, 0, 0], ...
+df['total_wins_x'] = df['row_wins_x'] + df['col_wins_x'] + df['diag_wins_x']
+
+# Dropping redundant columns
+# Explanation: Since we have combined the row, column, and diagonal wins for X into a single feature, these individual columns are not necessary for the classifier.
+df.drop(columns=['row_wins_x', 'col_wins_x', 'diag_wins_x'], inplace=True)

@@ -1,0 +1,18 @@
+
+# Feature name: Education_gap
+# Usefulness: The difference in education levels between the wife and husband may influence the couple's contraceptive method choice.
+# Input samples: 'Wifes_education': [3, 3, 2], 'Husbands_education': [3, 3, 3]
+df['Education_gap'] = df['Wifes_education'] - df['Husbands_education']
+
+# Feature name: Age_per_child
+# Usefulness: The age per child can indicate the couple's family planning decisions, which may influence their contraceptive method choice.
+# Input samples: 'Wifes_age': [48.0, 32.0, 28.0], 'Number_of_children_ever_born': [6.0, 2.0, 2.0]
+df['Age_per_child'] = df['Wifes_age'] / (df['Number_of_children_ever_born'] + 1)
+# Feature name: Religion_and_working
+# Usefulness: The interaction between the wife's religion and her working status may influence the couple's contraceptive method choice based on cultural and financial factors.
+# Input samples: 'Wifes_religion': [0, 1, 0], 'Wifes_now_working%3F': [1, 1, 1]
+df['Religion_and_working'] = df['Wifes_religion'] * df['Wifes_now_working%3F']
+# Feature name: Occupation_and_standard_living
+# Usefulness: The interaction between the husband's occupation and the standard-of-living index may influence the couple's contraceptive method choice based on their financial situation and job stability.
+# Input samples: 'Husbands_occupation': [1, 1, 2], 'Standard-of-living_index': [3, 2, 2]
+df['Occupation_and_standard_living'] = df['Husbands_occupation'] * df['Standard-of-living_index']

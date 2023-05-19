@@ -1,0 +1,11 @@
+
+# Feature name and description: right_moment
+# Usefulness: Calculates the moment on the right side of the balance scale, which is the product of right-weight and right-distance.
+# Input samples: 'right-weight': [5.0, 3.0, 1.0], 'right-distance': [2.0, 4.0, 4.0]
+df['right_moment'] = df['right-weight'] * df['right-distance']
+# Feature name and description: moment_difference
+# Usefulness: Calculates the difference between the left and right moments, which helps to determine the tipping direction of the balance scale.
+# Input samples: 'left-weight': [2.0, 4.0, 1.0], 'left-distance': [2.0, 5.0, 4.0], 'right-weight': [5.0, 3.0, 1.0], 'right-distance': [2.0, 4.0, 4.0]
+df['moment_difference'] = (df['left-weight'] * df['left-distance']) - (df['right-weight'] * df['right-distance'])
+# Drop the original columns as they are now represented by the moment_difference feature and may introduce multicollinearity.
+df.drop(columns=['left-weight', 'left-distance', 'right-weight', 'right-distance'], inplace=True)

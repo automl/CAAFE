@@ -1,0 +1,10 @@
+
+# Feature: Reco_Policy_Premium_Age_Ratio
+# Usefulness: This feature captures the ratio of recommended policy premium to the average age of the applicants, which can help identify the affordability of the policy for different age groups and their likelihood to respond positively.
+# Input samples: 'Reco_Policy_Premium': [12960.0, 21767.2, 26764.8], 'Upper_Age': [48, 58, 65], 'Lower_Age': [48, 50, 60]
+df['Reco_Policy_Premium_Age_Ratio'] = df['Reco_Policy_Premium'] / ((df['Upper_Age'] + df['Lower_Age']) / 2)
+
+# Feature: Health_Indicator_Holding_Policy_Type
+# Usefulness: Combining Health Indicator and Holding Policy Type can provide insights on whether different health conditions and policy types influence the response to recommended insurance policies.
+# Input samples: 'Health Indicator': ['X2', 'X5', 'X4'], 'Holding_Policy_Type': [3.0, 4.0, 3.0]
+df['Health_Indicator_Holding_Policy_Type'] = df['Health Indicator'].astype(str) + '_' + df['Holding_Policy_Type'].astype(str)

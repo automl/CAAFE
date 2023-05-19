@@ -1,0 +1,10 @@
+
+# (Credit to Income Ratio)
+# Usefulness: This feature provides the ratio of credit amount to income of the customer which is a useful metric for credit risk assessment.
+# Input samples: 'credit_amount': [1224.0, 8588.0, 6615.0], 'installment_commitment': [3.0, 4.0, 2.0], 'personal_status': [2, 2, 2], 'num_dependents': [1.0, 1.0, 1.0]
+df['credit_income_ratio'] = df['credit_amount'] / (df['installment_commitment'] * df['personal_status'] * (df['num_dependents'] + 1))
+# (Age bin)
+# Usefulness: Age is an important factor in determining credit risk. This feature adds a categorical column that bins the age of the customer.
+# Input samples: 'age': [30.0, 45.0, 75.0], 'personal_status': [2, 2, 2], 'class': [0.0, 0.0, 0.0]
+df['age_bin'] = pd.cut(df['age'], bins=[18, 30, 40, 50, 60, 70, 120], labels=['18-29', '30-39', '40-49', '50-59', '60-69', '70+'], include_lowest=True)
+df.drop(columns=['age'], inplace=True)  # Dropping original column as it is redundant and not needed anymore.

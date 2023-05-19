@@ -1,0 +1,104 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+"
+**Eucalyptus Soil Conservation**  
+The objective was to determine which seedlots in a species are best for soil conservation in seasonally dry hill country. Determination is found by measurement of height, diameter by height, survival, and other contributing factors. 
+ 
+It is important to note that eucalypt trial methods changed over time; earlier trials included mostly 15 - 30cm tall seedling grown in peat plots and the later trials have included mostly three replications of eight trees grown. This change may contribute to less significant results.
+
+Experimental data recording procedures which require noting include:
+ - instances with no data recorded due to experimental recording procedures
+   require that the absence of a species from one replicate at a site was
+   treated as a missing value, but if absent from two or more replicates at a
+   site the species was excluded from the site's analyses.
+ - missing data for survival, vigour, insect resistance, stem form, crown form
+   and utility especially for the data recorded at the Morea Station; this 
+   could indicate the death of species in these areas or a lack in collection
+   of data.  
+
+
+
+ Attribute Information  
+ 
+  1.  Abbrev - site abbreviation - enumerated
+  2.  Rep - site rep - integer
+  3.  Locality - site locality in the North Island - enumerated
+  4.  Map_Ref - map location in the North Island - enumerated
+  5.  Latitude - latitude approximation - enumerated
+  6.  Altitude - altitude approximation - integer
+  7.  Rainfall - rainfall (mm pa) - integer
+  8.  Frosts - frosts (deg. c) - integer
+  9.  Year - year of planting - integer
+  10. Sp - species code - enumerated
+  11. PMCno - seedlot number - integer
+  12. DBH - best diameter base height (cm) - real
+  13. Ht - height (m) - real
+  14. Surv - survival - integer
+  15. Vig - vigour - real
+  16. Ins_res - insect resistance - real
+  17. Stem_Fm - stem form - real
+  18. Crown_Fm - crown form - real
+  19. Brnch_Fm - branch form - real
+  Class:
+  20. Utility - utility rating - enumerated
+
+
+
+ Relevant papers
+
+Bulluch B. T., (1992) Eucalyptus Species Selection for Soil Conservation in Seasonally Dry Hill Country - Twelfth Year Assessment  New Zealand Journal of Forestry Science 21(1): 10 - 31 (1991)  
+
+Kirsten Thomson and Robert J. McQueen (1996) Machine Learning Applied to Fourteen Agricultural Datasets. University of Waikato Research Report  
+https://www.cs.waikato.ac.nz/ml/publications/1996/Thomson-McQueen-96.pdf + the original publication:"
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+Abbrev (int32): NaN-freq [0.0%], Samples [13, 13, 12, 5, 11, 6, 12, 11, 9, 7]
+Rep (float64): NaN-freq [0.0%], Samples [1.0, 2.0, 1.0, 2.0, 3.0, 2.0, 3.0, 3.0, 1.0, 2.0]
+Locality (int32): NaN-freq [0.0%], Samples [0, 0, 4, 5, 6, 4, 4, 6, 5, 2]
+Map_Ref (int32): NaN-freq [0.0%], Samples [11, 11, 4, 5, 10, 6, 4, 10, 8, 7]
+Latitude (int32): NaN-freq [0.0%], Samples [10, 10, 4, 5, 9, 4, 4, 9, 7, 6]
+Altitude (float64): NaN-freq [0.0%], Samples [150.0, 150.0, 180.0, 160.0, 150.0, 180.0, 180.0, 150.0, 220.0, 150.0]
+Rainfall (float64): NaN-freq [0.0%], Samples [900.0, 900.0, 1080.0, 1000.0, 1300.0, 1080.0, 1080.0, 1300.0, 1050.0, 1250.0]
+Frosts (float64): NaN-freq [0.0%], Samples [-2.0, -2.0, -3.0, -3.0, -2.0, -3.0, -3.0, -2.0, -2.0, -3.0]
+Year (float64): NaN-freq [0.0%], Samples [1986.0, 1986.0, 1981.0, 1981.0, 1983.0, 1982.0, 1981.0, 1983.0, 1983.0, 1983.0]
+Sp (int32): NaN-freq [0.0%], Samples [22, 0, 15, 7, 23, 15, 15, 3, 15, 8]
+PMCno (float64): NaN-freq [1.3%], Samples [3269.0, 2562.0, 2426.0, 1598.0, 1252.0, 2548.0, 2426.0, 1596.0, 2548.0, 2575.0]
+DBH (float64): NaN-freq [0.18%], Samples [24.72, 33.6, 8.3, 15.3, 26.05, 5.5, 17.42, 33.81, 15.98, 3.62]
+Ht (float64): NaN-freq [0.18%], Samples [11.29, 14.17, 5.93, 12.7, 12.15, 4.89, 9.01, 10.93, 6.24, 6.03]
+Surv (float64): NaN-freq [13.0%], Samples [nan, nan, 4.0, 3.0, 10.0, 25.0, 45.0, 10.0, 63.0, 25.0]
+Vig (float64): NaN-freq [9.8%], Samples [nan, nan, 2.0, 4.0, 3.0, 1.5, 4.5, 3.3, 3.5, 1.0]
+Ins_res (float64): NaN-freq [9.8%], Samples [nan, nan, 3.5, 2.5, 3.0, 3.0, 4.5, 4.0, 4.0, 3.0]
+Stem_Fm (float64): NaN-freq [9.8%], Samples [nan, nan, 3.0, 3.0, 2.5, 3.0, 3.0, 3.3, 2.8, 2.5]
+Crown_Fm (float64): NaN-freq [9.8%], Samples [nan, nan, 3.0, 2.0, 3.3, 3.0, 2.0, 4.0, 2.8, 2.5]
+Brnch_Fm (float64): NaN-freq [9.8%], Samples [nan, nan, 3.0, 3.0, 3.0, 3.0, 1.5, 2.7, 2.5, 3.0]
+Utility (category): NaN-freq [0.0%], Samples [0.0, 0.0, 0.0, 0.0, 2.0, 1.0, 4.0, 3.0, 2.0, 0.0]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 552
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "Utility".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "Utility" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'Abbrev': [13, 13, 12], 'Rep': [1.0, 2.0, 1.0], ...)
+(Some pandas code using Abbrev', 'Rep', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

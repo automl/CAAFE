@@ -1,0 +1,18 @@
+
+# (Calc_to_ph_diff)
+# Usefulness: The difference between the pH and calcium concentration can give insight into the formation of calcium oxalate crystals. 
+# Input samples: 'ph': [5.24, 5.41, 6.79], 'calc': [4.49, 0.83, 0.58]
+df['Calc_to_ph_diff'] = df['calc'] - df['ph']
+# Explanation: The column 'id' is dropped as it is not informative for the classification task.
+df.drop(columns=['id'], inplace=True)# (Calc_to_gravity_diff)
+# Usefulness: The difference between the specific gravity and calcium concentration can give insight into the formation of calcium oxalate crystals.
+# Input samples: 'gravity': [1.03, 1.01, 1.02], 'calc': [4.49, 0.83, 0.58]
+df['Calc_to_gravity_diff'] = df['calc'] - df['gravity']# Explanation: The column 'cond' is dropped as it is highly correlated with 'osmo' which is kept.
+df.drop(columns=['cond'], inplace=True)# (Urea_to_gravity_ratio)
+# Usefulness: The ratio between urea concentration and specific gravity can give insight into the concentration of molecules in the urine which may be related to the formation of calcium oxalate crystals.
+# Input samples: 'urea': [550.0, 159.0, 199.0], 'gravity': [1.03, 1.01, 1.02]
+df['Urea_to_gravity_ratio'] = df['urea'] / df['gravity']# Explanation: The column 'osmo' is dropped as it is highly correlated with 'Osmo_to_ph_ratio' and 'Osmo_to_calc_ratio' which are kept.
+df.drop(columns=['osmo'], inplace=True)# (Urea_to_calc_ratio)
+# Usefulness: The ratio between urea concentration and calcium concentration can give insight into the concentration of molecules in the urine which may be related to the formation of calcium oxalate crystals.
+# Input samples: 'urea': [550.0, 159.0, 199.0], 'calc': [4.49, 0.83, 0.58]
+df['Urea_to_calc_ratio'] = df['urea'] / df['calc']

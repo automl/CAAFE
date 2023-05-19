@@ -1,0 +1,8 @@
+# ('Halstead's Program Level')
+# Usefulness: Halstead's Program Level is a measure of the program's complexity. It is calculated based on the program's volume and the number of unique operators and operands.
+# Input samples: 'V': [305.03, 404.17, 280.0], 'uniq_Op': [18.0, 14.0, 14.0], 'uniq_Opnd': [18.0, 13.0, 18.0]
+df['program_level'] = df['V'] / (df['uniq_Op'] * df['uniq_Opnd'])
+# ('Halstead's Program Length per LOC')
+# Usefulness: Halstead's Program Length is a measure of the length of the program. Dividing it by the line count gives an idea of how long the program is per line.
+# Input samples: 'loc': [15.0, 13.0, 14.0], 'L': [0.09, 0.05, 0.1], ...
+df['program_length_per_loc'] = df['L'] / df['loc']

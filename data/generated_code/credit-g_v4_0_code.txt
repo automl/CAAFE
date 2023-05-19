@@ -1,0 +1,10 @@
+
+# Feature name: credit_amount_per_duration
+# Usefulness: This feature calculates the credit amount per month, which can provide insight into the monthly payment burden on the customer.
+# Input samples: 'credit_amount': [1224.0, 8588.0, 6615.0], 'duration': [9.0, 39.0, 24.0]
+df['credit_amount_per_duration'] = df['credit_amount'] / df['duration']
+
+# Feature name: installment_commitment_ratio
+# Usefulness: This feature calculates the ratio of the installment rate to the credit amount. It can provide insight into the customer's ability to pay off their credit.
+# Input samples: 'installment_commitment': [3.0, 4.0, 2.0], 'credit_amount': [1224.0, 8588.0, 6615.0]
+df['installment_commitment_ratio'] = df['installment_commitment'] / df['credit_amount']

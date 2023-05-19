@@ -1,0 +1,5 @@
+
+# Right moment
+# Usefulness: This feature represents the product of right-weight and right-distance, which helps in determining the balance scale tip according to the problem description.
+# Input samples: 'right-weight': [5.0, 1.0, 5.0], 'right-distance': [3.0, 1.0, 5.0]
+df['right_moment'] = df['right-weight'] * df['right-distance']

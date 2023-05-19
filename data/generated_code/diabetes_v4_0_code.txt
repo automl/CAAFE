@@ -1,0 +1,10 @@
+
+# Insulin and Glucose Interaction
+# Usefulness: Combining insulin and glucose levels may provide better insight into diabetes risk, as both are related to the body's ability to process glucose.
+# Input samples: 'insu': [220.0, 0.0, 96.0], 'plas': [119.0, 107.0, 115.0]
+df['insulin_glucose'] = df['insu'] * df['plas']
+
+# Pregnancies and Age Interaction
+# Usefulness: Combining the number of times pregnant and age may help the classifier identify patterns related to diabetes risk, as older women with more pregnancies could be at higher risk.
+# Input samples: 'preg': [1.0, 0.0, 1.0], 'age': [29.0, 23.0, 32.0]
+df['pregnancies_age'] = df['preg'] * df['age']

@@ -1,0 +1,8 @@
+Group A streptococcus (GAS) infection is a major cause of pediatric pharyngitis, and infection with this organism requires appropriate antimicrobial therapy.
+
+There is controversy as to whether physicians can rely on signs and symptoms to select pediatric patients with pharyngitis who should undergo rapid antigen detection testing (RADT) for GAS .
+
+Our objective was to evaluate the validity of signs and symptoms in the selective testing of children with pharyngitis.
+
+Now, let's use machine learning to analyze whether a diagnosis can be made from the child's symptoms and signs.
+Can we predict RADT positive?

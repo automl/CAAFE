@@ -1,0 +1,14 @@
+
+# (Number of pieces with strength 0 on the board)
+# Usefulness: This feature adds information on the number of pieces that are not contributing to the game. This may be useful in determining a player's strategy.
+# Input samples: 'white_piece0_strength': [0.0, 4.0, 4.0], 'black_piece0_strength': [7.0, 0.0, 0.0], ...
+df['num_zero_strength'] = (df['white_piece0_strength'] == 0).astype(int) + (df['black_piece0_strength'] == 0).astype(int)
+# (Difference in number of pieces with strength 7 between white and black)
+# Usefulness: This feature adds information on the relative strength of the pieces on the board. This may be useful in determining a player's strategy.
+# Input samples: 'white_piece0_strength': [0.0, 4.0, 4.0], 'black_piece0_strength': [7.0, 0.0, 0.0], ...
+df['strength_7_diff'] = (df['white_piece0_strength'] == 7).astype(int) - (df['black_piece0_strength'] == 7).astype(int)# (Difference in number of pieces with strength 6 or 7 between white and black)
+# Usefulness: This feature adds information on the relative strength of the pieces on the board. This may be useful in determining a player's strategy.
+# Input samples: 'white_piece0_strength': [0.0, 4.0, 4.0], 'black_piece0_strength': [7.0, 0.0, 0.0], ...
+if 'RAW Complete' in df.columns.tolist():
+    df.drop(columns=['RAW Complete'], inplace=True)
+df['strength_6_7_diff'] = ((df['white_piece0_strength'] == 6) | (df['white_piece0_strength'] == 7)).astype(int) - ((df['black_piece0_strength'] == 6) | (df['black_piece0_strength'] == 7)).astype(int)

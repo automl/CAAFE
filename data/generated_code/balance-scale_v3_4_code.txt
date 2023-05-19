@@ -1,0 +1,10 @@
+# ('right-weight' * 'right-distance')
+# Usefulness: This feature represents the right side's torque, which is a crucial factor in determining the balance of the scale. 
+# Input samples: 'right-weight': [1.0, 3.0, 5.0], 'right-distance': [5.0, 2.0, 4.0]
+df['right-torque'] = df['right-weight'] * df['right-distance']# ('left-weight' + 'right-weight') / ('left-distance' + 'right-distance')
+# Usefulness: This feature represents the weight-to-distance ratio for both sides of the scale, which can help determine the balance of the scale. 
+# Input samples: 'left-weight': [1.0, 4.0, 2.0], 'left-distance': [2.0, 2.0, 3.0], 'right-weight': [1.0, 3.0, 5.0], 'right-distance': [5.0, 2.0, 4.0]
+df['weight-distance-ratio'] = (df['left-weight'] + df['right-weight']) / (df['left-distance'] + df['right-distance'])# ('left-weight' - 'right-weight') / ('left-distance' - 'right-distance')
+# Usefulness: This feature represents the difference in weight-to-distance ratio between the left and right sides of the scale, which can help determine the direction of the tipping. 
+# Input samples: 'left-weight': [1.0, 4.0, 2.0], 'left-distance': [2.0, 2.0, 3.0], 'right-weight': [1.0, 3.0, 5.0], 'right-distance': [5.0, 2.0, 4.0]
+df['weight-distance-ratio-diff'] = (df['left-weight'] - df['right-weight']) / (df['left-distance'] - df['right-distance'])

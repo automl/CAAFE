@@ -1,0 +1,21 @@
+
+# Feature name: Education_gap
+# Usefulness: This feature captures the difference in education levels between the wife and husband. This might be relevant as couples with similar education levels may have similar preferences for contraceptive methods.
+# Input samples: 'Wifes_education': [3, 1, 3], 'Husbands_education': [3, 1, 3]
+df['Education_gap'] = df['Wifes_education'] - df['Husbands_education']
+
+# Feature name: Age_per_child
+# Usefulness: This feature represents the average age of the wife per child born. It may be useful to understand the relationship between the wife's age and the number of children, which could influence contraceptive method choice.
+# Input samples: 'Wifes_age': [45.0, 47.0, 33.0], 'Number_of_children_ever_born': [1.0, 7.0, 5.0]
+df['Age_per_child'] = df['Wifes_age'] / df['Number_of_children_ever_born']
+df['Age_per_child'].fillna(0, inplace=True)  # Fill NaN values with 0 (for cases where Number_of_children_ever_born is 0)
+
+# Feature name: Working_and_religion_interaction
+# Usefulness: This feature captures the interaction between the wife's working status and religion. This might be relevant as the combination of these factors could influence contraceptive method choice.
+# Input samples: 'Wifes_now_working%3F': [1, 1, 1], 'Wifes_religion': [1, 1, 1]
+df['Working_and_religion_interaction'] = df['Wifes_now_working%3F'] * df['Wifes_religion']
+
+# Feature name: Education_and_media_interaction
+# Usefulness: This feature captures the interaction between wife's education and media exposure. This might be relevant as the combination of these factors could influence contraceptive method choice.
+# Input samples: 'Wifes_education': [3, 1, 3], 'Media_exposure': [0, 0, 0]
+df['Education_and_media_interaction'] = df['Wifes_education'] * df['Media_exposure']

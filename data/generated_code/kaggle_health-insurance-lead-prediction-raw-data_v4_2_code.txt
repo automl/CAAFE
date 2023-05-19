@@ -1,0 +1,26 @@
+
+# Reco_Policy_Premium and Age Interaction
+# Usefulness: This feature captures the interaction between the recommended policy premium and the average age of the person, which might help in understanding how different age groups prefer different policy premiums.
+# Input samples: 'Reco_Policy_Premium': [10544.0, 11484.0, 19240.0], 'Upper_Age': [28, 52, 52], 'Lower_Age': [28, 52, 52]
+df['Average_Age'] = (df['Upper_Age'] + df['Lower_Age']) / 2
+df['Premium_Age_Interaction'] = df['Reco_Policy_Premium'] / df['Average_Age']
+
+# Holding_Policy_Type and Reco_Policy_Cat Interaction
+# Usefulness: This feature captures the interaction between the holding policy type and the recommended policy category, which might help in understanding how different policy categories are preferred based on the holding policy type.
+# Input samples: 'Holding_Policy_Type': [3.0, 2.0, 3.0], 'Reco_Policy_Cat': [16, 17, 21]
+df['Policy_Type_Cat_Interaction'] = df['Holding_Policy_Type'].astype(str) + "_" + df['Reco_Policy_Cat'].astype(str)
+df['Policy_Type_Cat_Interaction'] = df['Policy_Type_Cat_Interaction'].astype('category')
+
+# Drop Holding_Policy_Type as it is now captured in the interaction feature
+df.drop(columns=['Holding_Policy_Type'], inplace=True)
+
+# Holding_Policy_Duration and Reco_Policy_Premium Interaction
+# Usefulness: This feature captures the interaction between the holding policy duration and the recommended policy premium, which might help in understanding how different policy premiums are preferred based on the holding policy duration.
+# Input samples: 'Holding_Policy_Duration': ['3.0', '4.0', '2.0'], 'Reco_Policy_Premium': [10544.0, 11484.0, 19240.0]
+df['Duration_Premium_Interaction'] = df['Holding_Policy_Duration'].replace('14+', '15').astype(float) * df['Reco_Policy_Premium']
+
+# City_Code and Accomodation_Type Interaction
+# Usefulness: This feature captures the interaction between the city code and the accommodation type, which might help in understanding how different accommodation types are preferred in different cities.
+# Input samples: 'City_Code': ['C1', 'C5', 'C1'], 'Accomodation_Type': ['Rented', 'Owned', 'Owned']
+df['City_Accomodation_Interaction'] = df['City_Code'].astype(str) + "_" + df['Accomodation_Type'].astype(str)
+df['City_Accomodation_Interaction'] = df['City_Accomodation_Interaction'].astype('category')

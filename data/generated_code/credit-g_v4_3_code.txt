@@ -1,0 +1,39 @@
+
+# Feature name: Credit per month
+# Usefulness: This feature calculates the credit amount per month, which can help identify if the customer can afford the credit based on their monthly income.
+# Input samples: 'credit_amount': [2473.0, 522.0, 719.0], 'duration': [18.0, 12.0, 12.0]
+df['credit_per_month'] = df['credit_amount'] / df['duration']
+# Feature name: Age group
+# Usefulness: This feature categorizes customers into age groups, which can help identify patterns in credit risk based on age.
+# Input samples: 'age': [25.0, 42.0, 41.0]
+bins = [0, 25, 35, 50, 100]
+labels = [0, 1, 2, 3]
+df['age_group'] = pd.cut(df['age'], bins=bins, labels=labels).astype(int)
+
+# Explanation why the column 'age' is dropped
+# The age column is dropped because the age_group column captures the relevant information about age for credit risk prediction.
+df.drop(columns=['age'], inplace=True)
+# Feature name: Employment stability
+# Usefulness: This feature checks if the customer has a stable employment history, which can be an indicator of their ability to repay the credit.
+# Input samples: 'employment': [0, 4, 4]
+df['employment_stability'] = df['employment'].apply(lambda x: 1 if x >= 3 else 0)
+
+# Explanation why the column 'employment' is dropped
+# The employment column is dropped because the employment_stability column captures the relevant information about employment stability for credit risk prediction.
+df.drop(columns=['employment'], inplace=True)
+# Feature name: Installment to credit ratio
+# Usefulness: This feature calculates the ratio between the installment commitment and the credit amount, which can help identify if the customer can afford the monthly payments.
+# Input samples: 'installment_commitment': [4.0, 4.0, 4.0], 'credit_amount': [2473.0, 522.0, 719.0]
+df['installment_to_credit_ratio'] = df['installment_commitment'] / df['credit_amount']
+
+# Explanation why the column 'installment_commitment' is dropped
+# The installment_commitment column is dropped because the installment_to_credit_ratio column captures the relevant information about the relationship between installment commitment and credit amount for credit risk prediction.
+df.drop(columns=['installment_commitment'], inplace=True)
+# Feature name: Credit history risk
+# Usefulness: This feature checks if the customer has a risky credit history, which can be an indicator of their creditworthiness.
+# Input samples: 'credit_history': [2, 4, 2]
+df['credit_history_risk'] = df['credit_history'].apply(lambda x: 1 if x in [0, 1, 3] else 0)
+
+# Explanation why the column 'credit_history' is dropped
+# The credit_history column is dropped because the credit_history_risk column captures the relevant information about credit history risk for credit risk prediction.
+df.drop(columns=['credit_history'], inplace=True)

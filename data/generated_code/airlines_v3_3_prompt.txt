@@ -1,0 +1,44 @@
+
+The dataframe `df` is loaded and in memory. Columns are also named attributes.
+Description of the dataset in `df` (column dtypes might be inaccurate):
+"
+Airlines Dataset Inspired in the regression dataset from Elena Ikonomovska. The task is to predict whether a given flight will be delayed, given the information of the scheduled departure."
+
+Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
+Airline (int32): NaN-freq [0.0%], Samples [3, 13, 7, 11, 12, 17, 12, 11, 0, 3]
+Flight (float64): NaN-freq [0.0%], Samples [1589.0, 356.0, 6512.0, 2459.0, 7287.0, 2826.0, 7292.0, 2995.0, 797.0, 463.0]
+AirportFrom (float64): NaN-freq [0.0%], Samples [102.0, 21.0, 1.0, 108.0, 34.0, 162.0, 53.0, 129.0, 53.0, 65.0]
+AirportTo (float64): NaN-freq [0.0%], Samples [45.0, 24.0, 120.0, 3.0, 6.0, 86.0, 6.0, 3.0, 15.0, 3.0]
+DayOfWeek (int32): NaN-freq [0.0%], Samples [1, 6, 6, 4, 6, 4, 0, 3, 2, 3]
+Time (float64): NaN-freq [0.0%], Samples [865.0, 866.0, 461.0, 755.0, 724.0, 615.0, 745.0, 360.0, 455.0, 335.0]
+Length (float64): NaN-freq [0.0%], Samples [210.0, 157.0, 134.0, 170.0, 146.0, 60.0, 140.0, 215.0, 365.0, 164.0]
+Delay (category): NaN-freq [0.0%], Samples [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+    
+This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+Number of samples (rows) in training dataset: 1500
+    
+This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting "Delay".
+Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
+The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
+This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
+Added columns can be used in other codeblocks, dropped columns are not available anymore.
+
+Code formatting for each added column:
+```python
+# (Feature name and description)
+# Usefulness: (Description why this adds useful real world knowledge to classify "Delay" according to dataset description and attributes.)
+# Input samples: (Three samples of the columns used in the following code, e.g. 'Airline': [3, 13, 7], 'Flight': [1589.0, 356.0, 6512.0], ...)
+(Some pandas code using Airline', 'Flight', ... to add a new column for each row in df)
+```end
+
+Code formatting for dropping columns:
+```python
+# Explanation why the column XX is dropped
+df.drop(columns=['XX'], inplace=True)
+```end
+
+Each codeblock generates exactly one useful column and can drop unused columns (Feature selection).
+Each codeblock ends with ```end and starts with "```python"
+Codeblock:

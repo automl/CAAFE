@@ -1,0 +1,36 @@
+
+# Health_Indicator_Encoded
+# Usefulness: This new feature encodes the Health Indicator categorical variable into numerical values. It can help to identify the health status of the policy holder, which might affect their likelihood of being classified as a lead.
+# Input samples: 'Health Indicator': ['X5', 'X4', 'X2']
+df['Health_Indicator_Encoded'] = df['Health Indicator'].apply(lambda x: int(x[1:]))
+
+# Holding_Policy_Duration_Encoded
+# Usefulness: This new feature encodes the Holding Policy Duration categorical variable into numerical values. It can help to identify the duration of the holding policy, which might affect their likelihood of being classified as a lead.
+# Input samples: 'Holding_Policy_Duration': ['2.0', '14+', '12.0']
+df['Holding_Policy_Duration_Encoded'] = df['Holding_Policy_Duration'].replace('14+', '15').astype(float)
+
+# Dropping original categorical columns, as we have encoded them into numerical features
+df.drop(columns=['Health Indicator', 'Holding_Policy_Duration'], inplace=True)
+
+# City_Code_Encoded
+# Usefulness: This new feature encodes the City_Code categorical variable into numerical values. It can help to identify the city where the policy holder lives, which might affect their likelihood of being classified as a lead.
+# Input samples: 'City_Code': ['C4', 'C20', 'C17']
+df['City_Code_Encoded'] = df['City_Code'].apply(lambda x: int(x[1:]))
+
+# Dropping original categorical column, as we have encoded it into a numerical feature
+df.drop(columns=['City_Code'], inplace=True)
+
+# Reco_Policy_Premium_Ratio
+# Usefulness: This new feature represents the ratio of the Reco_Policy_Premium to the average premium in the dataset. It can help to identify if the policy holder is applying for a policy with a premium that is higher or lower than the average, which might affect their likelihood of being classified as a lead.
+# Input samples: 'Reco_Policy_Premium': [16172.0, 19272.0, 13661.2]
+df['Reco_Policy_Premium_Ratio'] = df['Reco_Policy_Premium'] / df['Reco_Policy_Premium'].mean()
+
+# Holding_Policy_Type_Ratio
+# Usefulness: This new feature represents the ratio of the Holding_Policy_Type to the average Holding_Policy_Type in the dataset. It can help to identify if the policy holder is applying for a policy with a holding policy type that is more or less common, which might affect their likelihood of being classified as a lead.
+# Input samples: 'Holding_Policy_Type': [4.0, 3.0, 2.0]
+df['Holding_Policy_Type_Ratio'] = df['Holding_Policy_Type'] / df['Holding_Policy_Type'].mean()
+
+# Reco_Policy_Cat_Ratio
+# Usefulness: This new feature represents the ratio of the Reco_Policy_Cat to the average Reco_Policy_Cat in the dataset. It can help to identify if the policy holder is applying for a policy with a recommended policy category that is more or less common, which might affect their likelihood of being classified as a lead.
+# Input samples: 'Reco_Policy_Cat': [5, 18, 22]
+df['Reco_Policy_Cat_Ratio'] = df['Reco_Policy_Cat'] / df['Reco_Policy_Cat'].mean()

@@ -1,0 +1,9 @@
+
+# ('total_Op'/'total_Opnd' ratio)
+# Usefulness: This ratio gives an idea about the proportion of operators to operands in the code.
+# Input samples: 'total_Op': [62.0, 20.0, 160.0], 'total_Opnd': [61.0, 17.0, 145.0]
+df['Op_Opnd_Ratio'] = df['total_Op'] / df['total_Opnd']
+# ('lOComment' / 'lOCode')
+# Usefulness: This feature captures the proportion of lines of code that are comments.
+# Input samples: 'lOComment': [5.0, 1.0, 7.0], 'lOCode': [18.0, 9.0, 35.0]
+df['lOComment_ratio'] = df['lOComment'] / df['lOCode']

@@ -1,0 +1,10 @@
+# (Feature name and description)
+# Usefulness: This feature captures the ratio of credit amount to installment commitment.
+# Input samples: 'credit_amount': [1082.0, 5293.0, 2080.0], 'installment_commitment': [4.0, 2.0, 1.0]
+df['credit_installment_ratio'] = df['credit_amount'] / (df['installment_commitment'] * df['duration'])# (Feature name and description)
+# Usefulness: This feature captures the number of credits per person responsible for maintenance
+# Input samples: 'existing_credits': [2.0, 2.0, 1.0], 'num_dependents': [1.0, 1.0, 1.0]
+df['credits_per_person'] = df['existing_credits'] / df['num_dependents']# (Feature name and description)
+# Usefulness: This feature captures the ratio of credit amount to present employment.
+# Input samples: 'credit_amount': [1082.0, 5293.0, 2080.0], 'employment': [4, 0, 2]
+df['credit_employment_ratio'] = df['credit_amount'] / df['employment']

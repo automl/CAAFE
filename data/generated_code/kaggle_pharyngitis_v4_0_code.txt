@@ -1,0 +1,40 @@
+
+# Feature: age_temperature_interaction
+# Usefulness: This feature captures the interaction between age and temperature, which may help to identify patterns related to the likelihood of a positive RADT result.
+# Input samples: 'age_y': [8.2, 5.5, 6.5], 'temperature': [39.7, 38.7, 38.0]
+df['age_temperature_interaction'] = df['age_y'] * df['temperature']
+
+# Feature: pain_swollenadp_tender_interaction
+# Usefulness: This feature captures the interaction between pain, swollenadp, and tender, which may help to identify patterns related to the likelihood of a positive RADT result.
+# Input samples: 'pain': [0.0, 1.0, 1.0], 'swollenadp': [1.0, 0.0, 1.0], 'tender': [1.0, 0.0, 1.0]
+df['pain_swollenadp_tender_interaction'] = df['pain'] * df['swollenadp'] * df['tender']
+
+# Dropping columns that may be redundant and hurt the predictive performance
+# Explanation: Since we have created an interaction feature with pain, swollenadp, and tender, we can drop the individual columns to reduce the chance of overfitting.
+df.drop(columns=['pain', 'swollenadp', 'tender'], inplace=True)
+
+# Feature: respiratory_symptoms
+# Usefulness: This feature captures the presence of respiratory symptoms (cough, rhinorrhea) which may help to identify patterns related to the likelihood of a positive RADT result.
+# Input samples: 'cough': [1.0, 0.0, 0.0], 'rhinorrhea': [0.0, 1.0, 0.0]
+df['respiratory_symptoms'] = df['cough'] + df['rhinorrhea']
+
+# Dropping columns that may be redundant and hurt the predictive performance
+# Explanation: Since we have created a new feature combining cough and rhinorrhea, we can drop the individual columns to reduce the chance of overfitting.
+df.drop(columns=['cough', 'rhinorrhea'], inplace=True)
+
+# Feature: sudden_headache_interaction
+# Usefulness: This feature captures the interaction between sudden onset and headache, which may help to identify patterns related to the likelihood of a positive RADT result.
+# Input samples: 'sudden': [0.0, 1.0, 0.0], 'headache': [0.0, 0.0, 0.0]
+df['sudden_headache_interaction'] = df['sudden'] * df['headache']
+
+# Dropping columns that may be redundant and hurt the predictive performance
+# Explanation: Since we have created an interaction feature with sudden and headache, we can drop the individual columns to reduce the chance of overfitting.
+df.drop(columns=['sudden', 'headache'], inplace=True)
+# Feature: age_conjunctivitis_interaction
+# Usefulness: This feature captures the interaction between age and conjunctivitis, which may help to identify patterns related to the likelihood of a positive RADT result.
+# Input samples: 'age_y': [8.2, 5.5, 6.5], 'conjunctivitis': [0.0, 0.0, 0.0]
+df['age_conjunctivitis_interaction'] = df['age_y'] * df['conjunctivitis']
+
+# Dropping columns that may be redundant and hurt the predictive performance
+# Explanation: Since we have created an interaction feature with age and conjunctivitis, we can drop the individual columns to reduce the chance of overfitting.
+df.drop(columns=['conjunctivitis'], inplace=True)

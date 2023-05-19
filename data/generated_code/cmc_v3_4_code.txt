@@ -1,0 +1,20 @@
+# (Age_above_mean)
+# Usefulness: This column will indicate whether the wife's age is above the mean age of all the wives in the dataset. This can be an important factor in deciding the contraceptive method used.
+# Input samples: 'Wifes_age': [45.0, 47.0, 33.0], (mean age = 32.98)
+mean_age = df['Wifes_age'].mean()
+df['Age_above_mean'] = (df['Wifes_age'] > mean_age).astype(int)# (Children_per_year)
+# Usefulness: This column will indicate the average number of children born per year for each wife. This can be an important factor in deciding the contraceptive method used.
+# Input samples: 'Number_of_children_ever_born': [1.0, 7.0, 5.0], 'Wifes_age': [45.0, 47.0, 33.0]
+df['Children_per_year'] = df['Number_of_children_ever_born'] / (df['Wifes_age'] - 18) # Assuming women get married at 18 years old.# (Number_of_children_ever_born_squared)
+# Usefulness: This column will capture the non-linear relationship between the number of children ever born and the contraceptive method used.
+# Input samples: 'Number_of_children_ever_born': [1.0, 7.0, 5.0]
+df['Number_of_children_ever_born_squared'] = df['Number_of_children_ever_born']**2# (Total_children)
+# Usefulness: This column will indicate the total number of children (including current pregnancy) for each wife. This can be an important factor in deciding the contraceptive method used.
+# Input samples: 'Number_of_children_ever_born': [1.0, 7.0, 5.0], 'Wifes_now_working%3F': [1, 1, 1], 'Wifes_age': [45.0, 47.0, 33.0]
+df['Total_children'] = df['Number_of_children_ever_born'] + ((df['Wifes_now_working%3F'] == 1) & (df['Wifes_age'] >= 20) & (df['Wifes_age'] <= 49)).astype(int)# (Husband_education_difference)
+# Usefulness: This column will indicate the difference in education level between the wife and husband. This can be an important factor in deciding the contraceptive method used.
+# Input samples: 'Wifes_education': [3, 1, 3], 'Husbands_education': [3, 1, 3]
+df['Husband_education_difference'] = abs(df['Wifes_education'] - df['Husbands_education'])# (Total_children_squared)
+# Usefulness: This column will capture the non-linear relationship between the total number of children and the contraceptive method used.
+# Input samples: 'Total_children': [2.0, 8.0, 6.0]
+df['Total_children_squared'] = df['Total_children']**2
