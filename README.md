@@ -1,4 +1,6 @@
 ### Usage
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6zCD48d3kNU/hqdefault.jpg)](https://www.youtube.com/watch?v=6zCD48d3kNU)
+
 ```
 caafe_clf = CAAFEClassifier(base_classifier=clf_no_feat_eng,
                       llm_model="gpt-4",
