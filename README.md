@@ -15,7 +15,7 @@ Then, fit the classifier to your training data:
 caafe_clf.fit_pandas(df_train,
                target_column_name=target_column_name,
                dataset_description=dataset_description,
-              disable_caafe=False 
+              disable_caafe=False
               )
 ```
 Finally, use the classifier to make predictions on your test data:
