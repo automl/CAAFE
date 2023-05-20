@@ -183,7 +183,7 @@ def refactor_openml_description(description):
 
 
 def get_X_y(df_train, target_name):
-    y = torch.tensor(df_train[target_name].astype(bool).to_numpy())
+    y = torch.tensor(df_train[target_name].astype(int).to_numpy())
     x = torch.tensor(df_train.drop(target_name, axis=1).to_numpy())
 
     return x, y

@@ -2,7 +2,12 @@ from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
 from sklearn.utils.multiclass import unique_labels
 from .run_llm_code import run_llm_code
-from .preprocessing import make_datasets_numeric, split_target_column
+from .preprocessing import (
+    make_datasets_numeric,
+    split_target_column,
+    make_dataset_numeric,
+)
+from .data import get_X_y
 from .caafe import generate_features
 from .metrics import auc_metric, accuracy_metric
 import pandas as pd
@@ -10,6 +15,17 @@ import numpy as np
 
 
 class CAAFEClassifier(BaseEstimator, ClassifierMixin):
+    """
+    A classifier that uses the CAAFE algorithm to generate features and a base classifier to make predictions.
+
+    Parameters:
+    base_classifier (object, optional): The base classifier to use. If None, a default TabPFNClassifier will be used. Defaults to None.
+    optimization_metric (str, optional): The metric to optimize during feature generation. Can be 'accuracy' or 'auc'. Defaults to 'accuracy'.
+    iterations (int, optional): The number of iterations to run the CAAFE algorithm. Defaults to 10.
+    llm_model (str, optional): The LLM model to use for generating features. Defaults to 'gpt-3.5-turbo'.
+    n_splits (int, optional): The number of cross-validation splits to use during feature generation. Defaults to 10.
+    n_repeats (int, optional): The number of times to repeat the cross-validation during feature generation. Defaults to 2.
+    """
     def __init__(
         self,
         base_classifier=None,
@@ -39,24 +55,22 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         self.n_repeats = n_repeats
 
     def fit_pandas(self, df, dataset_description, target_column_name, **kwargs):
-        X, y = df.drop(columns=[target_column_name]), df[target_column_name]
+        feature_columns = df.drop(columns=[target_column_name]).columns
+
+        X, y = (
+            df.drop(columns=[target_column_name]).values,
+            df[target_column_name].values,
+        )
         return self.fit(
-            X, y, dataset_description, X.columns, target_column_name, **kwargs
+            X, y, dataset_description, feature_columns, target_column_name, **kwargs
         )
 
     def fit(
         self, X, y, dataset_description, feature_names, target_name, disable_caafe=False
     ):
-
-        # Check that X and y have correct shape
-        X, y = check_X_y(X, y)
-
         self.dataset_description = dataset_description
         self.feature_names = list(feature_names)
         self.target_name = target_name
-
-        # Store the classes seen during fit
-        self.classes_ = unique_labels(y)
 
         self.X_ = X
         self.y_ = y
@@ -72,9 +86,10 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         ]
         # Add X and y as one dataframe
         df_train = pd.DataFrame(
-            np.concatenate([X, y.reshape(-1, 1)], axis=1),
-            columns=self.feature_names + [target_name],
+            X,
+            columns=self.feature_names,
         )
+        df_train[target_name] = y
         if disable_caafe:
             self.code = ""
         else:
@@ -95,13 +110,20 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
             df_train,
         )
 
-        df_train, _ = make_datasets_numeric(
-            df_train, df_test=None, target_column=target_name
+        df_train, _, self.mappings = make_datasets_numeric(
+            df_train, df_test=None, target_column=target_name, return_mappings=True
         )
 
         df_train, y = split_target_column(df_train, target_name)
 
-        self.base_classifier.fit(df_train.values, y.values)
+        X, y = df_train.values, y.values.astype(int)
+        # Check that X and y have correct shape
+        X, y = check_X_y(X, y)
+
+        # Store the classes seen during fit
+        self.classes_ = unique_labels(y)
+
+        self.base_classifier.fit(X, y)
 
         # Return the classifier
         return self
@@ -113,13 +135,14 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
 
         if type(X) != pd.DataFrame:
             X = pd.DataFrame(X, columns=self.X_.columns)
-
-        X = X[self.feature_names]
+        X, _ = split_target_column(X, self.target_name)
 
         X = run_llm_code(
             self.code,
             X,
         )
+
+        X = make_dataset_numeric(X, mappings=self.mappings)
 
         X = X.values
 

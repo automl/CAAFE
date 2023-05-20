@@ -1,9 +1,21 @@
 import pandas as pd
 import os
 from .run_llm_code import run_llm_code
+from typing import Tuple
 
 
-def extend_using_dfs(df_train, df_test, target_train):
+def extend_using_dfs(df_train: pd.DataFrame, df_test: pd.DataFrame, target_train: pd.Series) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Extends the given training and test dataframes with additional features using deep feature synthesis.
+
+    Parameters:
+    df_train (pandas.DataFrame): The training dataframe.
+    df_test (pandas.DataFrame): The test dataframe.
+    target_train (pandas.Series): The target variable for the training dataframe.
+
+    Returns:
+    Tuple[pandas.DataFrame, pandas.DataFrame]: The new training dataframe with added features and the new test dataframe with added features.
+    """
     import featuretools as ft
 
     es = ft.EntitySet(id="Test")
@@ -29,6 +41,18 @@ def extend_using_dfs(df_train, df_test, target_train):
 
 
 def extend_using_autofeat(df_train, df_test, target_train):
+    """
+    Extends the given training and test dataframes with additional features using autofeat.
+
+    Parameters:
+    df_train (pandas.DataFrame): The training dataframe.
+    df_test (pandas.DataFrame): The test dataframe.
+    target_train (pandas.Series): The target variable for the training dataframe.
+
+    Returns:
+    pandas.DataFrame: The new training dataframe with added features.
+    pandas.DataFrame: The new test dataframe with added features.
+    """
     from autofeat import FeatureSelector, AutoFeatRegressor, AutoFeatClassifier
 
     # Use a label encoder for all string columns in df_train, then apply to df_test

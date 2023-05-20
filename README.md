@@ -1,15 +1,22 @@
 ### Usage
-Use this colab notebook for a quickstart.
+```
+caafe_clf = CAAFEClassifier(base_classifier=clf_no_feat_eng,
+                      llm_model="gpt-4",
+                      iterations=2)
+
+caafe_clf.fit_pandas(df_train,
+               target_column_name=target_column_name,
+               dataset_description=dataset_description,
+              disable_caafe=False 
+              )
+
+pred = caafe_clf.predict(df_test)
+```
+
+Try out our demo at: https://colab.research.google.com/drive/1mCA8xOAJZ4MaB_alZvyARTMjhl6RZf0a
 
 Use CAFE_minimal.ipynb for a minimal example of how to use CAAFE on your dataset.
-
 Use CAAFE.ipynb to reproduce the experiments from the paper.
-
-#### Choosing an Iterative Classifier
-The iterative classifier gets called in each 
-
-### Access Tokens
-#### OpenAI
 
 
 ### Paper

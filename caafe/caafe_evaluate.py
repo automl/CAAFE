@@ -3,7 +3,7 @@ import pandas as pd
 import tabpfn
 import numpy as np
 from .data import get_X_y
-from .preprocessing import make_datasets_numeric
+from .preprocessing import make_datasets_numeric, make_dataset_numeric
 from sklearn.base import BaseEstimator
 
 
@@ -18,7 +18,11 @@ def evaluate_dataset(
     max_time=300,
     seed=0,
 ):
-    df_train, df_test = make_datasets_numeric(df_train, df_test, target_name)
+    df_train, df_test = copy.deepcopy(df_train), copy.deepcopy(df_test)
+    df_train, _, mappings = make_datasets_numeric(
+        df_train, None, target_name, return_mappings=True
+    )
+    df_test = make_dataset_numeric(df_test, mappings=mappings)
 
     if df_test is not None:
         test_x, test_y = get_X_y(df_test, target_name=target_name)
