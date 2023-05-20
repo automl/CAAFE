@@ -1,22 +1,31 @@
 ### Usage
+[![DEMO VIDEO](https://i.makeagif.com/media/5-20-2023/E4RfRM.gif)](https://www.youtube.com/watch?v=6zCD48d3kNU)
+
+CAAFE lets you semi-automate your feature engineering process based on your explanations on the dataset and with the help of language models. It is based on the paper "LLMs for Semi-Automated Data Science: Introducing CAAFE for Context-Aware Automated Feature Engineering" by Hollmann, Müller, and Hutter (2023).
+CAAFE systematically verifies the generated features to ensure that only features that are actually useful are added to the dataset.
+
+To use CAAFE, first create a CAAFEClassifier object with the desired parameters:
 ```
 caafe_clf = CAAFEClassifier(base_classifier=clf_no_feat_eng,
                       llm_model="gpt-4",
                       iterations=2)
-
+```
+Then, fit the classifier to your training data:
+```
 caafe_clf.fit_pandas(df_train,
                target_column_name=target_column_name,
                dataset_description=dataset_description,
               disable_caafe=False 
               )
-
+```
+Finally, use the classifier to make predictions on your test data:
+```
 pred = caafe_clf.predict(df_test)
 ```
 
-Try out our demo at: https://colab.research.google.com/drive/1mCA8xOAJZ4MaB_alZvyARTMjhl6RZf0a
+You can also try out the demo at: https://colab.research.google.com/drive/1mCA8xOAJZ4MaB_alZvyARTMjhl6RZf0a
 
-Use CAFE_minimal.ipynb for a minimal example of how to use CAAFE on your dataset.
-Use CAAFE.ipynb to reproduce the experiments from the paper.
+For a minimal example of how to use CAAFE on your dataset, use CAFE_minimal.ipynb. To reproduce the experiments from the paper, use CAAFE.ipynb.
 
 
 ### Paper
