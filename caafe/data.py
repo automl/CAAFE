@@ -199,7 +199,7 @@ def get_data_split(ds, seed):
             if len(np.unique(df.iloc[:, c])) > 50:
                 cat_features.remove(c)
                 continue
-            df.iloc[:, c] = df.iloc[:, c].astype("int32")
+            df[df.columns[c]] = df[df.columns[c]].astype("int32")
         return df.infer_objects()
 
     ds = copy.deepcopy(ds)
