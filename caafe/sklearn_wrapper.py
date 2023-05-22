@@ -107,10 +107,10 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
 
         if X.shape[0] > 3000 and self.base_classifier.__class__.__name__ == "TabPFNClassifier":
             print(
-                "Warning: TabPFN may take a long time to run on large datasets. Consider using alternatives (e.g. RandomForestClassifier)"
+                "WARNING: TabPFN may take a long time to run on large datasets. Consider using alternatives (e.g. RandomForestClassifier)"
             )
         elif X.shape[0] > 10000 and self.base_classifier.__class__.__name__ == "TabPFNClassifier":
-            print("Warning: CAAFE may take a long time to run on large datasets.")
+            print("WARNING: CAAFE may take a long time to run on large datasets.")
 
         ds = [
             "dataset",
