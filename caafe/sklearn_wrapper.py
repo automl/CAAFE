@@ -12,6 +12,9 @@ from .caafe import generate_features
 from .metrics import auc_metric, accuracy_metric
 import pandas as pd
 import numpy as np
+from typing import Optional
+import pandas as pd
+
 
 
 class CAAFEClassifier(BaseEstimator, ClassifierMixin):
@@ -28,13 +31,13 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
     """
     def __init__(
         self,
-        base_classifier=None,
-        optimization_metric="accuracy",
-        iterations=10,
-        llm_model="gpt-3.5-turbo",
-        n_splits=10,
-        n_repeats=2,
-    ):
+        base_classifier: Optional[object] = None,
+        optimization_metric: str = "accuracy",
+        iterations: int = 10,
+        llm_model: str = "gpt-3.5-turbo",
+        n_splits: int = 10,
+        n_repeats: int = 2,
+    ) -> None:
         self.base_classifier = base_classifier
         if self.base_classifier is None:
             from tabpfn.scripts.transformer_prediction_interface import TabPFNClassifier
@@ -55,7 +58,16 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         self.n_repeats = n_repeats
 
     def fit_pandas(self, df, dataset_description, target_column_name, **kwargs):
-        feature_columns = df.drop(columns=[target_column_name]).columns
+        """
+        Fit the classifier to a pandas DataFrame.
+
+        Parameters:
+        df (pandas.DataFrame): The DataFrame to fit the classifier to.
+        dataset_description (str): A description of the dataset.
+        target_column_name (str): The name of the target column in the DataFrame.
+        **kwargs: Additional keyword arguments to pass to the base classifier's fit method.
+        """
+        feature_columns = list(df.drop(columns=[target_column_name]).columns)
 
         X, y = (
             df.drop(columns=[target_column_name]).values,
@@ -68,12 +80,37 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
     def fit(
         self, X, y, dataset_description, feature_names, target_name, disable_caafe=False
     ):
+        """
+        Fit the model to the training data.
+
+        Parameters:
+        -----------
+        X : np.ndarray
+            The training data features.
+        y : np.ndarray
+            The training data target values.
+        dataset_description : str
+            A description of the dataset.
+        feature_names : List[str]
+            The names of the features in the dataset.
+        target_name : str
+            The name of the target variable in the dataset.
+        disable_caafe : bool, optional
+            Whether to disable the CAAFE algorithm, by default False.
+        """
         self.dataset_description = dataset_description
         self.feature_names = list(feature_names)
         self.target_name = target_name
 
         self.X_ = X
         self.y_ = y
+
+        if X.shape[0] > 3000 and self.base_classifier.__class__.__name__ == "TabPFNClassifier":
+            print(
+                "Warning: TabPFN may take a long time to run on large datasets. Consider using alternatives (e.g. RandomForestClassifier)"
+            )
+        elif X.shape[0] > 10000 and self.base_classifier.__class__.__name__ == "TabPFNClassifier":
+            print("Warning: CAAFE may take a long time to run on large datasets.")
 
         ds = [
             "dataset",
@@ -129,8 +166,15 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         return self
 
     def predict_preprocess(self, X):
+        """
+        Helper functions for preprocessing the data before making predictions.
 
-        # Check if fit has been called
+        Parameters:
+        X (pandas.DataFrame): The DataFrame to make predictions on.
+
+        Returns:
+        numpy.ndarray: The preprocessed input data.
+        """
         check_is_fitted(self)
 
         if type(X) != pd.DataFrame:

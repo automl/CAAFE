@@ -4,18 +4,17 @@
 CAAFE lets you semi-automate your feature engineering process based on your explanations on the dataset and with the help of language models. It is based on the paper "LLMs for Semi-Automated Data Science: Introducing CAAFE for Context-Aware Automated Feature Engineering" by Hollmann, Müller, and Hutter (2023).
 CAAFE systematically verifies the generated features to ensure that only features that are actually useful are added to the dataset.
 
-To use CAAFE, first create a CAAFEClassifier object with the desired parameters:
+To use CAAFE, first create a CAAFEClassifier object specifying your sklearn base classifier (clf_no_feat_eng; e.g. a random forest or TabPFN) and the language model you want to use (e.g. gpt-4):
 ```
 caafe_clf = CAAFEClassifier(base_classifier=clf_no_feat_eng,
                       llm_model="gpt-4",
                       iterations=2)
 ```
-Then, fit the classifier to your training data:
+Then, fit the CAAFE-enhanced classifier to your training data:
 ```
 caafe_clf.fit_pandas(df_train,
                target_column_name=target_column_name,
-               dataset_description=dataset_description,
-              disable_caafe=False 
+               dataset_description=dataset_description
               )
 ```
 Finally, use the classifier to make predictions on your test data:
@@ -26,15 +25,28 @@ View generated features:
 ```
 print(caafe_clf.code)
 ```
+#### Why not let GPT generate your features directly (or use Code Interpreter)?
+GPT-4 is a powerful language model that can generate code. However, it is not designed to generate code that is useful for machine learning. CAAFE uses a systematic verification process to ensure that the generated features are actually useful for the machine learning task at hand by: iteratively creating new code, verifying their performance using cross validation and providing feedback to the language model. CAAFE makes sure that cross validation is correctly applied and formalizes the verification process. Also, CAAFE uses a whitelist of allowed operations to ensure that the generated code is safe(er) to execute. There inherent risks in generating AI generated code, however, please see "Important Usage Considerations".
 
-You can also try out the demo at: https://colab.research.google.com/drive/1mCA8xOAJZ4MaB_alZvyARTMjhl6RZf0a
+#### Downstream Classifiers
+Downstream classifiers should be fast and need no specific hyperparameter tuning since they are iteratively being called. By default we are using TabPFN as the base classifier, which is a fast automated machine learning method for small tabular datasets.
+```
+from tabpfn import TabPFNClassifier # Fast Automated Machine Learning method for small tabular datasets
+
+clf_no_feat_eng = TabPFNClassifier(device=('cuda' if torch.cuda.is_available() else 'cpu'), N_ensemble_configurations=4)
+clf_no_feat_eng.fit = partial(clf_no_feat_eng.fit, overwrite_warning=True)
+```
+
+However, TabPFN only works for small datasets. You can use any other sklearn classifier as the base classifier. For example, you can use a random forest classifier:
+```
+from sklearn.ensemble import RandomForestClassifier
+clf_no_feat_eng = RandomForestClassifier(n_estimators=100, max_depth=2, random_state=0)
+```
+
+#### Demo
+Try out the demo at: https://colab.research.google.com/drive/1mCA8xOAJZ4MaB_alZvyARTMjhl6RZf0a
 
 For a minimal example of how to use CAAFE on your dataset, use CAFE_minimal.ipynb. To reproduce the experiments from the paper, use CAAFE.ipynb.
-
-
-### Paper
-Hollmann, N., Müller, S., & Hutter, F. (2023). LLMs for Semi-Automated Data Science: Introducing CAAFE for Context-Aware Automated Feature Engineering
-https://arxiv.org/abs/2305.03403
 
 ### Important Usage Considerations
 
@@ -43,6 +55,10 @@ Executing AI-generated code automatically poses inherent risks. These include po
 
 #### Replication of Biases
 It's important to note that AI algorithms can often replicate and even perpetuate biases found in their training data. CAAFE, which is built on GPT-4, is not exempt from this issue. The model has been trained on a vast array of web crawled data, which inevitably contains biases inherent in society. This implies that the generated features may also reflect these biases. If the data contains demographic information or other sensitive variables that could potentially be used to discriminate against certain groups, we strongly advise against using CAAFE or urge users to proceed with great caution, ensuring rigorous examination of the generated features.
+
+### Paper
+Hollmann, N., Müller, S., & Hutter, F. (2023). LLMs for Semi-Automated Data Science: Introducing CAAFE for Context-Aware Automated Feature Engineering
+https://arxiv.org/abs/2305.03403
 
 ### License
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
