@@ -1,7 +1,7 @@
 ### Usage
 [![DEMO VIDEO](https://i.makeagif.com/media/5-20-2023/E4RfRM.gif)](https://www.youtube.com/watch?v=6zCD48d3kNU)
 
-CAAFE lets you semi-automate your feature engineering process based on your explanations on the dataset and with the help of language models. It is based on the paper "LLMs for Semi-Automated Data Science: Introducing CAAFE for Context-Aware Automated Feature Engineering" by Hollmann, Müller, and Hutter (2023).
+CAAFE lets you semi-automate your feature engineering process based on your explanations on the dataset and with the help of language models. It is based on the paper "LLMs for Semi-Automated Data Science: Introducing CAAFE for Context-Aware Automated Feature Engineering" by Hollmann, Müller, and Hutter (2023). CAAFE is developed as part of [Prior Labs](http://priorlabs.ai).
 CAAFE systematically verifies the generated features to ensure that only features that are actually useful are added to the dataset.
 
 To use CAAFE, first create a CAAFEClassifier object specifying your sklearn base classifier (clf_no_feat_eng; e.g. a random forest or TabPFN) and the language model you want to use (e.g. gpt-4):
@@ -55,6 +55,9 @@ Executing AI-generated code automatically poses inherent risks. These include po
 
 #### Replication of Biases
 It's important to note that AI algorithms can often replicate and even perpetuate biases found in their training data. CAAFE, which is built on GPT-4, is not exempt from this issue. The model has been trained on a vast array of web crawled data, which inevitably contains biases inherent in society. This implies that the generated features may also reflect these biases. If the data contains demographic information or other sensitive variables that could potentially be used to discriminate against certain groups, we strongly advise against using CAAFE or urge users to proceed with great caution, ensuring rigorous examination of the generated features.
+
+#### Cost of Running CAFE
+CAAFE uses OpenAIs GPT-4 or GPT-3.5 as an endpoint. OpenAI charges The cost of running CAAFE depends on the number of iterations, the number of features in the dataset, the length of the dataset description and of the generated code. For example, for a dataset with 1000 rows and 10 columns, 10 iterations cost about 0.50$ for GPT-4 and 0.05$ for GPT-3.5.
 
 ### Paper
 Hollmann, N., Müller, S., & Hutter, F. (2023). LLMs for Semi-Automated Data Science: Introducing CAAFE for Context-Aware Automated Feature Engineering
