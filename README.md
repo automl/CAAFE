@@ -64,6 +64,8 @@ Hollmann, N., Müller, S., & Hutter, F. (2023). LLMs for Semi-Automated Data Sci
 https://arxiv.org/abs/2305.03403
 
 ### License
+Copyright by [Prior Labs](http://priorlabs.ai).
+
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 This work is licensed under a
