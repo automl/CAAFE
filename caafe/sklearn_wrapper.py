@@ -155,7 +155,7 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
 
         X, y = df_train.values, y.values.astype(int)
         # Check that X and y have correct shape
-        X, y = check_X_y(X, y)
+        # X, y = check_X_y(X, y)
 
         # Store the classes seen during fit
         self.classes_ = unique_labels(y)
@@ -175,7 +175,7 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         Returns:
         numpy.ndarray: The preprocessed input data.
         """
-        check_is_fitted(self)
+        # check_is_fitted(self)
 
         if type(X) != pd.DataFrame:
             X = pd.DataFrame(X, columns=self.X_.columns)
@@ -191,7 +191,7 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         X = X.values
 
         # Input validation
-        X = check_array(X)
+        # X = check_array(X)
 
         return X
 
