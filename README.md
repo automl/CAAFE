@@ -60,9 +60,8 @@ It's important to note that AI algorithms can often replicate and even perpetuat
 CAAFE uses OpenAIs GPT-4 or GPT-3.5 as an endpoint. OpenAI charges The cost of running CAAFE depends on the number of iterations, the number of features in the dataset, the length of the dataset description and of the generated code. For example, for a dataset with 1000 rows and 10 columns, 10 iterations cost about 0.50$ for GPT-4 and 0.05$ for GPT-3.5.
 
 ### Paper
-Our Paper
-Read our paper for more information about the setup (or contact us ☺️). If you use our method, please cite us using
-
+Read our [paper](https://arxiv.org/abs/2305.03403) for more information about the setup (or contact us ☺️). If you use our method, please cite us using
+```
 @misc{tabpfn,
   doi = {10.48550/ARXIV.2207.01848},
   url = {https://arxiv.org/abs/2305.03403},
@@ -72,6 +71,7 @@ Read our paper for more information about the setup (or contact us ☺️). If y
   year = {2023},
   copyright = {arXiv.org perpetual, non-exclusive license}
 }
+```
 
 ### License
 Copyright by [Prior Labs](http://priorlabs.ai).
