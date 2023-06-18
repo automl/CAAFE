@@ -62,14 +62,13 @@ CAAFE uses OpenAIs GPT-4 or GPT-3.5 as an endpoint. OpenAI charges The cost of r
 ### Paper
 Read our [paper](https://arxiv.org/abs/2305.03403) for more information about the setup (or contact us ☺️). If you use our method, please cite us using
 ```
-@misc{tabpfn,
-  doi = {10.48550/ARXIV.2207.01848},
-  url = {https://arxiv.org/abs/2305.03403},
-  author = {Hollmann, Noah and Müller, Samuel and Hutter, Frank},
-  title = {LLMs for Semi-Automated Data Science: Introducing CAAFE for Context-Aware Automated Feature Engineering},
-  publisher = {arXiv},
-  year = {2023},
-  copyright = {arXiv.org perpetual, non-exclusive license}
+@misc{hollmann2023llms,
+      title={LLMs for Semi-Automated Data Science: Introducing CAAFE for Context-Aware Automated Feature Engineering}, 
+      author={Noah Hollmann and Samuel Müller and Frank Hutter},
+      year={2023},
+      eprint={2305.03403},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI}
 }
 ```
 
