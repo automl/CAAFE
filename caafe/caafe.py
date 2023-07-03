@@ -137,6 +137,7 @@ def generate_features(
             stop=["```end"],
             temperature=0.5,
             max_tokens=500,
+            engine=model,
         )
         code = completion["choices"][0]["message"]["content"]
         code = code.replace("```python", "").replace("```", "").replace("<end>", "")
