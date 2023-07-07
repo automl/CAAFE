@@ -4,9 +4,13 @@ It is based on the paper [LLMs for Semi-Automated Data Science: Introducing CAAF
 CAAFE is developed as part of [Prior Labs](http://priorlabs.ai).
 CAAFE systematically verifies the generated features to ensure that only features that are actually useful are added to the dataset.
 
-### Usage
-[![DEMO VIDEO](https://i.makeagif.com/media/5-20-2023/E4RfRM.gif)](https://www.youtube.com/watch?v=6zCD48d3kNU)
+<p align="center">
+    <a href="https://www.youtube.com/watch?v=6zCD48d3kNU">
+        <img src="https://i.makeagif.com/media/5-20-2023/E4RfRM.gif" alt="CAFFE demo"/>
+    </a>
+</p>
 
+### Usage
 To use CAAFE, first create a `CAAFEClassifier` object specifying your sklearn base classifier (clf_no_feat_eng; e.g. a random forest or [`TabPFN`](https://github.com/automl/TabPFN))
 and the language model you want to use (e.g. gpt-4):
 
