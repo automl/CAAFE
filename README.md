@@ -75,9 +75,6 @@ clf_no_feat_eng = RandomForestClassifier(n_estimators=100, max_depth=2)
 #### Demo
 Try out the demo at: [https://colab.research.google.com/drive/1mCA8xOAJZ4MaB_alZvyARTMjhl6RZf0a]()
 
-For a minimal example of how to use CAAFE on your dataset, use [CAFE_minimal.ipynb](#MISSING)
-To reproduce the experiments from the paper, use [CAAFE.ipynb](#MISSING).
-
 ### Important Usage Considerations
 
 #### Code Execution
