@@ -1,7 +1,9 @@
+import os
 import copy
 import numpy as np
 
 import openai
+from gpt4all import GPT4All
 from sklearn.model_selection import RepeatedKFold
 from .caafe_evaluate import (
     evaluate_dataset,
@@ -17,7 +19,7 @@ def get_prompt(
         if iterative == 1
         else "exactly one useful column"
     )
-    return f"""
+    prompt = f"""
 The dataframe `df` is loaded and in memory. Columns are also named attributes.
 Description of the dataset in `df` (column dtypes might be inaccurate):
 "{data_description_unparsed}"
@@ -25,15 +27,15 @@ Description of the dataset in `df` (column dtypes might be inaccurate):
 Columns in `df` (true feature dtypes listed here, categoricals encoded as int):
 {samples}
     
-This code was written by an expert datascientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
+This code was written by an expert data scientist working to improve predictions. It is a snippet of code that adds new columns to the dataset.
 Number of samples (rows) in training dataset: {int(len(df))}
     
 This code generates additional columns that are useful for a downstream classification algorithm (such as XGBoost) predicting \"{ds[4][-1]}\".
 Additional columns add new semantic information, that is they use real world knowledge on the dataset. They can e.g. be feature combinations, transformations, aggregations where the new column is a function of the existing columns.
 The scale of columns and offset does not matter. Make sure all used columns exist. Follow the above description of columns closely and consider the datatypes and meanings of classes.
 This code also drops columns, if these may be redundant and hurt the predictive performance of the downstream classifier (Feature selection). Dropping columns may help as the chance of overfitting is lower, especially if the dataset is small.
-The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is accuracy. The best performing code will be selected.
-Added columns can be used in other codeblocks, dropped columns are not available anymore.
+The classifier will be trained on the dataset with the generated columns and evaluated on a holdout set. The evaluation metric is f1 score and ROC auc. The best performing code will be selected.
+Added columns can be used in other codeblocks, for the new added columns a naming pattern must be enforced as lower case words separated by underscore, dropped columns are not available anymore.
 
 Code formatting for each added column:
 ```python
@@ -53,6 +55,8 @@ Each codeblock generates {how_many} and can drop unused columns (Feature selecti
 Each codeblock ends with ```end and starts with "```python"
 Codeblock:
 """
+    print(prompt)
+    return prompt
 
 
 # Each codeblock either generates {how_many} or drops bad columns (Feature selection).
@@ -96,7 +100,8 @@ def build_prompt_from_df(ds, df, iterative=1):
 def generate_features(
     ds,
     df,
-    model="gpt-3.5-turbo",
+    model,
+    device="cpu",
     just_print_prompt=False,
     iterative=1,
     metric_used=None,
@@ -105,6 +110,10 @@ def generate_features(
     n_splits=10,
     n_repeats=2,
 ):
+    
+    if model not in ["gpt-3.5-turbo", "gpt4all"]:
+        raise SystemExit("\n\nerror** `model` must be `gpt-3.5-turbo` or `gpt4all`\n\n")
+    
     def format_for_display(code):
         code = code.replace("```python", "").replace("```", "").replace("<end>", "")
         return code
@@ -127,20 +136,45 @@ def generate_features(
         code, prompt = None, prompt
         return code, prompt, None
 
-    def generate_code(messages):
+    def generate_code(messages, model, device):
         if model == "skip":
             return ""
+        
+        if model in ["gpt-3.5-turbo"]:
+            completion = openai.ChatCompletion.create(
+                model=model,
+                messages=messages,
+                stop=["```end"],
+                temperature=0.5,
+                max_tokens=500,
+            )
+            code = completion["choices"][0]["message"]["content"]
+            code = code.replace("```python", "").replace("```", "").replace("<end>", "")
+            return code
+        
+        if model == "gpt4all":
+            gtp4all_model_bin = os.getenv("GPT4ALL_MODEL_BIN")
 
-        completion = openai.ChatCompletion.create(
-            model=model,
-            messages=messages,
-            stop=["```end"],
-            temperature=0.5,
-            max_tokens=500,
-        )
-        code = completion["choices"][0]["message"]["content"]
-        code = code.replace("```python", "").replace("```", "").replace("<end>", "")
-        return code
+            if not gtp4all_model_bin:
+                msg = "\n\n error** Environment variable `GPT4ALL_MODEL_BIN`"
+                msg += " pointing to the model file path is not defined.\n\n"
+                raise SystemExit(msg)
+            
+            if "model_gpt4all" not in list(locals()) + list(globals()):
+                device = "gpu" if device == "cuda" else "cpu"
+                model_gpt4all = GPT4All(gtp4all_model_bin, allow_download=True, device=device)
+
+            system_template = messages[0].get("content")
+            prompt_template = "USER: {0}\nASSISTANT: ".format(messages[1].get("content"))
+            prompt_message = system_template + prompt_template
+
+            completion = model_gpt4all.generate(prompt_message,
+                                                temp=0.5,
+                                                max_tokens=500)
+
+            code = completion.split("```python")[-1].split("```end")[0]
+            print(f"\n\ngenerated code:\n{code}\n\n")
+            return code
 
     def execute_and_evaluate_code_block(full_code, code):
         old_accs, old_rocs, accs, rocs = [], [], [], []
@@ -246,7 +280,7 @@ def generate_features(
     i = 0
     while i < n_iter:
         try:
-            code = generate_code(messages)
+            code = generate_code(messages, model, device)
         except Exception as e:
             display_method("Error in LLM API." + str(e))
             continue

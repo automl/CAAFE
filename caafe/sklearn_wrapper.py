@@ -14,6 +14,7 @@ import pandas as pd
 import numpy as np
 from typing import Optional
 import pandas as pd
+import torch
 
 
 
@@ -28,6 +29,7 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
     llm_model (str, optional): The LLM model to use for generating features. Defaults to 'gpt-3.5-turbo'.
     n_splits (int, optional): The number of cross-validation splits to use during feature generation. Defaults to 10.
     n_repeats (int, optional): The number of times to repeat the cross-validation during feature generation. Defaults to 2.
+    display_method (str, optional): Display method between markdown (Ipython.display) and print. Defaults to markdown.
     """
     def __init__(
         self,
@@ -37,6 +39,7 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         llm_model: str = "gpt-3.5-turbo",
         n_splits: int = 10,
         n_repeats: int = 2,
+        display_method="markdown"
     ) -> None:
         self.base_classifier = base_classifier
         if self.base_classifier is None:
@@ -56,6 +59,7 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
         self.optimization_metric = optimization_metric
         self.n_splits = n_splits
         self.n_repeats = n_repeats
+        self.display_method = display_method
 
     def fit_pandas(self, df, dataset_description, target_column_name, **kwargs):
         """
@@ -134,10 +138,11 @@ class CAAFEClassifier(BaseEstimator, ClassifierMixin):
                 ds,
                 df_train,
                 model=self.llm_model,
+                device="cuda" if torch.cuda.is_available() else "cpu",
                 iterative=self.iterations,
                 metric_used=auc_metric,
                 iterative_method=self.base_classifier,
-                display_method="markdown",
+                display_method=self.display_method,
                 n_splits=self.n_splits,
                 n_repeats=self.n_repeats,
             )
